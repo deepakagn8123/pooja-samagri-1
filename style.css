@@ -422,3 +422,69 @@ padding:18px;
 }
 
 }
+
+
+
+/* ===========================================
+MOBILE HAMBURGER MENU
+=========================================== */
+
+@media (max-width: 860px) {
+
+/* Hide desktop navigation */
+nav {
+display: none;
+}
+
+/* Show hamburger */
+.menu-btn {
+display: block;
+background: none;
+border: none;
+color: var(--white);
+font-size: 28px;
+cursor: pointer;
+padding: 5px;
+line-height: 1;
+z-index: 100;
+}
+
+/* Show mobile menu when active */
+nav.active {
+display: block;
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+background: var(--maroon);
+padding: 20px;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile menu list */
+nav.active ul {
+display: flex;
+flex-direction: column;
+gap: 0;
+width: 100%;
+}
+
+/* Mobile menu links */
+nav.active ul li {
+width: 100%;
+}
+
+nav.active ul li a {
+display: block;
+width: 100%;
+padding: 14px 10px;
+font-size: 15px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+nav.active ul li:last-child a {
+border-bottom: none;
+}
+
+}
+
