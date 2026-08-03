@@ -19,19 +19,19 @@
   </div>
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="puja-samagri.html">Puja Samagri</a></li>
-      <li><a href="wedding-items.html" class="active">Wedding Items</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="puja-samagri.php">Puja Samagri</a></li>
+      <li><a href="wedding-items.php" class="active">Wedding Items</a></li>
+      <li><a href="services.php">Services</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </nav>
   <div class="nav-actions">
-    <a href="cart.html" class="cart-link" aria-label="Cart">
+    <a href="cart.php" class="cart-link" aria-label="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <span class="cart-badge" id="cart-count" style="display:none;">0</span>
     </a>
-    <a href="contact.html" class="nav-cta">
+    <a href="contact.php" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
       WhatsApp Order
     </a>
@@ -56,56 +56,56 @@
   </div>
   <div class="prod-grid">
     <div class="prod-card">
-      <a href="product.html?id=topor-mukut" class="prod-link">
+      <a href="product.php?id=topor-mukut" class="prod-link">
         <div class="prod-visual"><img src="assets/images/topor_mukut.png" alt="Topor Mukut"></div>
         <div class="prod-body"><h4>Topor-Mukut</h4><div class="price">₹799</div><span class="tag">Bengali wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('topor-mukut')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=gachkouto" class="prod-link">
+      <a href="product.php?id=gachkouto" class="prod-link">
         <div class="prod-visual"><span class="sale-badge">10% OFF</span><img src="assets/images/topor_mukut.png" alt="Topor Mukut"></div>
         <div class="prod-body"><h4>Gachkouto (Sindoor Box)</h4><div class="price"><s>₹599</s>₹539</div><span class="tag">Bengali wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('gachkouto')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=maur-patmauri" class="prod-link">
+      <a href="product.php?id=maur-patmauri" class="prod-link">
         <div class="prod-visual"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="13" fill="#B8860B"/></svg></div>
         <div class="prod-body"><h4>Maur (Patmauri)</h4><div class="price">₹899</div><span class="tag">Bihari wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('maur-patmauri')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=dala-daura" class="prod-link">
+      <a href="product.php?id=dala-daura" class="prod-link">
         <div class="prod-visual"><svg viewBox="0 0 48 48" fill="none"><path d="M12 34l12-24 12 24z" fill="#5C7A4A"/></svg></div>
         <div class="prod-body"><h4>Dala Daura Set</h4><div class="price">₹1299</div><span class="tag">Bihari wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('dala-daura')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=bandhanwar" class="prod-link">
+      <a href="product.php?id=bandhanwar" class="prod-link">
         <div class="prod-visual"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="24" rx="16" ry="10" fill="#B8860B"/></svg></div>
         <div class="prod-body"><h4>Bandhanwar (Door Toran)</h4><div class="price">₹399</div><span class="tag">Marwadi wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('bandhanwar')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=kalash-set" class="prod-link">
+      <a href="product.php?id=kalash-set" class="prod-link">
         <div class="prod-visual"><span class="sale-badge">12% OFF</span><svg viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="32" rx="8" fill="#E8890C"/></svg></div>
         <div class="prod-body"><h4>Kalash Set</h4><div class="price"><s>₹899</s>₹791</div><span class="tag">Marwadi wedding</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('kalash-set')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=saat-phere-thali" class="prod-link">
+      <a href="product.php?id=saat-phere-thali" class="prod-link">
         <div class="prod-visual"><svg viewBox="0 0 48 48" fill="none"><path d="M24 8v32M14 16l20 16M34 16l-20 16" stroke="#8B1E3F" stroke-width="4"/></svg></div>
         <div class="prod-body"><h4>Saat Phere Thali Set</h4><div class="price">₹1499</div><span class="tag">All traditions</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('saat-phere-thali')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=mandap-flowers" class="prod-link">
+      <a href="product.php?id=mandap-flowers" class="prod-link">
         <div class="prod-visual"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="6" fill="#FBD599"/><circle cx="24" cy="12" r="6" fill="#E8890C"/><circle cx="36" cy="24" r="6" fill="#E8890C"/><circle cx="24" cy="36" r="6" fill="#E8890C"/><circle cx="12" cy="24" r="6" fill="#E8890C"/></svg></div>
         <div class="prod-body"><h4>Wedding Mandap Flowers</h4><div class="price">From ₹2999</div><span class="tag">Full decor</span></div>
       </a>
@@ -119,7 +119,7 @@
     <div>
       <h2>Wedding ki poori list ek saath</h2>
       <p>Apni shaadi ki tareekh aur tradition bataiye — hum aapke liye ek complete checklist aur quote WhatsApp par bhej denge.</p>
-      <a href="contact.html" class="wa-btn">
+      <a href="contact.php" class="wa-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
         Wedding list bhejein
       </a>
@@ -139,14 +139,14 @@
     </div>
     <div>
       <h4>Categories</h4>
-      <a href="puja-samagri.html">Puja samagri</a>
-      <a href="wedding-items.html">Wedding items</a>
-      <a href="services.html">Services</a>
+      <a href="puja-samagri.php">Puja samagri</a>
+      <a href="wedding-items.php">Wedding items</a>
+      <a href="services.php">Services</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.php">Home</a>
+      <a href="contact.php">Contact</a>
     </div>
     <div>
       <h4>Contact</h4>

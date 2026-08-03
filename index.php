@@ -34,34 +34,34 @@
   <nav id="mainNav">
     <ul>
       <li>
-        <a href="index.html" class="active">Home</a>
+        <a href="index.php" class="active">Home</a>
       </li>
 
       <li>
-        <a href="puja-samagri.html">Puja Samagri</a>
+        <a href="puja-samagri.php">Puja Samagri</a>
       </li>
 
       <li>
-        <a href="wedding-items.html">Wedding Items</a>
+        <a href="wedding-items.php">Wedding Items</a>
       </li>
 
       <li>
-        <a href="services.html">Services</a>
+        <a href="services.php">Services</a>
       </li>
 
       <li>
-        <a href="contact.html">Contact</a>
+        <a href="contact.php">Contact</a>
       </li>
     </ul>
   </nav>
 
 
    <div class="nav-actions">
-    <a href="cart.html" class="cart-link" aria-label="Cart">
+    <a href="cart.php" class="cart-link" aria-label="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <span class="cart-badge" id="cart-count" style="display:none;">0</span>
     </a>
-    <a href="contact.html" class="nav-cta">
+    <a href="contact.php" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
       WhatsApp Order
     </a>
@@ -96,11 +96,11 @@
     <h1>Har puja, har vivah, ek <em>bharosemand</em> dukaan</h1>
     <p>Shuddh samagri, taaza phool, aur wedding ki har cheez — ek WhatsApp message par. Local delivery aapke shehar mein, shipping poore Bharat mein.</p>
     <div class="hero-ctas">
-      <a href="contact.html" class="btn-primary">
+      <a href="contact.php" class="btn-primary">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
         Apni list WhatsApp karein
       </a>
-      <a href="puja-samagri.html" class="btn-secondary">Categories dekhein</a>
+      <a href="puja-samagri.php" class="btn-secondary">Categories dekhein</a>
     </div>
   </div>
   <svg class="hero-art" viewBox="0 0 420 380" fill="none">
@@ -132,37 +132,37 @@
     <p>Roz ki puja se lekar vivah tak — har zaroorat ke liye curated categories.</p>
   </div>
   <div class="cat-grid">
-    <a href="puja-samagri.html" class="cat-card">
+    <a href="puja-samagri.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="10" y="20" width="28" height="20" rx="3" fill="#8B1E3F"/><rect x="10" y="20" width="28" height="6" fill="#E8890C"/><circle cx="24" cy="12" r="8" fill="#FBD599"/></svg>
       <h3>Puja samagri &amp; kits</h3>
       <p>Roz ki puja se leke vishesh anushthan tak — ready-made kits, agarbatti, dhoop, aur zaroori saman.</p>
       <span class="cat-tag">Best seller</span>
     </a>
-    <a href="wedding-items.html" class="cat-card">
+    <a href="wedding-items.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><path d="M24 6c-2 8-10 14-10 22 0 6 4 10 10 10s10-4 10-10c0-8-8-14-10-22z" fill="#8B1E3F"/><circle cx="24" cy="34" r="6" fill="#E8890C"/></svg>
       <h3>Wedding items</h3>
       <p>Bengali (Topor-Mukut), Bihari (Maur, Dala Daura) aur Marwadi vivah ka poora saman.</p>
       <span class="cat-tag">Priority category</span>
     </a>
-    <a href="puja-samagri.html" class="cat-card">
+    <a href="puja-samagri.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="14" y="10" width="20" height="28" rx="2" fill="#B8860B"/><rect x="18" y="16" width="12" height="16" rx="1" fill="#FBD599"/></svg>
       <h3>Idols &amp; metal articles</h3>
       <p>Peetal diya, ghanti, panchpradeep, tamba aachmani aur devi ghat.</p>
       <span class="cat-tag">Premium</span>
     </a>
-    <a href="puja-samagri.html" class="cat-card">
+    <a href="puja-samagri.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="6" fill="#FBD599"/><circle cx="24" cy="12" r="6" fill="#E8890C"/><circle cx="36" cy="24" r="6" fill="#E8890C"/><circle cx="24" cy="36" r="6" fill="#E8890C"/><circle cx="12" cy="24" r="6" fill="#E8890C"/></svg>
       <h3>Taaza puja phool</h3>
       <p>Genda ki mala, tulsi patta, paan — daily subscription (abhi sirf aapke shehar mein).</p>
       <span class="cat-tag">Subscription</span>
     </a>
-    <a href="services.html" class="cat-card">
+    <a href="services.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" fill="#8B1E3F"/><path d="M10 40c0-8 6-14 14-14s14 6 14 14" fill="#E8890C"/></svg>
       <h3>Pandit booking</h3>
       <p>Bengali, Bihari, Marwadi, South Indian traditions ke experienced pandit — ghar baithe book karein.</p>
       <span class="cat-tag">Starting ₹1101</span>
     </a>
-    <a href="services.html" class="cat-card">
+    <a href="services.php" class="cat-card">
       <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><path d="M24 6l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z" fill="#B8860B"/></svg>
       <h3>Puja organizer</h3>
       <p>Poora event hum sambhaalte hain — aap sirf mehmaan ki tarah shamil hon.</p>
@@ -183,7 +183,7 @@
         <li><b>2</b> Hum availability aur price confirm karenge</li>
         <li><b>3</b> Local ho toh same-day, warna pan-India shipping</li>
       </ul>
-      <a href="contact.html" class="wa-btn">
+      <a href="contact.php" class="wa-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
         List bhejein
       </a>
@@ -224,14 +224,14 @@
     </div>
     <div>
       <h4>Categories</h4>
-      <a href="puja-samagri.html">Puja samagri</a>
-      <a href="wedding-items.html">Wedding items</a>
-      <a href="services.html">Services</a>
+      <a href="puja-samagri.php">Puja samagri</a>
+      <a href="wedding-items.php">Wedding items</a>
+      <a href="services.php">Services</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.php">Home</a>
+      <a href="contact.php">Contact</a>
     </div>
     <div>
       <h4>Contact</h4>

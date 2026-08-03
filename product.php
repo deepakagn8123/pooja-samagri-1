@@ -127,23 +127,29 @@ function e($value): string
 
     <div class="pd-visual">
 
-        <?php if (!empty($product['badge'])): ?>
+    <?php if (!empty($product['badge'])): ?>
+        <span class="pd-badge">
+            <?= e($product['badge']) ?>
+        </span>
+    <?php endif; ?>
 
-            <span class="pd-badge">
-                <?= e($product['badge']) ?>
-            </span>
+    <?php if (!empty($product['image'])): ?>
 
-        <?php endif; ?>
+        <img
+            src="assets/images/products/<?= rawurlencode($product['image']) ?>"
+            alt="<?= e($product['name']) ?>"
+            class="product-main-image"
+        >
 
-        <svg viewBox="0 0 48 48" fill="none">
-            <circle cx="24"
-                    cy="24"
-                    r="14"
-                    fill="#B8860B"/>
-        </svg>
+    <?php else: ?>
 
-    </div>
+        <div class="product-image-placeholder">
+            Image coming soon
+        </div>
 
+    <?php endif; ?>
+
+</div>
 
     <div class="pd-info">
 
@@ -378,6 +384,39 @@ function buyOnWhatsApp() {
 
     <?php endif; ?>
 
+}
+
+function getAllCategories(PDO $pdo): array
+{
+    $stmt = $pdo->query("
+        SELECT id, name, slug
+        FROM categories
+        ORDER BY name ASC
+    ");
+
+    return $stmt->fetchAll();
+}
+
+
+function getProductsByCategory(PDO $pdo, string $categorySlug): array
+{
+    $stmt = $pdo->prepare("
+        SELECT
+            p.*,
+            c.name AS category_name,
+            c.slug AS category_slug
+        FROM products p
+        INNER JOIN categories c ON c.id = p.category_id
+        WHERE c.slug = :category_slug
+          AND p.is_active = 1
+        ORDER BY p.id DESC
+    ");
+
+    $stmt->execute([
+        'category_slug' => $categorySlug
+    ]);
+
+    return $stmt->fetchAll();
 }
 
 </script>

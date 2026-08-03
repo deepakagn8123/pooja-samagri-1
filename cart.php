@@ -19,19 +19,19 @@
   </div>
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="puja-samagri.html">Puja Samagri</a></li>
-      <li><a href="wedding-items.html">Wedding Items</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="puja-samagri.php">Puja Samagri</a></li>
+      <li><a href="wedding-items.php">Wedding Items</a></li>
+      <li><a href="services.php">Services</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </nav>
   <div class="nav-actions">
-    <a href="cart.html" class="cart-link" aria-label="Cart">
+    <a href="cart.php" class="cart-link" aria-label="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <span class="cart-badge" id="cart-count" style="display:none;">0</span>
     </a>
-    <a href="contact.html" class="nav-cta">
+    <a href="contact.php" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
       WhatsApp Order
     </a>
@@ -57,14 +57,14 @@
     </div>
     <div>
       <h4>Categories</h4>
-      <a href="puja-samagri.html">Puja samagri</a>
-      <a href="wedding-items.html">Wedding items</a>
-      <a href="services.html">Services</a>
+      <a href="puja-samagri.php">Puja samagri</a>
+      <a href="wedding-items.php">Wedding items</a>
+      <a href="services.php">Services</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.php">Home</a>
+      <a href="contact.php">Contact</a>
     </div>
     <div>
       <h4>Contact</h4>
@@ -114,7 +114,7 @@ function renderCart(){
     wrap.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="#8B1E3F" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <p style="margin-bottom:18px;">Aapki cart abhi khaali hai.</p>
-      <a href="puja-samagri.html" class="btn-primary" style="display:inline-flex;">Shopping shuru karein</a>
+      <a href="puja-samagri.php" class="btn-primary" style="display:inline-flex;">Shopping shuru karein</a>
     </div>`;
     return;
   }
@@ -129,7 +129,7 @@ function renderCart(){
     rows += `
       <div class="cart-row">
         <div class="cart-row-icon"><svg viewBox="0 0 48 48" fill="none">${iconSvg(p.shape, p.color)}</svg></div>
-        <div class="cart-row-name"><a href="product.html?id=${p.id}">${p.name}</a><div style="font-size:12px;color:var(--ink-soft);font-weight:400;margin-top:2px;">${fmtPrice(p.price)}${p.unit} each</div></div>
+        <div class="cart-row-name"><a href="product.php?id=${p.id}">${p.name}</a><div style="font-size:12px;color:var(--ink-soft);font-weight:400;margin-top:2px;">${fmtPrice(p.price)}${p.unit} each</div></div>
         <div class="qty-stepper">
           <button onclick="updateQty('${p.id}', ${item.qty - 1})">−</button>
           <span>${item.qty}</span>

@@ -1,3 +1,11 @@
+<?php
+
+require_once __DIR__ . '/config/app.php';
+
+$products = getProductsByCategory($pdo, 'puja-samagri');
+
+?>
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -19,19 +27,19 @@
   </div>
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="puja-samagri.html" class="active">Puja Samagri</a></li>
-      <li><a href="wedding-items.html">Wedding Items</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="puja-samagri.php" class="active">Puja Samagri</a></li>
+      <li><a href="wedding-items.php">Wedding Items</a></li>
+      <li><a href="services.php">Services</a></li>
+      <li><a href="contact.php">Contact</a></li>
     </ul>
   </nav>
   <div class="nav-actions">
-    <a href="cart.html" class="cart-link" aria-label="Cart">
+    <a href="cart.php" class="cart-link" aria-label="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <span class="cart-badge" id="cart-count" style="display:none;">0</span>
     </a>
-    <a href="contact.html" class="nav-cta">
+    <a href="contact.php" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
       WhatsApp Order
     </a>
@@ -62,28 +70,28 @@
   </div>
   <div class="prod-grid">
     <div class="prod-card">
-      <a href="product.html?id=satyanarayan-kit" class="prod-link">
+      <a href="product.php?id=satyanarayan-kit" class="prod-link">
         <div class="prod-visual"><span class="sale-badge">15% OFF</span><img src="assets/images/satyanarayan_puja_kit.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Satyanarayan Puja Kit</h4><div class="price"><s>₹599</s>₹509</div><span class="tag">Complete kit</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('satyanarayan-kit')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=ganesh-chaturthi-kit" class="prod-link">
+      <a href="product.php?id=ganesh-chaturthi-kit" class="prod-link">
         <div class="prod-visual"><span class="sale-badge">10% OFF</span><img src="assets/images/Ganesh_Chaturthi_Kit.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Ganesh Chaturthi Kit</h4><div class="price"><s>₹449</s>₹404</div><span class="tag">Festival special</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('ganesh-chaturthi-kit')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=durva-sindoor-set" class="prod-link">
+      <a href="product.php?id=durva-sindoor-set" class="prod-link">
         <div class="prod-visual"><img src="assets/images/durva_sindoor_set.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Durva &amp; Sindoor Set</h4><div class="price">₹129</div><span class="tag">Everyday essential</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('durva-sindoor-set')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=agarbatti-dhoop-combo" class="prod-link">
+      <a href="product.php?id=agarbatti-dhoop-combo" class="prod-link">
         <div class="prod-visual"><span class="sale-badge">20% OFF</span><img src="assets/images/Agarbatti_&_Dhoop_Combo.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Agarbatti &amp; Dhoop Combo</h4><div class="price"><s>₹249</s>₹199</div><span class="tag">Daily use</span></div>
       </a>
@@ -99,28 +107,28 @@
   </div>
   <div class="prod-grid">
     <div class="prod-card">
-      <a href="product.html?id=brass-ganesh-idol" class="prod-link">
+      <a href="product.php?id=brass-ganesh-idol" class="prod-link">
         <div class="prod-visual"><img src="assets/images/Brass_Ganesh_Idol.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Brass Ganesh Idol</h4><div class="price">₹899</div><span class="tag">6 inch</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('brass-ganesh-idol')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=brass-diya-pair" class="prod-link">
+      <a href="product.php?id=brass-diya-pair" class="prod-link">
         <div class="prod-visual"><img src="assets/images/Brass-Diya_(Pair).png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Brass Diya (Pair)</h4><div class="price">₹249</div><span class="tag">Handcrafted</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('brass-diya-pair')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=panchpradeep" class="prod-link">
+      <a href="product.php?id=panchpradeep" class="prod-link">
         <div class="prod-visual"><img src="assets/images/panchpradeep.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Panchpradeep</h4><div class="price">₹649</div><span class="tag">5-wick brass lamp</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('panchpradeep')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=copper-aachmani" class="prod-link">
+      <a href="product.php?id=copper-aachmani" class="prod-link">
         <div class="prod-visual"><img src="assets/images/coppper_aachmani_panchpatra.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Copper Aachmani-Panchpatra</h4><div class="price">₹399</div><span class="tag">Pure copper</span></div>
       </a>
@@ -137,28 +145,28 @@
   </div>
   <div class="prod-grid">
     <div class="prod-card">
-      <a href="product.html?id=genda-mala" class="prod-link">
+      <a href="product.php?id=genda-mala" class="prod-link">
         <div class="prod-visual"><img src="assets/images/genda_phool _mala.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Genda Phool Mala</h4><div class="price">₹49 /day</div><span class="tag">Subscription</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('genda-mala')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=tulsi-patta" class="prod-link">
+      <a href="product.php?id=tulsi-patta" class="prod-link">
         <div class="prod-visual"><img src="assets/images/tulsi_patta.png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Tulsi Patta</h4><div class="price">₹19 /pack</div><span class="tag">Fresh cut</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('tulsi-patta')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=paan-patta" class="prod-link">
+      <a href="product.php?id=paan-patta" class="prod-link">
         <div class="prod-visual"><img src="assets/images/paan_patta_(5 pcs).png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Paan Patta (5 pcs)</h4><div class="price">₹29</div><span class="tag">Fresh daily</span></div>
       </a>
       <button class="quick-add" onclick="quickAdd('paan-patta')" aria-label="Add to cart">+</button>
     </div>
     <div class="prod-card">
-      <a href="product.html?id=banana-plant" class="prod-link">
+      <a href="product.php?id=banana-plant" class="prod-link">
         <div class="prod-visual"><img src="assets/images/Banana Plant (Kala Bou).png" alt="Satyanarayan Puja Kit"></div>
         <div class="prod-body"><h4>Banana Plant (Kala Bou)</h4><div class="price">₹149</div><span class="tag">Ritual use</span></div>
       </a>
@@ -172,7 +180,7 @@
     <div>
       <h2>List lambi hai? Bas WhatsApp karein</h2>
       <p>Samagri ki poori list photo ya text mein bhejein, hum arrange karke deliver kar denge.</p>
-      <a href="contact.html" class="wa-btn">
+      <a href="contact.php" class="wa-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
         List bhejein
       </a>
@@ -192,14 +200,14 @@
     </div>
     <div>
       <h4>Categories</h4>
-      <a href="puja-samagri.html">Puja samagri</a>
-      <a href="wedding-items.html">Wedding items</a>
-      <a href="services.html">Services</a>
+      <a href="puja-samagri.php">Puja samagri</a>
+      <a href="wedding-items.php">Wedding items</a>
+      <a href="services.php">Services</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.php">Home</a>
+      <a href="contact.php">Contact</a>
     </div>
     <div>
       <h4>Contact</h4>
