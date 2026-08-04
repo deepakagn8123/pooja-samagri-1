@@ -111,7 +111,6 @@
   </div>
 </footer>
 
-<script src="products.js"></script>
 <script src="cart.js"></script>
 </body>
 </html>

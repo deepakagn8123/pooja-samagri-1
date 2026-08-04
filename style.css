@@ -504,3 +504,17 @@ border-bottom: none;
     justify-content: center;
     color: var(--ink-soft);
 }
+
+.product-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.product-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}

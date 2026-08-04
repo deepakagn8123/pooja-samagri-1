@@ -1,67 +1,182 @@
-// cart.js — shared cart logic (localStorage backed, with in-memory fallback)
-const CART_KEY = "shubhsamagri_cart";
-let _memCart = null; // fallback if localStorage is unavailable
+const CART_KEY = "nitya_ritual_estore_cart_v2";
 
-function _loadCart(){
-  try{
-    const raw = localStorage.getItem(CART_KEY);
-    return raw ? JSON.parse(raw) : [];
-  }catch(e){
-    return _memCart || [];
-  }
-}
-function _saveCart(cart){
-  try{
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }catch(e){
-    _memCart = cart;
-  }
+let _memCart = [];
+
+
+function _loadCart()
+{
+    try {
+
+        const raw = localStorage.getItem(CART_KEY);
+
+        if (!raw) {
+            return [];
+        }
+
+        const parsed = JSON.parse(raw);
+
+        if (!Array.isArray(parsed)) {
+            return [];
+        }
+
+        return parsed.filter(item =>
+            typeof item.slug === "string" &&
+            item.slug.trim() !== "" &&
+            Number(item.qty) > 0
+        );
+
+    } catch (error) {
+
+        return _memCart;
+    }
 }
 
-function addToCart(id, qty=1){
-  const cart = _loadCart();
-  const existing = cart.find(i => i.id === id);
-  if(existing){ existing.qty += qty; }
-  else{ cart.push({ id, qty }); }
-  _saveCart(cart);
-  updateCartBadge();
-  return cart;
+
+function _saveCart(cart)
+{
+    try {
+
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify(cart)
+        );
+
+    } catch (error) {
+
+        _memCart = cart;
+    }
 }
-function removeFromCart(id){
-  let cart = _loadCart();
-  cart = cart.filter(i => i.id !== id);
-  _saveCart(cart);
-  updateCartBadge();
-  return cart;
-}
-function setQty(id, qty){
-  const cart = _loadCart();
-  const item = cart.find(i => i.id === id);
-  if(item){
-    item.qty = Math.max(1, qty);
+
+
+function addToCart(slug, qty = 1)
+{
+    slug = String(slug).trim();
+    qty = parseInt(qty, 10);
+
+    if (!slug) {
+        return _loadCart();
+    }
+
+    if (!Number.isInteger(qty) || qty < 1) {
+        qty = 1;
+    }
+
+
+    const cart = _loadCart();
+
+    const existing = cart.find(
+        item => item.slug === slug
+    );
+
+
+    if (existing) {
+
+        existing.qty += qty;
+
+    } else {
+
+        cart.push({
+            slug: slug,
+            qty: qty
+        });
+    }
+
+
     _saveCart(cart);
-  }
-  updateCartBadge();
-  return cart;
+
+    updateCartBadge();
+
+    return cart;
 }
-function getCart(){ return _loadCart(); }
-function getCartCount(){
-  return _loadCart().reduce((sum, i) => sum + i.qty, 0);
+
+
+function removeFromCart(slug)
+{
+    let cart = _loadCart();
+
+    cart = cart.filter(
+        item => item.slug !== slug
+    );
+
+    _saveCart(cart);
+
+    updateCartBadge();
+
+    return cart;
 }
-function getCartTotal(){
-  const cart = _loadCart();
-  let total = 0;
-  cart.forEach(i => {
-    const p = typeof getProduct === "function" ? getProduct(i.id) : null;
-    if(p) total += p.price * i.qty;
-  });
-  return total;
+
+
+function setQty(slug, qty)
+{
+    qty = parseInt(qty, 10);
+
+    let cart = _loadCart();
+
+    const item = cart.find(
+        item => item.slug === slug
+    );
+
+
+    if (!item) {
+        return cart;
+    }
+
+
+    if (!Number.isInteger(qty) || qty < 1) {
+
+        return removeFromCart(slug);
+    }
+
+
+    item.qty = Math.min(qty, 100);
+
+    _saveCart(cart);
+
+    updateCartBadge();
+
+    return cart;
 }
-function updateCartBadge(){
-  const badge = document.getElementById("cart-count");
-  if(!badge) return;
-  const count = getCartCount();
-  badge.textContent = count;
-  badge.style.display = count > 0 ? "flex" : "none";
+
+
+function getCart()
+{
+    return _loadCart();
 }
-document.addEventListener("DOMContentLoaded", updateCartBadge);
+
+
+function getCartCount()
+{
+    return _loadCart().reduce(
+        (total, item) => total + Number(item.qty),
+        0
+    );
+}
+
+
+function updateCartBadge()
+{
+    const badge = document.getElementById(
+        "cart-count"
+    );
+
+
+    if (!badge) {
+        return;
+    }
+
+
+    const count = getCartCount();
+
+    badge.textContent = count;
+
+    badge.style.display =
+        count > 0
+            ? "flex"
+            : "none";
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    updateCartBadge
+);
