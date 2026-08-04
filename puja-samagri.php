@@ -49,7 +49,9 @@ function renderProductCard(array $product): void
 
             <div class="prod-body">
 
-                <h4><?= e($product['name']) ?></h4>
+                <h4>
+                    <?= e($product['name']) ?>
+                </h4>
 
                 <div class="price">
 
@@ -66,9 +68,11 @@ function renderProductCard(array $product): void
                 </div>
 
                 <?php if (!empty($product['tag'])): ?>
+
                     <span class="tag">
                         <?= e($product['tag']) ?>
                     </span>
+
                 <?php endif; ?>
 
             </div>
@@ -87,122 +91,54 @@ function renderProductCard(array $product): void
 <?php
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| Page Specific JavaScript
+|--------------------------------------------------------------------------
+*/
+
+ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="hi">
+<script>
 
-<head>
+function quickAdd(id)
+{
+    addToCart(id, 1);
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    const toast = document.getElementById('added-toast');
 
-<title>Puja Samagri &amp; Kits — ShubhSamagri</title>
+    if (!toast) {
+        return;
+    }
 
-<link rel="stylesheet" href="style.css">
+    toast.classList.add('show');
 
-</head>
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 1800);
+}
 
-<body>
+</script>
 
+<?php
 
-<header>
+$pageScripts = ob_get_clean();
 
-    <div class="logo">
+$pageTitle = 'Puja Samagri & Kits — ShubhSamagri';
 
-        <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
-            <ellipse cx="20" cy="27" rx="15" ry="7" fill="#B8860B"/>
-            <path d="M20 26c-3 0-6-2-6-5 0-4 3-8 6-14 3 6 6 10 6 14 0 3-3 5-6 5z" fill="#E8890C"/>
-            <path d="M20 21c-1.4 0-2.6-1-2.6-2.3 0-1.7 1.3-3.5 2.6-6 1.3 2.5 2.6 4.3 2.6 6 0 1.3-1.2 2.3-2.6 2.3z" fill="#FBD599"/>
-        </svg>
+require __DIR__ . '/includes/header.php';
 
-        <div class="logo-text">
-            Shubh<span>Samagri</span>
-        </div>
-
-    </div>
-
-
-    <nav>
-
-        <ul>
-            <li><a href="index.php">Home</a></li>
-
-            <li>
-                <a href="puja-samagri.php" class="active">
-                    Puja Samagri
-                </a>
-            </li>
-
-            <li><a href="wedding-items.php">Wedding Items</a></li>
-            <li><a href="services.php">Services</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-
-    </nav>
-
-
-    <div class="nav-actions">
-
-        <a href="cart.php" class="cart-link" aria-label="Cart">
-
-            <svg viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2">
-
-                <circle cx="9" cy="21" r="1"/>
-                <circle cx="20" cy="21" r="1"/>
-
-                <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-
-            </svg>
-
-            <span
-                class="cart-badge"
-                id="cart-count"
-                style="display:none;"
-            >
-                0
-            </span>
-
-        </a>
-
-
-        <a href="contact.php" class="nav-cta">
-
-            <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-            >
-                <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
-            </svg>
-
-            WhatsApp Order
-
-        </a>
-
-    </div>
-
-
-    <button
-        class="menu-btn"
-        id="menuBtn"
-        aria-label="Open menu"
-        aria-expanded="false"
-        type="button"
-    >
-        ☰
-    </button>
-
-</header>
+?>
 
 
 <div class="garland">
 
-    <svg viewBox="0 0 1200 34" preserveAspectRatio="none">
+    <svg
+        viewBox="0 0 1200 34"
+        preserveAspectRatio="none"
+    >
 
         <path
             d="M0 4 Q60 30 120 4 T240 4 T360 4 T480 4 T600 4 T720 4 T840 4 T960 4 T1080 4 T1200 4"
@@ -309,7 +245,10 @@ function renderProductCard(array $product): void
 
 <!-- IDOLS AND METAL -->
 
-<section class="block" style="padding-top:0;">
+<section
+    class="block"
+    style="padding-top:0;"
+>
 
     <div class="section-head">
 
@@ -347,7 +286,10 @@ function renderProductCard(array $product): void
 
 <!-- FRESH PRODUCTS -->
 
-<section class="block" style="padding-top:0;">
+<section
+    class="block"
+    style="padding-top:0;"
+>
 
     <div class="section-head">
 
@@ -403,7 +345,10 @@ function renderProductCard(array $product): void
                 hum arrange karke deliver kar denge.
             </p>
 
-            <a href="contact.php" class="wa-btn">
+            <a
+                href="contact.php"
+                class="wa-btn"
+            >
 
                 <svg
                     width="16"
@@ -439,97 +384,6 @@ function renderProductCard(array $product): void
 </section>
 
 
-<footer>
-
-    <div class="foot-grid">
-
-        <div>
-
-            <div
-                class="logo-text"
-                style="margin-bottom:12px;"
-            >
-                Shubh<span style="color:#FBD599;">Samagri</span>
-            </div>
-
-            <p style="max-width:260px;">
-                Puja samagri aur wedding items — local shehar mein
-                same-day, poore Bharat mein shipping ke saath.
-            </p>
-
-        </div>
-
-
-        <div>
-
-            <h4>Categories</h4>
-
-            <a href="puja-samagri.php">
-                Puja samagri
-            </a>
-
-            <a href="wedding-items.php">
-                Wedding items
-            </a>
-
-            <a href="services.php">
-                Services
-            </a>
-
-        </div>
-
-
-        <div>
-
-            <h4>Company</h4>
-
-            <a href="index.php">
-                Home
-            </a>
-
-            <a href="contact.php">
-                Contact
-            </a>
-
-        </div>
-
-
-        <div>
-
-            <h4>Contact</h4>
-
-            <a href="#">
-                WhatsApp: +91 00000 00000
-            </a>
-
-            <a href="#">
-                hello@shubhsamagri.com
-            </a>
-
-            <a href="#">
-                Local city + Pan-India
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="foot-bottom">
-
-        <span>
-            © 2026 ShubhSamagri. Demo mockup — sample business hai.
-        </span>
-
-        <span>
-            Made for aapka business
-        </span>
-
-    </div>
-
-</footer>
-
-
 <div
     class="added-toast"
     id="added-toast"
@@ -538,25 +392,6 @@ function renderProductCard(array $product): void
 </div>
 
 
-<script src="cart.js"></script>
-
-<script>
-
-function quickAdd(id)
-{
-    addToCart(id, 1);
-
-    const toast = document.getElementById('added-toast');
-
-    toast.classList.add('show');
-
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 1800);
-}
-
-</script>
-
-
-</body>
-</html>
+<?php
+require __DIR__ . '/includes/footer.php';
+?>

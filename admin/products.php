@@ -4,40 +4,10 @@ require_once __DIR__ . '/../config/app.php';
 
 requireAdmin();
 
-/*
-|--------------------------------------------------------------------------
-| Dashboard Statistics
-|--------------------------------------------------------------------------
-*/
-
-$totalProducts = (int) $pdo->query("
-    SELECT COUNT(*)
-    FROM products
-")->fetchColumn();
-
-$activeProducts = (int) $pdo->query("
-    SELECT COUNT(*)
-    FROM products
-    WHERE is_active = 1
-")->fetchColumn();
-
-$inactiveProducts = (int) $pdo->query("
-    SELECT COUNT(*)
-    FROM products
-    WHERE is_active = 0
-")->fetchColumn();
-
-$totalCategories = (int) $pdo->query("
-    SELECT COUNT(*)
-    FROM categories
-")->fetchColumn();
-
-
-/*
-|--------------------------------------------------------------------------
-| Recent Products
-|--------------------------------------------------------------------------
-*/
+function e($value): string
+{
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+}
 
 $stmt = $pdo->query("
     SELECT
@@ -45,22 +15,17 @@ $stmt = $pdo->query("
         p.name,
         p.slug,
         p.price,
+        p.old_price,
+        p.unit,
         p.image,
         p.is_active,
         c.name AS category_name
     FROM products p
     INNER JOIN categories c ON c.id = p.category_id
     ORDER BY p.id DESC
-    LIMIT 5
 ");
 
-$recentProducts = $stmt->fetchAll();
-
-
-function e($value): string
-{
-    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
-}
+$products = $stmt->fetchAll();
 
 ?>
 
@@ -72,7 +37,7 @@ function e($value): string
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard — Nitya Ritual E-Store</title>
+<title>Products — Nitya Ritual E-Store</title>
 
 <style>
 
@@ -86,9 +51,6 @@ body {
     background: #f6f6f6;
     color: #222;
 }
-
-
-/* Sidebar */
 
 .sidebar {
     width: 240px;
@@ -123,16 +85,10 @@ body {
     background: rgba(255,255,255,.12);
 }
 
-
-/* Main */
-
 .main {
     margin-left: 240px;
     min-height: 100vh;
 }
-
-
-/* Header */
 
 .topbar {
     background: white;
@@ -159,87 +115,43 @@ body {
     font-weight: bold;
 }
 
-
-/* Content */
-
 .content {
     padding: 30px;
 }
 
-.welcome {
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 25px;
 }
 
-.welcome h1 {
-    margin: 0 0 8px;
+.page-head h1 {
+    margin: 0 0 6px;
 }
 
-.welcome p {
+.page-head p {
     margin: 0;
     color: #666;
 }
 
-
-/* Stats */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.stat-card {
-    background: white;
-    padding: 22px;
-    border-radius: 10px;
-    border: 1px solid #e5e5e5;
-}
-
-.stat-card span {
-    color: #777;
-    font-size: 14px;
-}
-
-.stat-card h2 {
-    margin: 10px 0 0;
-    font-size: 30px;
-    color: #8B1E1E;
-}
-
-
-/* Section */
-
-.section {
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.section-header {
-    padding: 18px 20px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.section-header h3 {
-    margin: 0;
-}
-
 .btn {
+    display: inline-block;
     background: #8B1E1E;
     color: white;
-    padding: 10px 15px;
+    padding: 11px 16px;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 14px;
+    border: 0;
+    cursor: pointer;
 }
 
-
-/* Table */
+.table-box {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    overflow-x: auto;
+}
 
 table {
     width: 100%;
@@ -248,28 +160,49 @@ table {
 
 th,
 td {
+    padding: 14px 18px;
     text-align: left;
-    padding: 14px 20px;
     border-bottom: 1px solid #eee;
 }
 
 th {
     background: #fafafa;
     font-size: 13px;
+    white-space: nowrap;
 }
 
 .product-info {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 220px;
 }
 
 .product-image {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 7px;
     background: #eee;
+}
+
+.image-placeholder {
+    width: 52px;
+    height: 52px;
+    border-radius: 7px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #777;
+    text-align: center;
+}
+
+.product-slug {
+    color: #888;
+    font-size: 12px;
+    margin-top: 4px;
 }
 
 .status {
@@ -289,15 +222,36 @@ th {
     color: #b42318;
 }
 
+.actions {
+    display: flex;
+    gap: 8px;
+}
 
-/* Responsive */
+.action-btn {
+    padding: 7px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
+}
 
-@media (max-width: 900px) {
+.action-btn:hover {
+    background: #f5f5f5;
+}
 
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.price-old {
+    display: block;
+    color: #999;
+    font-size: 12px;
+    text-decoration: line-through;
+}
 
+.empty {
+    padding: 40px;
+    text-align: center;
+    color: #777;
 }
 
 </style>
@@ -315,15 +269,15 @@ th {
 
     <nav>
 
-        <a href="index.php" class="active">
+        <a href="index.php">
             Dashboard
         </a>
 
-        <a href="products.php">
+        <a href="products.php" class="active">
             Products
         </a>
 
-        <a href="#">
+        <a href="add-product.php">
             Add Product
         </a>
 
@@ -342,10 +296,9 @@ th {
 
 <div class="main">
 
-
     <div class="topbar">
 
-        <h2>Dashboard</h2>
+        <h2>Products</h2>
 
         <div class="admin-info">
 
@@ -365,117 +318,58 @@ th {
     <div class="content">
 
 
-        <div class="welcome">
+        <div class="page-head">
 
-            <h1>
-                Welcome, <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
-            </h1>
+            <div>
 
-            <p>
-                Manage your Nitya Ritual E-Store from here.
-            </p>
+                <h1>Manage Products</h1>
+
+                <p>
+                    <?= count($products) ?> products found
+                </p>
+
+            </div>
+
+
+            <a href="add-product.php" class="btn">
+                + Add Product
+            </a>
 
         </div>
 
 
-        <div class="stats">
+        <div class="table-box">
+
+            <?php if (!$products): ?>
+
+                <div class="empty">
+                    No products found.
+                </div>
+
+            <?php else: ?>
 
 
-            <div class="stat-card">
+                <table>
 
-                <span>Total Products</span>
+                    <thead>
 
-                <h2>
-                    <?= $totalProducts ?>
-                </h2>
+                        <tr>
 
-            </div>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Unit</th>
+                            <th>Status</th>
+                            <th>Actions</th>
 
+                        </tr>
 
-            <div class="stat-card">
-
-                <span>Active Products</span>
-
-                <h2>
-                    <?= $activeProducts ?>
-                </h2>
-
-            </div>
+                    </thead>
 
 
-            <div class="stat-card">
+                    <tbody>
 
-                <span>Inactive Products</span>
-
-                <h2>
-                    <?= $inactiveProducts ?>
-                </h2>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <span>Categories</span>
-
-                <h2>
-                    <?= $totalCategories ?>
-                </h2>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="section">
-
-
-            <div class="section-header">
-
-                <h3>Recent Products</h3>
-
-                <a href="products.php" class="btn">
-                    Manage Products
-                </a>
-
-            </div>
-
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                <?php if (!$recentProducts): ?>
-
-                    <tr>
-
-                        <td colspan="4">
-                            No products found.
-                        </td>
-
-                    </tr>
-
-
-                <?php else: ?>
-
-
-                    <?php foreach ($recentProducts as $product): ?>
+                    <?php foreach ($products as $product): ?>
 
                         <tr>
 
@@ -484,13 +378,20 @@ th {
 
                                 <div class="product-info">
 
+
                                     <?php if (!empty($product['image'])): ?>
 
                                         <img
                                             src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
-                                            class="product-image"
                                             alt="<?= e($product['name']) ?>"
+                                            class="product-image"
                                         >
+
+                                    <?php else: ?>
+
+                                        <div class="image-placeholder">
+                                            No image
+                                        </div>
 
                                     <?php endif; ?>
 
@@ -500,6 +401,10 @@ th {
                                         <strong>
                                             <?= e($product['name']) ?>
                                         </strong>
+
+                                        <div class="product-slug">
+                                            <?= e($product['slug']) ?>
+                                        </div>
 
                                     </div>
 
@@ -515,8 +420,21 @@ th {
 
                             <td>
 
+                                <?php if (!empty($product['old_price'])): ?>
+
+                                    <span class="price-old">
+                                        ₹<?= number_format((float)$product['old_price'], 0) ?>
+                                    </span>
+
+                                <?php endif; ?>
+
                                 ₹<?= number_format((float)$product['price'], 0) ?>
 
+                            </td>
+
+
+                            <td>
+                                <?= e($product['unit'] ?? '-') ?>
                             </td>
 
 
@@ -539,21 +457,65 @@ th {
                             </td>
 
 
+                            <td>
+
+                                <div class="actions">
+
+                                    <a
+                                        href="../product.php?slug=<?= urlencode($product['slug']) ?>"
+                                        class="action-btn"
+                                        target="_blank"
+                                    >
+                                        View
+                                    </a>
+
+
+                                    <a
+    href="edit-product.php?id=<?= (int)$product['id'] ?>"
+    class="action-btn"
+>
+    Edit
+</a>
+
+<form
+    method="POST"
+    action="toggle-product.php"
+    style="margin:0;"
+>
+
+    <input
+        type="hidden"
+        name="id"
+        value="<?= (int)$product['id'] ?>"
+    >
+
+    <button
+        type="submit"
+        class="action-btn"
+        style="cursor:pointer;"
+    >
+        <?= $product['is_active'] ? 'Disable' : 'Activate' ?>
+    </button>
+
+</form>
+
+                                </div>
+
+                            </td>
+
+
                         </tr>
 
                     <?php endforeach; ?>
 
+                    </tbody>
 
-                <?php endif; ?>
+                </table>
 
 
-                </tbody>
-
-            </table>
-
+            <?php endif; ?>
 
         </div>
-
 
     </div>
 

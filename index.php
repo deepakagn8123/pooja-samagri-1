@@ -1,85 +1,53 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShubhSamagri — Puja Samagri &amp; Wedding Items</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+<?php
 
-<header>
+$pageTitle = 'ShubhSamagri — Puja Samagri & Wedding Items';
 
-  <!-- Logo -->
-  <div class="logo">
-    <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
-      <ellipse cx="20" cy="27" rx="15" ry="7" fill="#B8860B"/>
-      <path 
-        d="M20 26c-3 0-6-2-6-5 0-4 3-8 6-14 3 6 6 10 6 14 0 3-3 5-6 5z" 
-        fill="#E8890C"
-      />
-      <path 
-        d="M20 21c-1.4 0-2.6-1-2.6-2.3 0-1.7 1.3-3.5 2.6-6 1.3 2.5 2.6 4.3 2.6 6 0 1.3-1.2 2.3-2.6 2.3z" 
-        fill="#FBD599"
-      />
-    </svg>
+ob_start();
+?>
 
-    <div class="logo-text">
-      Shubh<span>Samagri</span>
-    </div>
-  </div>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mainNav = document.getElementById("mainNav");
+
+if (menuBtn && mainNav) {
+
+    menuBtn.addEventListener("click", function () {
+
+        mainNav.classList.toggle("active");
+
+        const isOpen = mainNav.classList.contains("active");
+
+        menuBtn.setAttribute("aria-expanded", isOpen);
+
+        menuBtn.innerHTML = isOpen ? "✕" : "☰";
+    });
 
 
-  <!-- Main Navigation -->
-  <nav id="mainNav">
-    <ul>
-      <li>
-        <a href="index.php" class="active">Home</a>
-      </li>
+    const navLinks = mainNav.querySelectorAll("a");
 
-      <li>
-        <a href="puja-samagri.php">Puja Samagri</a>
-      </li>
+    navLinks.forEach(function(link) {
 
-      <li>
-        <a href="wedding-items.php">Wedding Items</a>
-      </li>
+        link.addEventListener("click", function() {
 
-      <li>
-        <a href="services.php">Services</a>
-      </li>
+            mainNav.classList.remove("active");
 
-      <li>
-        <a href="contact.php">Contact</a>
-      </li>
-    </ul>
-  </nav>
+            menuBtn.setAttribute("aria-expanded", "false");
 
+            menuBtn.innerHTML = "☰";
+        });
 
-   <div class="nav-actions">
-    <a href="cart.php" class="cart-link" aria-label="Cart">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
-      <span class="cart-badge" id="cart-count" style="display:none;">0</span>
-    </a>
-    <a href="contact.php" class="nav-cta">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
-      WhatsApp Order
-    </a>
-  </div>
+    });
+}
+</script>
 
+<?php
 
-  <!-- Mobile Menu Button -->
-  <button
-    class="menu-btn"
-    id="menuBtn"
-    aria-label="Open menu"
-    aria-expanded="false"
-    type="button"
-  >
-    ☰
-  </button>
+$pageScripts = ob_get_clean();
 
-</header>
+require __DIR__ . '/includes/header.php';
+
+?>
+
 
 <div class="garland">
   <svg viewBox="0 0 1200 34" preserveAspectRatio="none">
@@ -90,204 +58,514 @@
   </svg>
 </div>
 
+
 <section class="hero">
+
   <div>
-    <span class="eyebrow">Kolkata + Pan-India</span>
-    <h1>Har puja, har vivah, ek <em>bharosemand</em> dukaan</h1>
-    <p>Shuddh samagri, taaza phool, aur wedding ki har cheez — ek WhatsApp message par. Local delivery aapke shehar mein, shipping poore Bharat mein.</p>
+
+    <span class="eyebrow">
+      Kolkata + Pan-India
+    </span>
+
+    <h1>
+      Har puja, har vivah, ek <em>bharosemand</em> dukaan
+    </h1>
+
+    <p>
+      Shuddh samagri, taaza phool, aur wedding ki har cheez —
+      ek WhatsApp message par. Local delivery aapke shehar mein,
+      shipping poore Bharat mein.
+    </p>
+
     <div class="hero-ctas">
+
       <a href="contact.php" class="btn-primary">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
+
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
+        </svg>
+
         Apni list WhatsApp karein
+
       </a>
-      <a href="puja-samagri.php" class="btn-secondary">Categories dekhein</a>
+
+      <a href="puja-samagri.php" class="btn-secondary">
+        Categories dekhein
+      </a>
+
     </div>
+
   </div>
+
+
   <svg class="hero-art" viewBox="0 0 420 380" fill="none">
+
     <ellipse cx="210" cy="330" rx="170" ry="20" fill="#F3E4CB"/>
+
     <rect x="100" y="230" width="220" height="90" rx="10" fill="#B8860B"/>
+
     <rect x="100" y="230" width="220" height="14" rx="7" fill="#8B1E3F"/>
+
     <circle cx="140" cy="200" r="34" fill="#E8890C"/>
+
     <circle cx="140" cy="200" r="20" fill="#FBD599"/>
+
     <circle cx="210" cy="180" r="40" fill="#8B1E3F"/>
+
     <circle cx="210" cy="180" r="24" fill="#E8890C"/>
+
     <circle cx="280" cy="205" r="30" fill="#5C7A4A"/>
+
     <circle cx="280" cy="205" r="16" fill="#FBD599"/>
-    <path d="M195 130c0-20 15-40 15-40s15 20 15 40c0 8-7 14-15 14s-15-6-15-14z" fill="#E8890C"/>
-    <path d="M203 118c0-10 7-20 7-20s7 10 7 20c0 4-3 7-7 7s-7-3-7-7z" fill="#FBD599"/>
+
+    <path
+      d="M195 130c0-20 15-40 15-40s15 20 15 40c0 8-7 14-15 14s-15-6-15-14z"
+      fill="#E8890C"
+    />
+
+    <path
+      d="M203 118c0-10 7-20 7-20s7 10 7 20c0 4-3 7-7 7s-7-3-7-7z"
+      fill="#FBD599"
+    />
+
   </svg>
+
 </section>
+
 
 <div class="trust">
-  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2"><path d="M3 12l2-7h14l2 7M5 12v7h14v-7M9 19v-4h6v4"/></svg>Pan-India shipping</div>
-  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Same-day local delivery</div>
-  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>100% shuddh samagri</div>
-  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>24x7 WhatsApp support</div>
+
+  <div class="trust-item">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2">
+      <path d="M3 12l2-7h14l2 7M5 12v7h14v-7M9 19v-4h6v4"/>
+    </svg>
+
+    Pan-India shipping
+
+  </div>
+
+
+  <div class="trust-item">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7v5l3 3"/>
+    </svg>
+
+    Same-day local delivery
+
+  </div>
+
+
+  <div class="trust-item">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2">
+      <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+    </svg>
+
+    100% shuddh samagri
+
+  </div>
+
+
+  <div class="trust-item">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="#FBD599" stroke-width="2">
+      <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
+    </svg>
+
+    24x7 WhatsApp support
+
+  </div>
+
 </div>
 
+
 <section class="block" id="categories">
+
   <div class="section-head">
-    <span class="eyebrow">Shop by category</span>
-    <h2>Sab kuch ek jagah</h2>
-    <p>Roz ki puja se lekar vivah tak — har zaroorat ke liye curated categories.</p>
+
+    <span class="eyebrow">
+      Shop by category
+    </span>
+
+    <h2>
+      Sab kuch ek jagah
+    </h2>
+
+    <p>
+      Roz ki puja se lekar vivah tak — har zaroorat ke liye curated categories.
+    </p>
+
   </div>
+
+
   <div class="cat-grid">
+
+
     <a href="puja-samagri.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="10" y="20" width="28" height="20" rx="3" fill="#8B1E3F"/><rect x="10" y="20" width="28" height="6" fill="#E8890C"/><circle cx="24" cy="12" r="8" fill="#FBD599"/></svg>
-      <h3>Puja samagri &amp; kits</h3>
-      <p>Roz ki puja se leke vishesh anushthan tak — ready-made kits, agarbatti, dhoop, aur zaroori saman.</p>
-      <span class="cat-tag">Best seller</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+        <rect x="10" y="20" width="28" height="20" rx="3" fill="#8B1E3F"/>
+        <rect x="10" y="20" width="28" height="6" fill="#E8890C"/>
+        <circle cx="24" cy="12" r="8" fill="#FBD599"/>
+      </svg>
+
+      <h3>
+        Puja samagri &amp; kits
+      </h3>
+
+      <p>
+        Roz ki puja se leke vishesh anushthan tak — ready-made kits,
+        agarbatti, dhoop, aur zaroori saman.
+      </p>
+
+      <span class="cat-tag">
+        Best seller
+      </span>
+
     </a>
+
+
     <a href="wedding-items.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><path d="M24 6c-2 8-10 14-10 22 0 6 4 10 10 10s10-4 10-10c0-8-8-14-10-22z" fill="#8B1E3F"/><circle cx="24" cy="34" r="6" fill="#E8890C"/></svg>
-      <h3>Wedding items</h3>
-      <p>Bengali (Topor-Mukut), Bihari (Maur, Dala Daura) aur Marwadi vivah ka poora saman.</p>
-      <span class="cat-tag">Priority category</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+
+        <path
+          d="M24 6c-2 8-10 14-10 22 0 6 4 10 10 10s10-4 10-10c0-8-8-14-10-22z"
+          fill="#8B1E3F"
+        />
+
+        <circle cx="24" cy="34" r="6" fill="#E8890C"/>
+
+      </svg>
+
+      <h3>
+        Wedding items
+      </h3>
+
+      <p>
+        Bengali (Topor-Mukut), Bihari (Maur, Dala Daura)
+        aur Marwadi vivah ka poora saman.
+      </p>
+
+      <span class="cat-tag">
+        Priority category
+      </span>
+
     </a>
+
+
     <a href="puja-samagri.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><rect x="14" y="10" width="20" height="28" rx="2" fill="#B8860B"/><rect x="18" y="16" width="12" height="16" rx="1" fill="#FBD599"/></svg>
-      <h3>Idols &amp; metal articles</h3>
-      <p>Peetal diya, ghanti, panchpradeep, tamba aachmani aur devi ghat.</p>
-      <span class="cat-tag">Premium</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+
+        <rect x="14" y="10" width="20" height="28" rx="2" fill="#B8860B"/>
+
+        <rect x="18" y="16" width="12" height="16" rx="1" fill="#FBD599"/>
+
+      </svg>
+
+      <h3>
+        Idols &amp; metal articles
+      </h3>
+
+      <p>
+        Peetal diya, ghanti, panchpradeep, tamba aachmani aur devi ghat.
+      </p>
+
+      <span class="cat-tag">
+        Premium
+      </span>
+
     </a>
+
+
     <a href="puja-samagri.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="6" fill="#FBD599"/><circle cx="24" cy="12" r="6" fill="#E8890C"/><circle cx="36" cy="24" r="6" fill="#E8890C"/><circle cx="24" cy="36" r="6" fill="#E8890C"/><circle cx="12" cy="24" r="6" fill="#E8890C"/></svg>
-      <h3>Taaza puja phool</h3>
-      <p>Genda ki mala, tulsi patta, paan — daily subscription (abhi sirf aapke shehar mein).</p>
-      <span class="cat-tag">Subscription</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+
+        <circle cx="24" cy="24" r="6" fill="#FBD599"/>
+        <circle cx="24" cy="12" r="6" fill="#E8890C"/>
+        <circle cx="36" cy="24" r="6" fill="#E8890C"/>
+        <circle cx="24" cy="36" r="6" fill="#E8890C"/>
+        <circle cx="12" cy="24" r="6" fill="#E8890C"/>
+
+      </svg>
+
+      <h3>
+        Taaza puja phool
+      </h3>
+
+      <p>
+        Genda ki mala, tulsi patta, paan — daily subscription
+        (abhi sirf aapke shehar mein).
+      </p>
+
+      <span class="cat-tag">
+        Subscription
+      </span>
+
     </a>
+
+
     <a href="services.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" fill="#8B1E3F"/><path d="M10 40c0-8 6-14 14-14s14 6 14 14" fill="#E8890C"/></svg>
-      <h3>Pandit booking</h3>
-      <p>Bengali, Bihari, Marwadi, South Indian traditions ke experienced pandit — ghar baithe book karein.</p>
-      <span class="cat-tag">Starting ₹1101</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+
+        <circle cx="24" cy="16" r="8" fill="#8B1E3F"/>
+
+        <path
+          d="M10 40c0-8 6-14 14-14s14 6 14 14"
+          fill="#E8890C"
+        />
+
+      </svg>
+
+      <h3>
+        Pandit booking
+      </h3>
+
+      <p>
+        Bengali, Bihari, Marwadi, South Indian traditions ke
+        experienced pandit — ghar baithe book karein.
+      </p>
+
+      <span class="cat-tag">
+        Starting ₹1101
+      </span>
+
     </a>
+
+
     <a href="services.php" class="cat-card">
-      <svg class="cat-icon" viewBox="0 0 48 48" fill="none"><path d="M24 6l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z" fill="#B8860B"/></svg>
-      <h3>Puja organizer</h3>
-      <p>Poora event hum sambhaalte hain — aap sirf mehmaan ki tarah shamil hon.</p>
-      <span class="cat-tag">Full service</span>
+
+      <svg class="cat-icon" viewBox="0 0 48 48" fill="none">
+
+        <path
+          d="M24 6l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z"
+          fill="#B8860B"
+        />
+
+      </svg>
+
+      <h3>
+        Puja organizer
+      </h3>
+
+      <p>
+        Poora event hum sambhaalte hain —
+        aap sirf mehmaan ki tarah shamil hon.
+      </p>
+
+      <span class="cat-tag">
+        Full service
+      </span>
+
     </a>
+
+
   </div>
+
 </section>
 
-<div class="garland"><svg viewBox="0 0 1200 34" preserveAspectRatio="none"><path d="M0 4 Q60 30 120 4 T240 4 T360 4 T480 4 T600 4 T720 4 T840 4 T960 4 T1080 4 T1200 4" stroke="#5C7A4A" stroke-width="2" fill="none"/><g fill="#8B1E3F"><circle cx="20" cy="14" r="6"/><circle cx="60" cy="22" r="6"/><circle cx="100" cy="14" r="6"/><circle cx="140" cy="22" r="6"/><circle cx="180" cy="14" r="6"/><circle cx="220" cy="22" r="6"/><circle cx="260" cy="14" r="6"/><circle cx="300" cy="22" r="6"/><circle cx="340" cy="14" r="6"/><circle cx="380" cy="22" r="6"/><circle cx="420" cy="14" r="6"/><circle cx="460" cy="22" r="6"/><circle cx="500" cy="14" r="6"/><circle cx="540" cy="22" r="6"/><circle cx="580" cy="14" r="6"/><circle cx="620" cy="22" r="6"/><circle cx="660" cy="14" r="6"/><circle cx="700" cy="22" r="6"/><circle cx="740" cy="14" r="6"/><circle cx="780" cy="22" r="6"/><circle cx="820" cy="14" r="6"/><circle cx="860" cy="22" r="6"/><circle cx="900" cy="14" r="6"/><circle cx="940" cy="22" r="6"/><circle cx="980" cy="14" r="6"/><circle cx="1020" cy="22" r="6"/><circle cx="1060" cy="14" r="6"/><circle cx="1100" cy="22" r="6"/><circle cx="1140" cy="14" r="6"/><circle cx="1180" cy="22" r="6"/></g></svg></div>
+
+<div class="garland">
+
+  <svg viewBox="0 0 1200 34" preserveAspectRatio="none">
+
+    <path
+      d="M0 4 Q60 30 120 4 T240 4 T360 4 T480 4 T600 4 T720 4 T840 4 T960 4 T1080 4 T1200 4"
+      stroke="#5C7A4A"
+      stroke-width="2"
+      fill="none"
+    />
+
+    <g fill="#8B1E3F">
+
+      <circle cx="20" cy="14" r="6"/>
+      <circle cx="60" cy="22" r="6"/>
+      <circle cx="100" cy="14" r="6"/>
+      <circle cx="140" cy="22" r="6"/>
+      <circle cx="180" cy="14" r="6"/>
+      <circle cx="220" cy="22" r="6"/>
+      <circle cx="260" cy="14" r="6"/>
+      <circle cx="300" cy="22" r="6"/>
+      <circle cx="340" cy="14" r="6"/>
+      <circle cx="380" cy="22" r="6"/>
+      <circle cx="420" cy="14" r="6"/>
+      <circle cx="460" cy="22" r="6"/>
+      <circle cx="500" cy="14" r="6"/>
+      <circle cx="540" cy="22" r="6"/>
+      <circle cx="580" cy="14" r="6"/>
+      <circle cx="620" cy="22" r="6"/>
+      <circle cx="660" cy="14" r="6"/>
+      <circle cx="700" cy="22" r="6"/>
+      <circle cx="740" cy="14" r="6"/>
+      <circle cx="780" cy="22" r="6"/>
+      <circle cx="820" cy="14" r="6"/>
+      <circle cx="860" cy="22" r="6"/>
+      <circle cx="900" cy="14" r="6"/>
+      <circle cx="940" cy="22" r="6"/>
+      <circle cx="980" cy="14" r="6"/>
+      <circle cx="1020" cy="22" r="6"/>
+      <circle cx="1060" cy="14" r="6"/>
+      <circle cx="1100" cy="22" r="6"/>
+      <circle cx="1140" cy="14" r="6"/>
+      <circle cx="1180" cy="22" r="6"/>
+
+    </g>
+
+  </svg>
+
+</div>
+
 
 <section class="block">
+
   <div class="wa-feature">
+
     <div>
-      <h2>Apni puja list bhejein, hum sambhaal lenge</h2>
-      <p>Poori website browse karne ki zaroorat nahi — samagri ki list WhatsApp par bhejein, hum arrange karke deliver kar denge.</p>
+
+      <h2>
+        Apni puja list bhejein, hum sambhaal lenge
+      </h2>
+
+      <p>
+        Poori website browse karne ki zaroorat nahi —
+        samagri ki list WhatsApp par bhejein,
+        hum arrange karke deliver kar denge.
+      </p>
+
+
       <ul class="wa-steps">
-        <li><b>1</b> Apni zaroorat ki list photo ya text mein bhejein</li>
-        <li><b>2</b> Hum availability aur price confirm karenge</li>
-        <li><b>3</b> Local ho toh same-day, warna pan-India shipping</li>
+
+        <li>
+          <b>1</b>
+          Apni zaroorat ki list photo ya text mein bhejein
+        </li>
+
+        <li>
+          <b>2</b>
+          Hum availability aur price confirm karenge
+        </li>
+
+        <li>
+          <b>3</b>
+          Local ho toh same-day, warna pan-India shipping
+        </li>
+
       </ul>
+
+
       <a href="contact.php" class="wa-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
+
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
+        </svg>
+
         List bhejein
+
       </a>
+
     </div>
+
+
     <div class="wa-mock">
-      <div class="wa-bubble">Namaste! Ganesh Chaturthi puja ke liye samagri chahiye — durva, modak, sindoor, agarbatti</div>
-      <div class="wa-bubble me">Ji zaroor! List confirm ho gayi — total ₹840, kal subah 9 baje tak deliver ho jaayega ✅</div>
+
+      <div class="wa-bubble">
+        Namaste! Ganesh Chaturthi puja ke liye samagri chahiye —
+        durva, modak, sindoor, agarbatti
+      </div>
+
+      <div class="wa-bubble me">
+        Ji zaroor! List confirm ho gayi —
+        total ₹840, kal subah 9 baje tak deliver ho jaayega ✅
+      </div>
+
     </div>
+
   </div>
+
 </section>
+
 
 <section class="block">
+
   <div class="section-head">
-    <span class="eyebrow">Grahakon ka bharosa</span>
-    <h2>Log kya kehte hain</h2>
+
+    <span class="eyebrow">
+      Grahakon ka bharosa
+    </span>
+
+    <h2>
+      Log kya kehte hain
+    </h2>
+
   </div>
+
+
   <div class="testi-grid">
+
     <div class="testi-card">
-      <p>Puri puja ki list ek WhatsApp message mein order ho gayi, aur samay par deliver bhi hui. Bahut aasan tha.</p>
-      <div class="testi-name">Ritu Sharma</div><div class="testi-loc">Jaipur</div>
+
+      <p>
+        Puri puja ki list ek WhatsApp message mein order ho gayi,
+        aur samay par deliver bhi hui. Bahut aasan tha.
+      </p>
+
+      <div class="testi-name">
+        Ritu Sharma
+      </div>
+
+      <div class="testi-loc">
+        Jaipur
+      </div>
+
     </div>
+
+
     <div class="testi-card">
-      <p>Wedding ke liye Maur aur Dala Daura dono time par mil gaye, quality bhi acchi thi.</p>
-      <div class="testi-name">Amit Kumar</div><div class="testi-loc">Patna</div>
+
+      <p>
+        Wedding ke liye Maur aur Dala Daura dono time par mil gaye,
+        quality bhi acchi thi.
+      </p>
+
+      <div class="testi-name">
+        Amit Kumar
+      </div>
+
+      <div class="testi-loc">
+        Patna
+      </div>
+
     </div>
+
+
     <div class="testi-card">
-      <p>Rozana taaza genda mala subscription se ab market jaane ki zaroorat hi nahi padti.</p>
-      <div class="testi-name">Sunita Devi</div><div class="testi-loc">Kolkata</div>
+
+      <p>
+        Rozana taaza genda mala subscription se
+        ab market jaane ki zaroorat hi nahi padti.
+      </p>
+
+      <div class="testi-name">
+        Sunita Devi
+      </div>
+
+      <div class="testi-loc">
+        Kolkata
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<footer>
-  <div class="foot-grid">
-    <div>
-      <div class="logo-text" style="margin-bottom:12px;">Shubh<span style="color:#FBD599;">Samagri</span></div>
-      <p style="max-width:260px;">Puja samagri aur wedding items — local shehar mein same-day, poore Bharat mein shipping ke saath.</p>
-    </div>
-    <div>
-      <h4>Categories</h4>
-      <a href="puja-samagri.php">Puja samagri</a>
-      <a href="wedding-items.php">Wedding items</a>
-      <a href="services.php">Services</a>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <a href="index.php">Home</a>
-      <a href="contact.php">Contact</a>
-    </div>
-    <div>
-      <h4>Contact</h4>
-      <a href="#">WhatsApp: +91 00000 00000</a>
-      <a href="#">hello@shubhsamagri.com</a>
-      <a href="#">Local city + Pan-India</a>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <span>© 2026 ShubhSamagri. Demo mockup — sample business hai.</span>
-    <span>Made for aapka business</span>
-  </div>
-</footer>
-  <!-- menu option ke liye js -->
-<script>
-const menuBtn = document.getElementById("menuBtn");
-const mainNav = document.getElementById("mainNav");
 
-menuBtn.addEventListener("click", function () {
-
-    // Open / close menu
-    mainNav.classList.toggle("active");
-
-    // Check menu status
-    const isOpen = mainNav.classList.contains("active");
-
-    // Accessibility
-    menuBtn.setAttribute("aria-expanded", isOpen);
-
-    // Change icon
-    menuBtn.innerHTML = isOpen ? "✕" : "☰";
-
-});
-
-
-// Close menu after clicking a navigation link
-const navLinks = mainNav.querySelectorAll("a");
-
-navLinks.forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        mainNav.classList.remove("active");
-
-        menuBtn.setAttribute("aria-expanded", "false");
-
-        menuBtn.innerHTML = "☰";
-
-    });
-
-});
-</script>
-
-
-
-
-<script src="cart.js"></script>
-</body>
-</html>
+<?php
+require __DIR__ . '/includes/footer.php';
+?>
