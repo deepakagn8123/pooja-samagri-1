@@ -519,3 +519,2738 @@ border-bottom: none;
     display: block;
 }
 
+/* ==========================================================
+   NEW UNIVERSAL HEADER — FINAL OVERRIDES
+   Keep this at the END of style.css
+========================================================== */
+
+.store-header {
+    width: 100%;
+    display: block !important;
+    background: #fff;
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* =========================
+   FIRST ROW
+========================= */
+
+.store-header-top {
+    width: 100%;
+    display: block !important;
+    background: #fff;
+}
+
+.store-header-inner {
+    width: min(1450px, calc(100% - 60px));
+    min-height: 92px;
+
+    margin: 0 auto;
+    padding: 12px 0;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 28px;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.store-brand {
+    width: 250px;
+    flex: 0 0 250px;
+
+    display: block;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.store-brand-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.store-brand .logo-mark {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.store-brand .logo-text {
+    font-size: 25px;
+    white-space: nowrap;
+}
+
+.store-brand small {
+    display: block;
+    margin: 2px 0 0 52px;
+
+    font-size: 12px;
+    color: var(--ink-soft);
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.store-search {
+    flex: 1 1 500px;
+
+    max-width: 570px;
+    min-width: 280px;
+
+    height: 44px;
+
+    display: flex !important;
+    align-items: center;
+
+    padding: 0 18px;
+
+    border: 1px solid #e0bda4;
+    border-radius: 25px;
+
+    background: #fff;
+}
+
+.store-search svg {
+    width: 21px;
+    height: 21px;
+
+    flex: 0 0 21px;
+}
+
+.store-search input {
+    display: block !important;
+
+    width: 100% !important;
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0 12px;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    background: transparent !important;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.store-search input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================
+   ACTION AREA
+========================= */
+
+.store-actions {
+    display: flex !important;
+    align-items: center;
+
+    flex: 0 0 auto;
+
+    gap: 11px;
+}
+
+.store-cart {
+    position: relative;
+
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.store-cart svg {
+    width: 25px;
+    height: 25px;
+}
+
+.store-cart .cart-badge {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    min-width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.header-action-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 125px;
+    height: 40px;
+
+    padding: 0 17px;
+
+    border-radius: 8px;
+
+    background: var(--maroon);
+    color: #fff !important;
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   SECOND ROW
+========================= */
+
+.store-category-nav {
+    width: 100% !important;
+
+    display: block !important;
+    position: static !important;
+
+    background: #fff;
+
+    border-top: 1px solid #f1e6dc;
+}
+
+.store-category-nav ul {
+    width: min(1000px, calc(100% - 40px));
+
+    min-height: 48px;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+
+    list-style: none !important;
+}
+
+.store-category-nav li {
+    display: block !important;
+    margin: 0 !important;
+}
+
+.store-category-nav a {
+    display: block !important;
+
+    padding: 14px 35px;
+
+    color: var(--ink) !important;
+
+    text-decoration: none !important;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.store-category-nav a:hover {
+    color: var(--maroon) !important;
+}
+
+
+/* =========================
+   THIRD ROW
+========================= */
+
+.store-announcement {
+    width: 100%;
+    display: block !important;
+
+    background: #456b43;
+}
+
+.store-announcement a {
+    min-height: 39px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 5px 20px;
+
+    color: #fff !important;
+    text-decoration: none !important;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.store-header .menu-btn {
+    display: none !important;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1200px) {
+
+    .store-header-inner {
+        width: calc(100% - 40px);
+        gap: 18px;
+    }
+
+    .store-brand {
+        width: 210px;
+        flex-basis: 210px;
+    }
+
+    .store-brand small {
+        display: none;
+    }
+
+    .header-action-btn {
+        min-width: auto;
+        padding: 0 13px;
+    }
+
+}
+
+
+/* =========================
+   SMALL TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+    .header-action-btn {
+        display: none !important;
+    }
+
+    .store-header .menu-btn {
+        display: block !important;
+
+        border: 0;
+        background: transparent;
+
+        font-size: 27px;
+        color: var(--maroon);
+
+        cursor: pointer;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .store-header-inner {
+        width: calc(100% - 28px);
+
+        min-height: auto;
+
+        padding: 12px 0;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+    }
+
+    .store-brand {
+        width: auto;
+        flex: 1 1 auto;
+    }
+
+    .store-brand .logo-text {
+        font-size: 20px;
+    }
+
+    .store-brand .logo-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .store-search {
+        order: 10;
+
+        flex: 1 0 100%;
+
+        max-width: none;
+        min-width: 100%;
+
+        height: 44px;
+    }
+
+    .store-category-nav {
+        display: none !important;
+    }
+
+    .store-category-nav.active {
+        display: block !important;
+    }
+
+    .store-category-nav ul {
+        width: calc(100% - 30px);
+
+        min-height: 0;
+
+        display: block !important;
+
+        padding: 5px 0 !important;
+    }
+
+    .store-category-nav a {
+        padding: 13px 5px;
+
+        border-bottom: 1px solid #eee2d3;
+    }
+
+    .store-announcement a {
+        min-height: 42px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* Full-width green WhatsApp announcement bar */
+.store-announcement {
+    width: 100vw !important;
+    max-width: none !important;
+
+    position: relative;
+    left: 50%;
+    right: 50%;
+
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+
+    background: #456b43;
+}
+
+/* ==========================================================
+   NEW HOMEPAGE
+========================================================== */
+
+.home-shop-section,
+.home-products-section,
+.home-flower-section,
+.home-services {
+    width: min(1420px, calc(100% - 60px));
+    margin: 0 auto;
+    padding: 58px 0;
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.home-section-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.home-section-title h2 {
+    margin: 5px 0 0;
+    color: var(--maroon);
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 3vw, 40px);
+}
+
+.home-see-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 20px;
+
+    border-radius: 8px;
+
+    background: var(--maroon);
+    color: #fff;
+
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.home-category-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.home-category-card {
+    min-width: 0;
+
+    padding: 15px 12px 18px;
+
+    border: 1px solid #e5c8b4;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: var(--ink);
+    text-align: center;
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+.home-category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(70, 35, 20, .08);
+}
+
+.home-category-image {
+    width: 135px;
+    max-width: 100%;
+    aspect-ratio: 1;
+
+    margin: 0 auto 13px;
+
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.home-category-image svg {
+    width: 100%;
+    height: 100%;
+}
+
+.home-category-card h3 {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+
+/* =========================
+   ORGANIZER BANNER
+========================= */
+
+.home-organizer {
+    padding: 25px 30px 60px;
+}
+
+.home-organizer-inner {
+    width: min(1200px, 100%);
+    min-height: 270px;
+
+    margin: auto;
+    padding: 45px 60px;
+
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+    align-items: center;
+    gap: 30px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #791a21,
+            #a52118
+        );
+
+    color: #fff;
+}
+
+.home-organizer h2 {
+    max-width: 650px;
+
+    margin: 10px 0 12px;
+
+    color: #fff;
+
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 44px);
+}
+
+.home-organizer p {
+    max-width: 620px;
+    margin-bottom: 25px;
+
+    color: rgba(255,255,255,.86);
+    line-height: 1.7;
+}
+
+.home-organizer .eyebrow {
+    background: #FBD599;
+    color: #8B1E3F;
+}
+
+.home-organizer .btn-primary {
+    background: #FBD599;
+    color: #7d1b1b;
+}
+
+.home-organizer-art svg {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.home-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.home-product-card {
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid #eee1d5;
+    border-radius: 14px;
+
+    background: #fff;
+
+    transition: .2s ease;
+}
+
+.home-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(60, 30, 10, .08);
+}
+
+.home-product-image {
+    position: relative;
+
+    height: 220px;
+
+    display: block;
+
+    overflow: hidden;
+
+    background: #faf4ea;
+}
+
+.home-product-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform .3s ease;
+}
+
+.home-product-card:hover .home-product-image img {
+    transform: scale(1.035);
+}
+
+.home-product-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-product-placeholder svg {
+    width: 100px;
+    height: 100px;
+}
+
+.home-product-badge {
+    position: absolute;
+    z-index: 2;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: var(--maroon);
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.home-product-info {
+    position: relative;
+    padding: 18px 55px 18px 18px;
+}
+
+.home-product-name {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--maroon);
+    text-decoration: none;
+
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.home-product-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    font-size: 15px;
+}
+
+.home-product-price s {
+    color: #777;
+    font-size: 13px;
+}
+
+.home-product-price strong {
+    color: var(--ink);
+    font-size: 17px;
+}
+
+.home-product-price small {
+    color: var(--ink-soft);
+}
+
+.home-product-add {
+    position: absolute;
+
+    right: 15px;
+    bottom: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: var(--maroon);
+    color: #fff;
+
+    font-size: 23px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.home-products-empty {
+    padding: 50px;
+
+    border-radius: 15px;
+
+    background: #fff;
+
+    text-align: center;
+}
+
+.home-products-empty p {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   WEDDING
+========================= */
+
+.home-wedding-section {
+    padding: 65px 30px;
+
+    background: #fff8ed;
+}
+
+.home-wedding-inner {
+    width: min(1250px, 100%);
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr .8fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.home-wedding-content h2 {
+    max-width: 650px;
+
+    margin: 10px 0 15px;
+
+    color: var(--maroon);
+
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 44px);
+}
+
+.home-wedding-content p {
+    max-width: 620px;
+
+    line-height: 1.75;
+    color: var(--ink-soft);
+}
+
+.home-wedding-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin: 23px 0;
+}
+
+.home-wedding-links span {
+    padding: 8px 13px;
+
+    border: 1px solid #e4c6ad;
+    border-radius: 20px;
+
+    background: #fff;
+
+    font-size: 13px;
+}
+
+.home-wedding-art svg {
+    display: block;
+
+    width: 100%;
+    max-width: 380px;
+
+    margin: auto;
+}
+
+
+/* =========================
+   FLOWERS
+========================= */
+
+.home-flower-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.home-flower-card {
+    padding: 30px 24px;
+
+    border: 1px solid #e9dccb;
+    border-radius: 14px;
+
+    background: #fff;
+
+    text-align: center;
+}
+
+.home-flower-icon {
+    margin-bottom: 13px;
+    font-size: 43px;
+}
+
+.home-flower-card h3 {
+    margin-bottom: 8px;
+    color: var(--maroon);
+}
+
+.home-flower-card p {
+    margin: 0;
+
+    color: var(--ink-soft);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* =========================
+   PUJA LIST
+========================= */
+
+.home-puja-list {
+    padding: 65px 30px;
+
+    background: #416b45;
+}
+
+.home-puja-list-inner {
+    width: min(1200px, 100%);
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr .8fr;
+    align-items: center;
+    gap: 60px;
+
+    color: #fff;
+}
+
+.home-puja-list h2 {
+    margin: 10px 0 15px;
+
+    color: #fff;
+
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 42px);
+}
+
+.home-puja-list p {
+    max-width: 650px;
+
+    color: rgba(255,255,255,.88);
+    line-height: 1.75;
+}
+
+.home-puja-list .eyebrow {
+    background: #FBD599;
+    color: #7d1b1b;
+}
+
+.home-puja-steps {
+    display: grid;
+    gap: 12px;
+}
+
+.home-puja-steps > div {
+    padding: 16px 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.08);
+}
+
+.home-puja-steps b {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #FBD599;
+    color: #7d1b1b;
+}
+
+
+/* =========================
+   SERVICES
+========================= */
+
+.home-service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.home-service-card {
+    padding: 30px;
+
+    border: 1px solid #ead8c8;
+    border-radius: 14px;
+
+    background: #fff;
+
+    color: inherit;
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+.home-service-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--maroon);
+}
+
+.home-service-number {
+    margin-bottom: 22px;
+
+    color: #d99a50;
+
+    font-family: Georgia, serif;
+    font-size: 34px;
+}
+
+.home-service-card h3 {
+    margin-bottom: 10px;
+
+    color: var(--maroon);
+    font-size: 19px;
+}
+
+.home-service-card p {
+    margin: 0;
+
+    color: var(--ink-soft);
+    line-height: 1.7;
+}
+
+
+/* =========================
+   TRUST
+========================= */
+
+.home-trust {
+    padding: 25px 30px;
+    background: var(--maroon);
+}
+
+.home-trust-grid {
+    width: min(1100px, 100%);
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.home-trust-grid > div {
+    padding: 15px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-right: 1px solid rgba(255,255,255,.2);
+
+    text-align: center;
+}
+
+.home-trust-grid > div:last-child {
+    border-right: 0;
+}
+
+.home-trust strong {
+    color: #FBD599;
+    font-size: 17px;
+}
+
+.home-trust span {
+    margin-top: 4px;
+
+    color: rgba(255,255,255,.85);
+    font-size: 13px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+    .home-category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .home-product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================
+   MOBILE / SMALL TABLET
+========================= */
+
+@media (max-width: 800px) {
+
+    .home-shop-section,
+    .home-products-section,
+    .home-flower-section,
+    .home-services {
+        width: calc(100% - 30px);
+        padding: 40px 0;
+    }
+
+    .home-section-title {
+        align-items: center;
+    }
+
+    .home-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .home-product-image {
+        height: 180px;
+    }
+
+    .home-organizer {
+        padding: 15px 15px 45px;
+    }
+
+    .home-organizer-inner,
+    .home-wedding-inner,
+    .home-puja-list-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .home-organizer-inner {
+        padding: 35px 25px;
+    }
+
+    .home-organizer-art {
+        display: none;
+    }
+
+    .home-wedding-section,
+    .home-puja-list {
+        padding: 50px 20px;
+    }
+
+    .home-wedding-art {
+        display: none;
+    }
+
+    .home-flower-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-trust-grid > div {
+        border-right: 0;
+    }
+
+}
+
+
+/* =========================
+   PHONE
+========================= */
+
+@media (max-width: 500px) {
+
+    .home-section-title {
+        align-items: flex-start;
+    }
+
+    .home-section-title h2 {
+        font-size: 27px;
+    }
+
+    .home-see-all {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .home-category-image {
+        width: 105px;
+    }
+
+    .home-category-card {
+        padding: 12px 8px 15px;
+    }
+
+    .home-category-card h3 {
+        font-size: 13px;
+    }
+
+    .home-product-image {
+        height: 145px;
+    }
+
+    .home-product-info {
+        padding: 13px 45px 14px 13px;
+    }
+
+    .home-product-name {
+        font-size: 13px;
+    }
+
+    .home-product-price strong {
+        font-size: 15px;
+    }
+
+    .home-product-add {
+        right: 10px;
+        bottom: 12px;
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 19px;
+    }
+
+    .home-flower-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* ==========================================================
+   HOMEPAGE — AVAILABLE AT / SERVICES / SERVICEABLE AREAS
+========================================================== */
+
+.home-available,
+.home-main-services,
+.home-serviceable {
+    width: min(1420px, calc(100% - 60px));
+    margin: 0 auto;
+    padding: 55px 0;
+}
+
+
+/* =========================
+   COMMON HEADING
+========================= */
+
+.home-simple-heading {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.home-simple-heading h2 {
+    margin: 0;
+
+    color: var(--maroon);
+
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 500;
+}
+
+.home-simple-heading p {
+    max-width: 600px;
+
+    margin: 8px auto 0;
+
+    color: var(--ink-soft);
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   AVAILABLE AT
+========================================================== */
+
+.home-available {
+    padding-top: 42px;
+    padding-bottom: 48px;
+}
+
+.home-available-grid {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.home-platform-card {
+    min-height: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    border: 1px solid #eadbcf;
+    border-radius: 12px;
+
+    background: #fff;
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.home-platform-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 24px rgba(80, 40, 20, .08);
+}
+
+.home-platform-logo {
+    color: #f5c400;
+
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.home-platform-logo span {
+    color: #ef2028;
+}
+
+.home-platform-zepto {
+    color: #6827c7;
+}
+
+.home-platform-instamart {
+    color: #ef5b2a;
+}
+
+.home-platform-amazon {
+    color: #161616;
+}
+
+
+/* ==========================================================
+   OUR SERVICES
+========================================================== */
+
+.home-main-services {
+    padding-top: 58px;
+    padding-bottom: 62px;
+
+    border-top: 1px solid #eee1d5;
+}
+
+.home-main-service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.home-main-service-card {
+    min-height: 210px;
+
+    padding: 28px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    border: 1px solid #e7d5c5;
+    border-radius: 14px;
+
+    background: #fff;
+
+    color: inherit;
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.home-main-service-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #d8ad8c;
+
+    box-shadow: 0 10px 28px rgba(72, 38, 18, .08);
+}
+
+.home-main-service-icon {
+    width: 65px;
+    height: 65px;
+
+    flex: 0 0 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff2df;
+
+    font-size: 31px;
+}
+
+.home-main-service-content h3 {
+    margin: 2px 0 8px;
+
+    color: var(--maroon);
+
+    font-family: 'Mukta', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.home-main-service-content p {
+    margin: 0 0 15px;
+
+    color: var(--ink-soft);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.home-main-service-content span {
+    color: var(--maroon);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   SERVICEABLE AREA
+========================================================== */
+
+.home-serviceable {
+    padding-top: 58px;
+    padding-bottom: 65px;
+
+    border-top: 1px solid #eee1d5;
+}
+
+.home-area-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.home-area-card {
+    padding: 27px 15px;
+
+    border: 1px solid #eadbcd;
+    border-radius: 12px;
+
+    background: #fff;
+
+    text-align: center;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.home-area-card:hover {
+    transform: translateY(-3px);
+    border-color: #d5ad8c;
+}
+
+.home-area-pin {
+    width: 46px;
+    height: 46px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1df;
+    color: var(--maroon);
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.home-area-card h3 {
+    margin: 0;
+
+    color: var(--maroon);
+
+    font-family: 'Mukta', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.home-area-card span {
+    display: block;
+    margin-top: 2px;
+
+    color: var(--ink-soft);
+
+    font-size: 13px;
+}
+
+
+/* Bottom availability message */
+
+.home-area-note {
+    margin-top: 25px;
+
+    padding: 18px 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 10px;
+
+    background: #fff4e7;
+}
+
+.home-area-note strong {
+    color: var(--maroon);
+}
+
+.home-area-note span {
+    color: var(--ink-soft);
+}
+
+.home-area-note a {
+    margin-left: auto;
+
+    color: var(--maroon);
+
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1000px) {
+
+    .home-main-service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-area-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .home-available,
+    .home-main-services,
+    .home-serviceable {
+        width: calc(100% - 30px);
+        padding: 42px 0;
+    }
+
+    .home-available-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-area-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-area-note {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .home-area-note a {
+        margin-left: 0;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .home-main-service-card {
+        padding: 20px;
+
+        gap: 14px;
+    }
+
+    .home-main-service-icon {
+        width: 52px;
+        height: 52px;
+
+        flex-basis: 52px;
+
+        font-size: 25px;
+    }
+
+    .home-platform-card {
+        min-height: 78px;
+    }
+
+    .home-platform-logo {
+        font-size: 20px;
+    }
+
+}
+
+
+
+/* ==========================================================
+   CUSTOMER REVIEWS
+========================================================== */
+
+.home-reviews {
+    width: min(1420px, calc(100% - 60px));
+    margin: 0 auto;
+    padding: 60px 0 70px;
+}
+
+
+/* =========================
+   REVIEW GRID
+========================= */
+
+.home-review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+
+/* =========================
+   REVIEW CARD
+========================= */
+
+.home-review-card {
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 250px;
+
+    border: 1px solid #ead9ca;
+    border-radius: 14px;
+
+    background: #fff;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.home-review-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(70, 35, 20, .08);
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.home-review-stars {
+    margin-bottom: 15px;
+
+    color: #e89a18;
+
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   REVIEW TEXT
+========================= */
+
+.home-review-text {
+    flex: 1;
+
+    margin: 0 0 24px;
+
+    color: var(--ink-soft);
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+
+/* =========================
+   CUSTOMER
+========================= */
+
+.home-review-user {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.home-review-avatar {
+    width: 45px;
+    height: 45px;
+
+    flex: 0 0 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff0df;
+    color: var(--maroon);
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.home-review-user strong {
+    display: block;
+
+    color: var(--maroon);
+
+    font-size: 14px;
+}
+
+.home-review-user span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--ink-soft);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   REVIEW SUMMARY
+========================= */
+
+.home-review-summary {
+    margin-top: 25px;
+
+    padding: 20px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    border: 1px solid #ead9ca;
+    border-radius: 12px;
+
+    background: #fff8ee;
+}
+
+.home-review-score {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.home-review-score > strong {
+    color: var(--maroon);
+
+    font-family: Georgia, serif;
+    font-size: 36px;
+    line-height: 1;
+}
+
+.home-review-score div {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-review-score span {
+    color: #e89a18;
+
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.home-review-score small {
+    margin-top: 3px;
+
+    color: var(--ink-soft);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.home-review-action {
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    background: var(--maroon);
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .home-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .home-reviews {
+        width: calc(100% - 30px);
+
+        padding: 45px 0 55px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .home-review-card {
+        min-height: auto;
+
+        padding: 22px;
+    }
+
+    .home-review-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .home-review-action {
+        width: 100%;
+
+        text-align: center;
+    }
+
+}
+
+
+/* ==========================================================
+   AVAILABLE AT — PUJADUKAAN STYLE
+========================================================== */
+
+.home-available {
+    width: 100%;
+    margin: 0;
+
+    padding: 34px 55px 28px;
+
+    background: #fff;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.home-available-heading {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.home-available-heading h2 {
+    margin: 0;
+
+    color: var(--maroon);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(32px, 3vw, 43px);
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+
+/* =========================
+   MARKETPLACE ROW
+========================= */
+
+.home-marketplace-grid {
+    width: min(1450px, 100%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    align-items: end;
+
+    gap: 35px;
+}
+
+
+/* =========================
+   EACH MARKETPLACE
+========================= */
+
+.home-marketplace-item {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================
+   SQUARE LOGOS
+========================= */
+
+.marketplace-square {
+    width: 138px;
+    height: 138px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+}
+
+
+/* =========================
+   INSTAMART
+========================= */
+
+.instamart-box {
+    background: #ff652f;
+    color: #fff;
+}
+
+.instamart-box strong {
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.instamart-small {
+    margin-bottom: -1px;
+
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   ZEPTO
+========================= */
+
+.zepto-box {
+    background: #3c006f;
+}
+
+.zepto-box strong {
+    color: #ff5773;
+
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   BLINKIT
+========================= */
+
+.blinkit-box {
+    background: #ffe13d;
+}
+
+.blinkit-box strong {
+    color: #000;
+
+    font-family: Arial, sans-serif;
+    font-size: 29px;
+    font-weight: 900;
+
+    letter-spacing: -2px;
+}
+
+.blinkit-box strong span {
+    color: #156d34;
+}
+
+
+/* =========================
+   FLIPKART
+========================= */
+
+.flipkart-box {
+    background: #ffe500;
+}
+
+.flipkart-box strong {
+    color: #2455e6;
+
+    font-family: Arial, sans-serif;
+    font-size: 85px;
+    font-style: italic;
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   AMAZON
+========================= */
+
+.marketplace-logo {
+    width: 150px;
+    height: 138px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.amazon-a {
+    color: #000;
+
+    font-family: Georgia, serif;
+    font-size: 128px;
+    font-weight: 700;
+
+    line-height: .8;
+}
+
+.amazon-smile {
+    position: absolute;
+
+    width: 105px;
+    height: 31px;
+
+    left: 23px;
+    bottom: 5px;
+
+    border-bottom: 8px solid #ff9900;
+    border-radius: 0 0 70% 70%;
+
+    transform: rotate(3deg);
+}
+
+
+/* =========================
+   LIVE / LIVE SOON
+========================= */
+
+.marketplace-status {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    text-align: center;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.home-marketplace-item {
+    transition: transform .2s ease;
+}
+
+.home-marketplace-item:hover {
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+    .home-marketplace-grid {
+        grid-template-columns: repeat(3, 1fr);
+
+        row-gap: 40px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .home-available {
+        padding:
+            35px
+            18px
+            30px;
+    }
+
+    .home-available-heading {
+        margin-bottom: 30px;
+    }
+
+    .home-marketplace-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 32px 15px;
+    }
+
+    .marketplace-square {
+        width: 105px;
+        height: 105px;
+
+        border-radius: 18px;
+    }
+
+    .marketplace-logo {
+        width: 115px;
+        height: 105px;
+    }
+
+    .amazon-a {
+        font-size: 98px;
+    }
+
+    .amazon-smile {
+        width: 80px;
+
+        left: 18px;
+        bottom: 1px;
+    }
+
+    .zepto-box strong {
+        font-size: 25px;
+    }
+
+    .blinkit-box strong {
+        font-size: 23px;
+    }
+
+    .flipkart-box strong {
+        font-size: 65px;
+    }
+
+}
+
+/* ==========================================================
+   OUR SERVICES — PUJADUKAAN STYLE
+========================================================== */
+
+.home-services {
+    width: 100%;
+
+    padding: 65px 0 75px;
+
+    background: #fff5e7;
+}
+
+
+/* =========================
+   TITLE ROW
+========================= */
+
+.home-section-top {
+    width: min(1200px, calc(100% - 60px));
+
+    margin: 0 auto 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-section-top h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 38px;
+    font-weight: 400;
+
+    color: var(--maroon);
+}
+
+
+/* =========================
+   SEE ALL
+========================= */
+
+.home-see-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 120px;
+    height: 43px;
+
+    padding: 0 20px;
+
+    border-radius: 9px;
+
+    background: var(--maroon);
+    color: #fff !important;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none !important;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.home-see-all:hover {
+    transform: translateY(-2px);
+    opacity: .92;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.home-services-grid {
+    width: min(1200px, calc(100% - 60px));
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.home-service-card {
+    min-height: 330px;
+
+    padding: 23px 21px 21px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fff;
+
+    border: 1px solid #e8890c;
+    border-radius: 10px;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.home-service-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(80, 35, 10, .08);
+}
+
+
+/* =========================
+   CARD TOP
+========================= */
+
+.service-card-top {
+    min-height: 82px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.service-card-image {
+    width: 78px;
+    height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #fff1df;
+
+    font-size: 38px;
+}
+
+
+/* =========================
+   STATUS PILL
+========================= */
+
+.service-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 55px;
+
+    padding: 6px 14px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 1;
+}
+
+.service-pill-popular {
+    background: #efc3f7;
+    color: #9a1748;
+}
+
+.service-pill-live {
+    background: #a9f5b5;
+    color: #176b32;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.home-service-card h3 {
+    margin: 5px 0 19px;
+
+    color: var(--maroon);
+
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.home-service-card p {
+    margin: 0 0 24px;
+
+    color: #342d29;
+
+    font-size: 14px;
+    line-height: 1.75;
+
+    flex: 1;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.service-card-btn {
+    width: 100%;
+    height: 39px;
+
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--maroon);
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: var(--maroon) !important;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none !important;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.service-card-btn:hover {
+    background: var(--maroon);
+
+    color: #fff !important;
+}
+
+.service-card-btn-filled {
+    background: var(--maroon);
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1000px) {
+
+    .home-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .home-services {
+        padding: 45px 0 50px;
+    }
+
+    .home-section-top {
+        width: calc(100% - 30px);
+
+        margin-bottom: 30px;
+    }
+
+    .home-section-top h2 {
+        font-size: 30px;
+    }
+
+    .home-see-all {
+        min-width: auto;
+        height: 39px;
+
+        padding: 0 15px;
+    }
+
+    .home-services-grid {
+        width: calc(100% - 30px);
+
+        grid-template-columns: 1fr;
+    }
+
+    .home-service-card {
+        min-height: 300px;
+    }
+
+}
+
+
+/* ==========================================================
+   SERVICEABLE AREA — PUJADUKAAN STYLE
+========================================================== */
+
+.serviceable-area {
+    width: 100%;
+
+    padding: 58px 0 65px;
+
+    background: #fff;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.serviceable-heading {
+    text-align: center;
+
+    margin-bottom: 42px;
+}
+
+.serviceable-heading h2 {
+    margin: 0 0 22px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 38px;
+    font-weight: 400;
+
+    line-height: 1.15;
+
+    color: var(--maroon);
+}
+
+.serviceable-heading p {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    color: var(--maroon);
+}
+
+
+/* =========================
+   FEATURE STRIP
+========================= */
+
+.serviceable-features {
+    width: min(1360px, calc(100% - 100px));
+
+    min-height: 130px;
+
+    margin: 0 auto;
+
+    padding: 28px 60px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    align-items: center;
+
+    background: #fff5e7;
+}
+
+
+/* =========================
+   FEATURE
+========================= */
+
+.serviceable-feature {
+    min-height: 75px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    text-align: center;
+
+    color: var(--maroon);
+}
+
+
+/* ICON */
+
+.serviceable-feature svg {
+    width: 29px;
+    height: 29px;
+
+    display: block;
+
+    color: var(--maroon);
+}
+
+
+/* TEXT */
+
+.serviceable-feature span {
+    display: block;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    color: var(--maroon);
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .serviceable-features {
+        width: calc(100% - 40px);
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
+
+        padding: 30px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .serviceable-area {
+        padding: 45px 0;
+    }
+
+    .serviceable-heading {
+        margin-bottom: 30px;
+    }
+
+    .serviceable-heading h2 {
+        font-size: 30px;
+
+        margin-bottom: 14px;
+    }
+
+    .serviceable-heading p {
+        font-size: 15px;
+    }
+
+    .serviceable-features {
+        width: calc(100% - 30px);
+
+        grid-template-columns: repeat(2, 1fr);
+
+        padding: 25px 15px;
+
+        gap: 28px 10px;
+    }
+
+    .serviceable-feature span {
+        font-size: 13px;
+    }
+
+}
+
+/* =========================
+   PAGE LOADER
+========================= */
+
+body.loading{
+    overflow:hidden;
+}
+
+#page-loader{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#fff;
+    z-index:999999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.6s ease;
+}
+
+#page-loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.store-brand{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    flex-shrink:0;
+    text-decoration:none;
+
+    min-width:290px;
+
+}
+
+.brand-diya{
+
+    width:85px;
+    height:85px;
+
+    flex-shrink:0;
+
+}
+
+.brand-logo{
+
+    width:190px;
+    height:auto;
+
+    display:block;
+
+}

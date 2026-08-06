@@ -1,7 +1,5 @@
 <?php
-
 $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
-
 ?>
 
 <!DOCTYPE html>
@@ -16,60 +14,174 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
 <link rel="stylesheet" href="style.css">
 
+<script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
+
 </head>
 
 <body>
 
-<header>
+<!-- Page Loader -->
+<div id="page-loader">
 
-    <a
-        href="index.php"
-        class="logo"
-        style="text-decoration:none;"
+    <dotlottie-player
+        src="assets/images/Diya.lottie"
+        autoplay
+        style="width:220px;height:220px;">
+    </dotlottie-player>
+
+</div>
+
+<header class="store-header">
+
+    <!-- =========================
+         LAYER 1
+    ========================== -->
+
+    <div class="store-header-top">
+
+        <div class="store-header-inner">
+
+
+            <!-- BRAND -->
+
+            <a href="index.php" class="store-brand">
+
+<dotlottie-player
+    class="brand-diya"
+    src="assets/images/DiyaCropped.json"
+    autoplay
+    loop>
+</dotlottie-player>
+
+    <img
+        src="assets/images/site-logo.png"
+        alt="Shubh Samagri"
+        class="brand-logo"
     >
-
-        <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
-
-            <ellipse
-                cx="20"
-                cy="27"
-                rx="15"
-                ry="7"
-                fill="#B8860B"
-            />
-
-            <path
-                d="M20 26c-3 0-6-2-6-5 0-4 3-8 6-14 3 6 6 10 6 14 0 3-3 5-6 5z"
-                fill="#E8890C"
-            />
-
-            <path
-                d="M20 21c-1.4 0-2.6-1-2.6-2.3 0-1.7 1.3-3.5 2.6-6 1.3 2.5 2.6 4.3 2.6 6 0 1.3-1.2 2.3-2.6 2.3z"
-                fill="#FBD599"
-            />
-
-        </svg>
-
-        <div class="logo-text">
-            Shubh<span>Samagri</span>
-        </div>
 
     </a>
 
 
-    <nav id="mainNav">
+            <!-- SEARCH -->
+
+            <form
+                class="store-search"
+                action="search.php"
+                method="get"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="M20 20l-4-4"/>
+                </svg>
+
+                <input
+                    type="search"
+                    name="q"
+                    placeholder="Search for Puja Items, Wedding Items and more"
+                >
+
+            </form>
+
+
+            <!-- ACTIONS -->
+
+            <div class="store-actions">
+
+
+                <!-- CART -->
+
+                <a
+                    href="cart.php"
+                    class="store-cart"
+                    aria-label="Cart"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+
+                        <path
+                            d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
+                        />
+                    </svg>
+
+                    <span
+                        class="cart-badge"
+                        id="cart-count"
+                        style="display:none;"
+                    >
+                        0
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="contact.php"
+                    class="header-action-btn"
+                >
+                    Contact Us
+                </a>
+
+
+                <a
+                    href="contact.php"
+                    class="header-action-btn"
+                >
+                    Send Puja List
+                </a>
+
+
+                <a
+                    href="services.php"
+                    class="header-action-btn"
+                >
+                    Book Pandit Ji
+                </a>
+
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                    type="button"
+                    aria-label="Menu"
+                >
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         LAYER 2
+    ========================== -->
+
+    <nav
+        class="store-category-nav"
+        id="mainNav"
+    >
 
         <ul>
 
             <li>
-                <a href="index.php">
-                    Home
-                </a>
-            </li>
-
-            <li>
                 <a href="puja-samagri.php">
-                    Puja Samagri
+                    Puja Items
                 </a>
             </li>
 
@@ -80,14 +192,14 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
             </li>
 
             <li>
-                <a href="services.php">
-                    Services
+                <a href="puja-samagri.php">
+                    Puja Flowers
                 </a>
             </li>
 
             <li>
-                <a href="contact.php">
-                    Contact
+                <a href="categories.php">
+                    All Category
                 </a>
             </li>
 
@@ -96,75 +208,25 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
     </nav>
 
 
-    <div class="nav-actions">
 
-        <a
-            href="cart.php"
-            class="cart-link"
-            aria-label="Cart"
-        >
+    <!-- =========================
+         LAYER 3 / ANNOUNCEMENT
+    ========================== -->
 
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-            >
+    <div class="store-announcement">
 
-                <circle cx="9" cy="21" r="1"/>
+        <a href="contact.php">
 
-                <circle cx="20" cy="21" r="1"/>
+            <span>◉</span>
 
-                <path
-                    d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
-                />
+            Send your Puja List on WhatsApp
 
-            </svg>
-
-            <span
-                class="cart-badge"
-                id="cart-count"
-                style="display:none;"
-            >
-                0
-            </span>
-
-        </a>
-
-
-        <a
-            href="contact.php"
-            class="nav-cta"
-        >
-
-            <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-            >
-
-                <path
-                    d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"
-                />
-
-            </svg>
-
-            WhatsApp Order
+            <strong>
+                — Contact Us
+            </strong>
 
         </a>
 
     </div>
-
-
-    <button
-        class="menu-btn"
-        id="menuBtn"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-    >
-        ☰
-    </button>
 
 </header>
