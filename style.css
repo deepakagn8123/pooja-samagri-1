@@ -3254,3 +3254,68 @@ body.loading{
     display:block;
 
 }
+
+
+/* ==========================================
+   CATEGORY GRID
+========================================== */
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:28px;
+
+}
+
+.category-card{
+
+    background:#fff;
+
+    border:1px solid #eee;
+
+    border-radius:18px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.category-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.category-icon{
+
+    font-size:48px;
+
+    margin-bottom:18px;
+
+}
+
+.category-card h3{
+
+    color:var(--maroon);
+
+    margin-bottom:10px;
+
+}
+
+.category-card span{
+
+    color:var(--ink-soft);
+
+    font-size:14px;
+
+}

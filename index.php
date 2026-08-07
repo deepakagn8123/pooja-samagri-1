@@ -1402,16 +1402,23 @@ window.addEventListener("load", function () {
 
     const loader = document.getElementById("page-loader");
 
-    if (!loader) {
+    // Has the loader already been shown in this tab?
+    if (sessionStorage.getItem("loaderShown")) {
+
+        loader.remove();
         document.body.classList.remove("loading");
         return;
+
     }
 
-    setTimeout(() => {
+    // Mark loader as shown for this tab
+    sessionStorage.setItem("loaderShown", "true");
+
+    setTimeout(function () {
 
         loader.classList.add("hide");
 
-        setTimeout(() => {
+        setTimeout(function () {
 
             loader.remove();
             document.body.classList.remove("loading");

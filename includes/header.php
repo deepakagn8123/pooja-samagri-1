@@ -104,6 +104,7 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
                     type="search"
                     name="q"
                     placeholder="Search for Puja Items, Wedding Items and more"
+                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
                 >
 
             </form>
