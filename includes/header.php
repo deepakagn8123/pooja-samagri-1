@@ -1,5 +1,22 @@
+
 <?php
 $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
+?>
+
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$showLoader = !isset($_SESSION['loader_shown']);
+
+if ($showLoader) {
+    $_SESSION['loader_shown'] = true;
+}
+
+$pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +37,7 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
 <body>
 
+<?php if ($showLoader): ?>
 <!-- Page Loader -->
 <div id="page-loader">
 
@@ -30,6 +48,8 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
     </dotlottie-player>
 
 </div>
+
+<?php endif; ?>
 
 <header class="store-header">
 
