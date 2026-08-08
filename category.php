@@ -368,51 +368,30 @@ require __DIR__ . '/includes/header.php';
 
     </div>
 
+<div class="page-banner">
 
-    <div class="page-banner">
+    <span class="eyebrow">
+        Category
+    </span>
 
+    <h1>
+        <?= e($category['name']) ?>
+    </h1>
 
-        <span class="eyebrow">
-            Category
-        </span>
+    <?php if (!empty($category['description'])): ?>
 
+        <p>
+            <?= e($category['description']) ?>
+        </p>
 
-        <h1>
-            <?= e($category['name']) ?>
-        </h1>
+    <?php endif; ?>
 
-
-        <?php if (!empty($category['description'])): ?>
-
-            <p>
-                <?= e($category['description']) ?>
-            </p>
-
-        <?php endif; ?>
-
-
-    </div>
-
-
-
+</div>
 
     <?php if ($products): ?>
 
 
         <section class="block">
-
-
-            <div class="section-head">
-
-                <span class="eyebrow">
-                    Products
-                </span>
-
-                <h2>
-                    <?= e($category['name']) ?>
-                </h2>
-
-            </div>
 
 
             <div class="prod-grid">
