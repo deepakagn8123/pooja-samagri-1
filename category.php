@@ -48,7 +48,6 @@ if ($slug === '') {
 $stmt = $pdo->prepare("
     SELECT
         id,
-        parent_id,
         name,
         slug,
         image,
@@ -120,40 +119,6 @@ if (!$category) {
     exit;
 
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Get child categories
-|--------------------------------------------------------------------------
-*/
-
-$stmt = $pdo->prepare("
-    SELECT
-        id,
-        parent_id,
-        name,
-        slug,
-        image,
-        description,
-        sort_order
-
-    FROM categories
-
-    WHERE parent_id = :parent_id
-      AND is_active = 1
-
-    ORDER BY
-        sort_order ASC,
-        name ASC
-");
-
-$stmt->execute([
-    'parent_id' => $category['id']
-]);
-
-$subcategories = $stmt->fetchAll();
-
 
 /*
 |--------------------------------------------------------------------------
@@ -429,89 +394,6 @@ require __DIR__ . '/includes/header.php';
     </div>
 
 
-    <?php if ($subcategories): ?>
-
-
-        <section class="block">
-
-
-            <div class="section-head">
-
-                <span class="eyebrow">
-                    Explore
-                </span>
-
-                <h2>
-                    Shop by Subcategory
-                </h2>
-
-            </div>
-
-
-            <div class="category-grid">
-
-
-                <?php foreach ($subcategories as $subcategory): ?>
-
-
-                    <a
-                        href="category.php?slug=<?= urlencode($subcategory['slug']) ?>"
-                        class="category-card"
-                    >
-
-
-                        <div class="category-icon">
-
-
-                            <?php if (!empty($subcategory['image'])): ?>
-
-                                <img
-                                    src="assets/images/categories/<?= rawurlencode($subcategory['image']) ?>"
-                                    alt="<?= e($subcategory['name']) ?>"
-                                    loading="lazy"
-                                >
-
-                            <?php else: ?>
-
-                                🪔
-
-                            <?php endif; ?>
-
-
-                        </div>
-
-
-                        <h3>
-
-                            <?= e($subcategory['name']) ?>
-
-                        </h3>
-
-
-                        <?php if (!empty($subcategory['description'])): ?>
-
-                            <p>
-
-                                <?= e($subcategory['description']) ?>
-
-                            </p>
-
-                        <?php endif; ?>
-
-
-                    </a>
-
-
-                <?php endforeach; ?>
-
-
-            </div>
-
-
-        </section>
-
-
-    <?php endif; ?>
 
 
     <?php if ($products): ?>
@@ -553,7 +435,7 @@ require __DIR__ . '/includes/header.php';
         </section>
 
 
-    <?php elseif (!$subcategories): ?>
+    <?php else: ?>
 
 
         <section class="block">

@@ -143,19 +143,6 @@ require __DIR__ . '/includes/header.php';
                     </p>
 
 
-                    <?php if ((int)$category['subcategory_count'] > 0): ?>
-
-                        <span class="category-subcount">
-
-                            <?= (int)$category['subcategory_count'] ?>
-
-                            Subcategories →
-
-                        </span>
-
-                    <?php endif; ?>
-
-
                 </a>
 
 

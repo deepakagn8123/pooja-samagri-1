@@ -170,26 +170,6 @@ if (
 
         /*
         |--------------------------------------------------------------------------
-        | Handle Child Categories
-        |--------------------------------------------------------------------------
-        |
-        | If this category has subcategories, make them top-level.
-        |
-        */
-
-        $stmt = $pdo->prepare("
-            UPDATE categories
-            SET parent_id = NULL
-            WHERE parent_id = :category_id
-        ");
-
-        $stmt->execute([
-            'category_id' => $categoryId
-        ]);
-
-
-        /*
-        |--------------------------------------------------------------------------
         | Delete Category
         |--------------------------------------------------------------------------
         */

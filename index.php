@@ -47,7 +47,6 @@ try {
     $stmt = $pdo->query("
         SELECT
             id,
-            parent_id,
             name,
             slug,
             image,
@@ -123,10 +122,6 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 
-<!-- ===============================<!-- ========================================================
-     SHOP BY CATEGORY
-======================================================== -->
-
 <!-- ========================================================
      SHOP BY CATEGORY
 ======================================================== -->
@@ -160,7 +155,6 @@ require __DIR__ . '/includes/header.php';
             FROM categories
             WHERE is_active = 1
               AND show_on_homepage = 1
-              AND parent_id IS NULL
             ORDER BY sort_order ASC, name ASC
         ");
 

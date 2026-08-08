@@ -34,8 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
 
-    $parentId = (int)($_POST['parent_id'] ?? 0);
-
     $image = trim($_POST['image'] ?? '');
 
     $description = trim(
@@ -125,39 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 /*
                 |--------------------------------------------------------------------------
-                | Parent Category
-                |--------------------------------------------------------------------------
-                */
-
-                if ($parentId < 1) {
-
-                    $parentId = null;
-
-                } else {
-
-                    $stmt = $pdo->prepare("
-                        SELECT id
-                        FROM categories
-                        WHERE id = :id
-                        LIMIT 1
-                    ");
-
-                    $stmt->execute([
-                        'id' => $parentId
-                    ]);
-
-
-                    if (!$stmt->fetch()) {
-
-                        $parentId = null;
-
-                    }
-
-                }
-
-
-                /*
-                |--------------------------------------------------------------------------
                 | Insert
                 |--------------------------------------------------------------------------
                 */
@@ -165,7 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $pdo->prepare("
                     INSERT INTO categories
                     (
-                        parent_id,
                         name,
                         slug,
                         image,
@@ -177,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     VALUES
                     (
-                        :parent_id,
                         :name,
                         :slug,
                         :image,
@@ -190,9 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                 $stmt->execute([
-
-                    'parent_id' =>
-                        $parentId,
 
                     'name' =>
                         $name,
@@ -246,7 +206,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $stmt = $pdo->query("
     SELECT
         c.id,
-        c.parent_id,
         c.name,
         c.slug,
         c.image,
@@ -264,7 +223,6 @@ $stmt = $pdo->query("
 
     GROUP BY
         c.id,
-        c.parent_id,
         c.name,
         c.slug,
         c.image,
@@ -274,10 +232,6 @@ $stmt = $pdo->query("
         c.show_on_homepage
 
     ORDER BY
-        CASE
-            WHEN c.parent_id IS NULL THEN 0
-            ELSE 1
-        END,
         c.sort_order ASC,
         c.name ASC
 ");
@@ -285,28 +239,6 @@ $stmt = $pdo->query("
 $categories = $stmt->fetchAll(
     PDO::FETCH_ASSOC
 );
-
-
-/*
-|--------------------------------------------------------------------------
-| Parent Categories
-|--------------------------------------------------------------------------
-*/
-
-$parentCategories = [];
-
-foreach ($categories as $category) {
-
-    if (
-        empty($category['parent_id']) &&
-        (int)$category['is_active'] === 1
-    ) {
-
-        $parentCategories[] = $category;
-
-    }
-
-}
 
 ?>
 
@@ -1150,13 +1082,12 @@ th {
 
 
         <?php if (
-            ($_GET['delete'] ?? '') === 'blocked'
+            isset($_GET['delete_error'])
         ): ?>
 
             <div class="alert alert-error">
 
-                This category cannot be deleted
-                because products are assigned to it.
+                <?= e($_GET['delete_error']) ?>
 
             </div>
 
@@ -1237,59 +1168,6 @@ th {
                                 automatically.
 
                             </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Parent Category
-                            </label>
-
-
-                            <select name="parent_id">
-
-
-                                <option value="0">
-
-                                    Top Level Category
-
-                                </option>
-
-
-                                <?php foreach (
-                                    $parentCategories
-                                    as $parent
-                                ): ?>
-
-
-                                    <option
-                                        value="<?= (int)$parent['id'] ?>"
-                                        <?= (
-                                            (int)(
-                                                $_POST['parent_id']
-                                                ?? 0
-                                            )
-                                            ===
-                                            (int)$parent['id']
-                                        )
-                                            ? 'selected'
-                                            : ''
-                                        ?>
-                                    >
-
-                                        <?= e(
-                                            $parent['name']
-                                        ) ?>
-
-                                    </option>
-
-
-                                <?php endforeach; ?>
-
-
-                            </select>
 
                         </div>
 
@@ -1561,22 +1439,9 @@ th {
 
                                     <strong>
 
-
-                                        <?php if (
-                                            !empty(
-                                                $category['parent_id']
-                                            )
-                                        ): ?>
-
-                                            └─
-
-                                        <?php endif; ?>
-
-
                                         <?= e(
                                             $category['name']
                                         ) ?>
-
 
                                     </strong>
 
@@ -1718,12 +1583,14 @@ th {
                                             >
 
 
-                                           <button
-    type="submit"
-    class="btn btn-delete"
->
-    Delete
-</button>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-delete"
+                                            >
+
+                                                Delete
+
+                                            </button>
 
 
                                         </form>
