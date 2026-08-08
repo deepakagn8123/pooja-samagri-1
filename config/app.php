@@ -16,7 +16,7 @@ function searchProducts(PDO $pdo, string $keyword): array
         return [];
     }
 
-    // Split the search into individual words
+    // Split search into individual words
     $words = preg_split('/\s+/', $keyword);
 
     $where = [];
@@ -53,7 +53,6 @@ function searchProducts(PDO $pdo, string $keyword): array
     ";
 
     $stmt = $pdo->prepare($sql);
-
     $stmt->execute($params);
 
     return $stmt->fetchAll();

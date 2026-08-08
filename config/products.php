@@ -45,11 +45,14 @@ function getAllCategories(PDO $pdo): array
 {
     $stmt = $pdo->query("
         SELECT
-            id,
-            name,
-            slug
-        FROM categories
-        ORDER BY name ASC
+            c.*,
+            COUNT(p.id) AS total_products
+        FROM categories c
+        LEFT JOIN products p
+            ON p.category_id = c.id
+            AND p.is_active = 1
+        GROUP BY c.id
+        ORDER BY c.name ASC
     ");
 
     return $stmt->fetchAll();
@@ -91,33 +94,23 @@ function getRelatedProducts(
             c.name AS category_name,
             c.slug AS category_slug
         FROM products p
-        INNER JOIN categories c ON c.id = p.category_id
-        WHERE p.category_id = :category_id
-          AND p.id != :current_product_id
-          AND p.is_active = 1
-        ORDER BY p.id DESC
+        INNER JOIN categories c
+            ON c.id = p.category_id
+        WHERE
+            p.category_id = :category_id
+            AND p.id != :current_product_id
+            AND p.is_active = 1
+        ORDER BY
+            p.id DESC
         LIMIT :product_limit
     ");
 
-    $stmt->bindValue(
-        ':category_id',
-        $categoryId,
-        PDO::PARAM_INT
-    );
-
-    $stmt->bindValue(
-        ':current_product_id',
-        $currentProductId,
-        PDO::PARAM_INT
-    );
-
-    $stmt->bindValue(
-        ':product_limit',
-        $limit,
-        PDO::PARAM_INT
-    );
+    $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
+    $stmt->bindValue(':current_product_id', $currentProductId, PDO::PARAM_INT);
+    $stmt->bindValue(':product_limit', $limit, PDO::PARAM_INT);
 
     $stmt->execute();
 
     return $stmt->fetchAll();
 }
+

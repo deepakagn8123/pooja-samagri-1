@@ -8,6 +8,21 @@ $product = $slug !== ''
     ? getProductBySlug($pdo, $slug)
     : null;
 
+require_once __DIR__ . '/includes/product-card.php';
+
+$relatedProducts = [];
+
+if ($product) {
+
+    $relatedProducts = getRelatedProducts(
+        $pdo,
+        (int)$product['category_id'],
+        (int)$product['id'],
+        4
+    );
+
+}
+
 $relatedProducts = [];
 
 if ($product) {
@@ -343,96 +358,13 @@ require __DIR__ . '/includes/header.php';
 
     <div class="prod-grid">
 
-        <?php foreach ($relatedProducts as $related): ?>
+<?php foreach($relatedProducts as $related): ?>
 
-            <div class="prod-card">
+    <?php renderProductCard($related); ?>
 
-                <a
-                    href="product.php?slug=<?= urlencode($related['slug']) ?>"
-                    class="prod-link"
-                >
+<?php endforeach; ?>
 
-                    <div class="prod-visual">
-
-                        <?php if (!empty($related['badge'])): ?>
-
-                            <span class="sale-badge">
-                                <?= e($related['badge']) ?>
-                            </span>
-
-                        <?php endif; ?>
-
-
-                        <?php if (!empty($related['image'])): ?>
-
-                            <img
-                                src="assets/images/products/<?= rawurlencode($related['image']) ?>"
-                                alt="<?= e($related['name']) ?>"
-                                class="product-card-image"
-                            >
-
-                        <?php else: ?>
-
-                            <div class="product-image-placeholder">
-                                Image coming soon
-                            </div>
-
-                        <?php endif; ?>
-
-                    </div>
-
-
-                    <div class="prod-body">
-
-                        <h4>
-                            <?= e($related['name']) ?>
-                        </h4>
-
-
-                        <div class="price">
-
-                            <?php if (!empty($related['old_price'])): ?>
-
-                                <s>
-                                    ₹<?= number_format((float)$related['old_price'], 0) ?>
-                                </s>
-
-                            <?php endif; ?>
-
-
-                            ₹<?= number_format((float)$related['price'], 0) ?>
-
-                            <?= e($related['unit'] ?? '') ?>
-
-                        </div>
-
-
-                        <?php if (!empty($related['tag'])): ?>
-
-                            <span class="tag">
-                                <?= e($related['tag']) ?>
-                            </span>
-
-                        <?php endif; ?>
-
-                    </div>
-
-                </a>
-
-
-                <button
-                    class="quick-add"
-                    onclick="quickAdd('<?= e($related['slug']) ?>')"
-                    aria-label="Add to cart"
-                >
-                    +
-                </button>
-
-            </div>
-
-        <?php endforeach; ?>
-
-    </div>
+</div>
 
 </div>
 

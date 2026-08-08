@@ -146,32 +146,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F8E8D0"/>
-
-                    <rect
-                        x="30"
-                        y="55"
-                        width="60"
-                        height="38"
-                        rx="6"
-                        fill="#8B1E3F"
-                    />
-
-                    <circle
-                        cx="60"
-                        cy="40"
-                        r="18"
-                        fill="#E8890C"
-                    />
-
-                    <path
-                        d="M52 42c0-13 8-23 8-23s8 10 8 23"
-                        fill="#FBD599"
-                    />
-
-                </svg>
+                <img
+                    src="assets/images/categories/Pooja_essential.webp"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >           
 
             </div>
 
@@ -187,27 +166,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F6DFD8"/>
-
-                    <path
-                        d="M60 20
-                           C45 35 37 51 37 68
-                           C37 84 47 94 60 94
-                           C73 94 83 84 83 68
-                           C83 51 75 35 60 20Z"
-                        fill="#8B1E3F"
-                    />
-
-                    <circle
-                        cx="60"
-                        cy="70"
-                        r="16"
-                        fill="#E8890C"
-                    />
-
-                </svg>
+                <img
+                    src="assets/images/categories/717vdrxwYZL.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
 
             </div>
 
@@ -223,18 +186,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F8E8D0"/>
-
-                    <circle cx="60" cy="60" r="13" fill="#B8860B"/>
-
-                    <circle cx="60" cy="35" r="15" fill="#E8890C"/>
-                    <circle cx="85" cy="60" r="15" fill="#E8890C"/>
-                    <circle cx="60" cy="85" r="15" fill="#E8890C"/>
-                    <circle cx="35" cy="60" r="15" fill="#E8890C"/>
-
-                </svg>
+                <img
+                    src="assets/images/categories/Untitled-design-79.webp"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
 
             </div>
 
@@ -250,25 +206,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F6DFD8"/>
-
-                    <circle
-                        cx="60"
-                        cy="42"
-                        r="18"
-                        fill="#B8860B"
-                    />
-
-                    <path
-                        d="M30 95
-                           C32 72 43 61 60 61
-                           C77 61 88 72 90 95Z"
-                        fill="#8B1E3F"
-                    />
-
-                </svg>
+                <img
+                    src="assets/images/categories/puja-services.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
 
             </div>
 
@@ -284,36 +226,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F8E8D0"/>
-
-                    <rect
-                        x="40"
-                        y="25"
-                        width="40"
-                        height="70"
-                        rx="6"
-                        fill="#B8860B"
-                    />
-
-                    <rect
-                        x="47"
-                        y="38"
-                        width="26"
-                        height="42"
-                        rx="3"
-                        fill="#FBD599"
-                    />
-
-                    <circle
-                        cx="60"
-                        cy="56"
-                        r="10"
-                        fill="#8B1E3F"
-                    />
-
-                </svg>
+                <img
+                    src="assets/images/categories/51HW4wy1edL._SL500_.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
 
             </div>
 
@@ -329,25 +246,11 @@ require __DIR__ . '/includes/header.php';
 
             <div class="home-category-image">
 
-                <svg viewBox="0 0 120 120">
-
-                    <circle cx="60" cy="60" r="58" fill="#F6DFD8"/>
-
-                    <circle
-                        cx="60"
-                        cy="42"
-                        r="17"
-                        fill="#8B1E3F"
-                    />
-
-                    <path
-                        d="M30 95
-                           C33 72 44 62 60 62
-                           C76 62 87 72 90 95Z"
-                        fill="#E8890C"
-                    />
-
-                </svg>
+                <img
+                    src="assets/images/categories/images.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
 
             </div>
 
@@ -396,41 +299,11 @@ require __DIR__ . '/includes/header.php';
 
         <div class="home-organizer-art">
 
-            <svg viewBox="0 0 300 180">
-
-                <circle
-                    cx="150"
-                    cy="70"
-                    r="48"
-                    fill="#FBD599"
-                />
-
-                <circle
-                    cx="150"
-                    cy="70"
-                    r="32"
-                    fill="#E8890C"
-                />
-
-                <rect
-                    x="75"
-                    y="110"
-                    width="150"
-                    height="45"
-                    rx="8"
-                    fill="#B8860B"
-                />
-
-                <path
-                    d="M138 35
-                       C138 15 150 5 150 5
-                       C150 5 162 15 162 35
-                       C162 43 157 48 150 48
-                       C143 48 138 43 138 35Z"
-                    fill="#8B1E3F"
-                />
-
-            </svg>
+            <img
+                    src="assets/images/categories/images (1).jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy" 
+                > 
 
         </div>
 
@@ -528,9 +401,6 @@ require __DIR__ . '/includes/header.php';
 <!-- ========================================================
      OUR SERVICES
 ======================================================== -->
-<!-- ========================================================
-     OUR SERVICES
-======================================================== -->
 
 <section class="home-services">
 
@@ -550,7 +420,11 @@ require __DIR__ . '/includes/header.php';
             <div class="service-card-top">
 
                 <div class="service-card-image">
-                    🪔
+                    <img
+                    src="assets/images/categories/images (2).jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
                 </div>
 
                 <span class="service-pill service-pill-popular">
@@ -580,7 +454,11 @@ require __DIR__ . '/includes/header.php';
             <div class="service-card-top">
 
                 <div class="service-card-image">
-                    🌸
+                    <img
+                    src="assets/images/categories/mixedflowers-350x350.webp"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
                 </div>
 
                 <span class="service-pill service-pill-live">
@@ -610,7 +488,11 @@ require __DIR__ . '/includes/header.php';
             <div class="service-card-top">
 
                 <div class="service-card-image">
-                    🙏
+                    <img
+                    src="assets/images/categories/about_us.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
                 </div>
 
                 <span class="service-pill service-pill-live">
@@ -640,7 +522,11 @@ require __DIR__ . '/includes/header.php';
             <div class="service-card-top">
 
                 <div class="service-card-image">
-                    🪷
+                    <img
+                    src="assets/images/categories/images (1).jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
                 </div>
 
                 <span class="service-pill service-pill-live">
@@ -667,9 +553,6 @@ require __DIR__ . '/includes/header.php';
 
 </section>
 
-<!-- ========================================================
-     OUR SERVICEABLE AREA
-======================================================== -->
 <!-- ========================================================
      OUR SERVICEABLE AREA
 ======================================================== -->
@@ -989,7 +872,11 @@ require __DIR__ . '/includes/header.php';
         <div class="home-flower-card">
 
             <div class="home-flower-icon">
-                🌼
+                <img
+                    src="assets/images/categories/gardland.png"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
             </div>
 
             <h3>Genda Mala</h3>
@@ -1004,7 +891,11 @@ require __DIR__ . '/includes/header.php';
         <div class="home-flower-card">
 
             <div class="home-flower-icon">
-                🌿
+                <img
+                    src="assets/images/categories/tulsi.png"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
             </div>
 
             <h3>Tulsi Patta</h3>
@@ -1019,7 +910,11 @@ require __DIR__ . '/includes/header.php';
         <div class="home-flower-card">
 
             <div class="home-flower-icon">
-                🍃
+                <img
+                    src="assets/images/categories/paan.webp"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
             </div>
 
             <h3>Paan Patta</h3>
@@ -1034,7 +929,11 @@ require __DIR__ . '/includes/header.php';
         <div class="home-flower-card">
 
             <div class="home-flower-icon">
-                🪷
+                <img
+                    src="assets/images/categories/custom.jpg"
+                    alt="Daily Puja Items and Puja Kits"
+                    loading="lazy"
+                >  
             </div>
 
             <h3>Custom Flower Order</h3>
@@ -1058,87 +957,109 @@ require __DIR__ . '/includes/header.php';
 
 <section class="home-puja-list">
 
-    <div class="home-puja-list-inner">
+    <!-- ==========================================================
+     FLOATING PUJA LIST WHATSAPP
+========================================================== -->
+
+<div class="floating-puja-whatsapp">
+
+    <!-- POPUP -->
+
+    <div
+        class="floating-wa-panel"
+        id="floatingWaPanel"
+    >
+
+        <button
+            type="button"
+            class="floating-wa-close"
+            id="floatingWaClose"
+            aria-label="Close"
+        >
+            ×
+        </button>
 
 
-        <div>
-
-            <span class="eyebrow">
-                Fastest way to order
-            </span>
-
-            <h2>
-                Apni Puja List WhatsApp karein
-            </h2>
-
-            <p>
-                Har product alag-alag search karne ki zaroorat nahi.
-                Apni handwritten list ki photo ya text bhejiye —
-                hum availability aur price confirm kar denge.
-            </p>
+        <span class="floating-wa-eyebrow">
+            Fastest way to order
+        </span>
 
 
-            <a
-                href="contact.php"
-                class="wa-btn"
-            >
-
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                >
-                    <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
-                </svg>
-
-                Send Puja List
-
-            </a>
-
-        </div>
+        <h3>
+            Apni Puja List WhatsApp karein
+        </h3>
 
 
-        <div class="home-puja-steps">
+        <p>
+            Har product alag-alag search karne ki zaroorat nahi.
+            Apni handwritten list ki photo ya text bhejiye —
+            hum availability aur price confirm kar denge.
+        </p>
 
+
+        <div class="floating-wa-steps">
 
             <div>
-
                 <b>1</b>
-
-                <span>
-                    List ki photo bhejein
-                </span>
-
+                <span>List ki photo bhejein</span>
             </div>
 
-
             <div>
-
                 <b>2</b>
-
-                <span>
-                    Price confirmation paayein
-                </span>
-
+                <span>Price confirmation paayein</span>
             </div>
-
 
             <div>
-
                 <b>3</b>
-
-                <span>
-                    Delivery receive karein
-                </span>
-
+                <span>Delivery receive karein</span>
             </div>
-
 
         </div>
 
+
+        <a
+            href="contact.php"
+            class="floating-wa-send"
+        >
+
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+            >
+                <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
+            </svg>
+
+            Send Puja List
+
+        </a>
 
     </div>
+
+
+    <!-- FLOATING BUTTON -->
+
+    <button
+        type="button"
+        class="floating-wa-button"
+        id="floatingWaButton"
+        aria-label="Send Puja List on WhatsApp"
+        aria-expanded="false"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+        >
+            <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/>
+        </svg>
+
+        <span class="floating-wa-pulse"></span>
+
+    </button>
+
+</div>
 
 </section>
 

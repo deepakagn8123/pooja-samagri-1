@@ -66,12 +66,12 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
             <a href="index.php" class="store-brand">
 
-<dotlottie-player
+<!-- <dotlottie-player
     class="brand-diya"
     src="assets/images/DiyaCropped.json"
     autoplay
     loop>
-</dotlottie-player>
+</dotlottie-player> -->
 
     <img
         src="assets/images/site-logo.png"
@@ -228,26 +228,5 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
     </nav>
 
-
-
-    <!-- =========================
-         LAYER 3 / ANNOUNCEMENT
-    ========================== -->
-
-    <div class="store-announcement">
-
-        <a href="contact.php">
-
-            <span>◉</span>
-
-            Send your Puja List on WhatsApp
-
-            <strong>
-                — Contact Us
-            </strong>
-
-        </a>
-
-    </div>
 
 </header>

@@ -1,30 +1,49 @@
 <?php
 
-require_once __DIR__.'/config/app.php';
+require_once __DIR__ . '/config/app.php';
+require_once __DIR__ . '/includes/product-card.php';
 
-$slug=$_GET['slug'] ?? '';
+$slug = $_GET['slug'] ?? '';
 
-$category=getCategoryBySlug($pdo,$slug);
+$category = getCategoryBySlug($pdo, $slug);
 
-if(!$category){
-
+if (!$category) {
     http_response_code(404);
-
-    exit('Category not found.');
-
+    exit('Category not found');
 }
 
-$products=getProductsByCategory($pdo,$slug);
+$products = getProductsByCategory($pdo, $slug);
 
-function e($value):string{
+$pageTitle = $category['name'];
 
-    return htmlspecialchars((string)$value,ENT_QUOTES,'UTF-8');
+ob_start();
+?>
 
+<script>
+
+function quickAdd(slug)
+{
+    addToCart(slug,1);
+
+    const toast=document.getElementById("added-toast");
+
+    if(!toast) return;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+        toast.classList.remove("show");
+    },1800);
 }
 
-$pageTitle=$category['name'];
+</script>
 
-require __DIR__.'/includes/header.php';
+<?php
+
+$pageScripts = ob_get_clean();
+
+require __DIR__ . '/includes/header.php';
+
 ?>
 
 <div class="page-banner">
@@ -37,13 +56,30 @@ require __DIR__.'/includes/header.php';
 
     <h1>
 
-        <?= e($category['name']) ?>
+        <?= htmlspecialchars($category['name']) ?>
 
     </h1>
 
+    <p>
+
+        <?= count($products) ?> Products Available
+
+    </p>
+
 </div>
 
+
 <section class="block">
+
+<?php if(empty($products)): ?>
+
+    <div class="empty-state">
+
+        <h2>No Products Found</h2>
+
+    </div>
+
+<?php else: ?>
 
     <div class="prod-grid">
 
@@ -55,6 +91,17 @@ require __DIR__.'/includes/header.php';
 
     </div>
 
+<?php endif; ?>
+
 </section>
 
-<?php require __DIR__.'/includes/footer.php'; ?>
+
+<div class="added-toast" id="added-toast">
+
+Cart mein add ho gaya ✓
+
+</div>
+
+<?php
+
+require __DIR__.'/includes/footer.php';

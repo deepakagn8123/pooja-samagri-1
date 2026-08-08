@@ -99,5 +99,57 @@
     <?= $pageScripts ?>
 <?php endif; ?>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const wrapper = document.querySelector('.floating-puja-whatsapp');
+    const button = document.getElementById('floatingWaButton');
+    const close = document.getElementById('floatingWaClose');
+
+    if (!wrapper || !button || !close) return;
+
+
+    button.addEventListener('click', function () {
+
+        const isOpen = wrapper.classList.toggle('open');
+
+        button.setAttribute(
+            'aria-expanded',
+            isOpen ? 'true' : 'false'
+        );
+
+    });
+
+
+    close.addEventListener('click', function () {
+
+        wrapper.classList.remove('open');
+
+        button.setAttribute(
+            'aria-expanded',
+            'false'
+        );
+
+    });
+
+
+    document.addEventListener('click', function (event) {
+
+        if (!wrapper.contains(event.target)) {
+
+            wrapper.classList.remove('open');
+
+            button.setAttribute(
+                'aria-expanded',
+                'false'
+            );
+
+        }
+
+    });
+
+});
+</script>
+
 </body>
 </html>

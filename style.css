@@ -527,7 +527,7 @@ border-bottom: none;
 .store-header {
     width: 100%;
     display: block !important;
-    background: #fff;
+    background: #6f1121;
     position: relative;
     z-index: 1000;
 }
@@ -540,21 +540,21 @@ border-bottom: none;
 .store-header-top {
     width: 100%;
     display: block !important;
-    background: #fff;
+    background: #6f1121;
 }
 
 .store-header-inner {
-    width: min(1450px, calc(100% - 60px));
+    width: 100%;
     min-height: 92px;
 
     margin: 0 auto;
-    padding: 12px 0;
+    /* padding: 12px 0; */
 
     display: flex !important;
     align-items: center;
-    justify-content: space-between;
+    justify-content:flex-start;
 
-    gap: 28px;
+    /* gap: 28px; */
 }
 
 
@@ -678,7 +678,7 @@ border-bottom: none;
     align-items: center;
     justify-content: center;
 
-    color: var(--ink);
+    color: #fff;
     text-decoration: none;
 }
 
@@ -784,7 +784,7 @@ border-bottom: none;
 /* =========================
    THIRD ROW
 ========================= */
-
+/* 
 .store-announcement {
     width: 100%;
     display: block !important;
@@ -808,7 +808,7 @@ border-bottom: none;
 
     font-size: 14px;
     font-weight: 500;
-}
+} */
 
 
 /* =========================
@@ -1409,84 +1409,436 @@ border-bottom: none;
     font-size: 14px;
 }
 
+/* ==========================================================
+   FLOATING WHATSAPP PUJA LIST
+========================================================== */
 
-/* =========================
-   PUJA LIST
-========================= */
+.floating-puja-whatsapp {
+    position: fixed;
 
-.home-puja-list {
-    padding: 65px 30px;
+    right: 24px;
+    bottom: 24px;
 
-    background: #416b45;
+    z-index: 9999;
 }
 
-.home-puja-list-inner {
-    width: min(1200px, 100%);
-    margin: auto;
 
-    display: grid;
-    grid-template-columns: 1fr .8fr;
-    align-items: center;
-    gap: 60px;
+/* ==========================================================
+   FLOATING BUTTON
+========================================================== */
 
-    color: #fff;
-}
+.floating-wa-button {
 
-.home-puja-list h2 {
-    margin: 10px 0 15px;
+    position: relative;
 
-    color: #fff;
-
-    font-family: Georgia, serif;
-    font-size: clamp(30px, 4vw, 42px);
-}
-
-.home-puja-list p {
-    max-width: 650px;
-
-    color: rgba(255,255,255,.88);
-    line-height: 1.75;
-}
-
-.home-puja-list .eyebrow {
-    background: #FBD599;
-    color: #7d1b1b;
-}
-
-.home-puja-steps {
-    display: grid;
-    gap: 12px;
-}
-
-.home-puja-steps > div {
-    padding: 16px 18px;
-
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.08);
-}
-
-.home-puja-steps b {
-    width: 32px;
-    height: 32px;
+    width: 58px;
+    height: 58px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    flex-shrink: 0;
+    border: 1px solid rgba(212,175,55,.65);
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3A0710 0%,
+            #5A0B16 50%,
+            #6F1121 100%
+        );
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(58,7,16,.28),
+        0 0 0 4px rgba(212,175,55,.08);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.floating-wa-button svg {
+    width: 27px;
+    height: 27px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Hover */
+
+.floating-wa-button:hover {
+
+    transform: translateY(-3px) scale(1.04);
+
+    box-shadow:
+        0 12px 30px rgba(58,7,16,.35),
+        0 0 0 5px rgba(212,175,55,.12);
+}
+
+
+/* ==========================================================
+   GOLD PULSE RING
+========================================================== */
+
+.floating-wa-pulse {
+
+    position: absolute;
+
+    inset: -5px;
+
+    border: 1px solid rgba(212,175,55,.35);
 
     border-radius: 50%;
 
-    background: #FBD599;
-    color: #7d1b1b;
+    animation:
+        floatingWaPulse 2.5s ease-out infinite;
 }
 
+
+@keyframes floatingWaPulse {
+
+    0% {
+        transform: scale(.92);
+        opacity: .7;
+    }
+
+    70% {
+        transform: scale(1.12);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.12);
+        opacity: 0;
+    }
+
+}
+
+
+/* ==========================================================
+   POPUP
+========================================================== */
+
+.floating-wa-panel {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 74px;
+
+    width: 350px;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #FFF8EF 0%,
+            #F8F1E4 65%,
+            #E8D5B5 100%
+        );
+
+    border: 1px solid rgba(200,154,43,.38);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 18px 45px rgba(58,7,16,.22),
+        0 3px 10px rgba(58,7,16,.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(12px)
+        scale(.96);
+
+    transform-origin: bottom right;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease,
+        transform .25s ease;
+}
+
+
+/* OPEN */
+
+.floating-puja-whatsapp.open .floating-wa-panel {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* ==========================================================
+   CLOSE BUTTON
+========================================================== */
+
+.floating-wa-close {
+
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    width: 28px;
+    height: 28px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #5A0B16;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: .65;
+
+    transition: opacity .2s ease;
+}
+
+
+.floating-wa-close:hover {
+    opacity: 1;
+}
+
+
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
+.floating-wa-eyebrow {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #F3D57A;
+
+    color: #5A0B16;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: .2px;
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.floating-wa-panel h3 {
+
+    margin: 14px 30px 10px 0;
+
+    color: #5A0B16;
+
+    font-family: Georgia, serif;
+
+    font-size: 26px;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.floating-wa-panel p {
+
+    margin: 0 0 18px;
+
+    color: #5A4A3F;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+/* ==========================================================
+   STEPS
+========================================================== */
+
+.floating-wa-steps {
+
+    display: grid;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.floating-wa-steps > div {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 11px;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.62);
+
+    border: 1px solid rgba(200,154,43,.18);
+
+    color: #5A0B16;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.floating-wa-steps b {
+
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #C89A2B,
+            #F3D57A
+        );
+
+    color: #3A0710;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   SEND BUTTON
+========================================================== */
+
+.floating-wa-send {
+
+    width: 100%;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            105deg,
+            #3A0710 0%,
+            #5A0B16 48%,
+            #6F1121 100%
+        );
+
+    border: 1px solid rgba(212,175,55,.55);
+
+    color: #FFFFFF;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 14px rgba(58,7,16,.2);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+
+.floating-wa-send:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #D4AF37;
+
+    box-shadow:
+        0 8px 20px rgba(58,7,16,.28);
+
+    color: #FFFFFF;
+}
+
+
+.floating-wa-send svg {
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .floating-puja-whatsapp {
+
+        right: 16px;
+        bottom: 16px;
+    }
+
+
+    .floating-wa-button {
+
+        width: 54px;
+        height: 54px;
+    }
+
+
+    .floating-wa-panel {
+
+        right: 0;
+        bottom: 68px;
+
+        width: min(340px, calc(100vw - 32px));
+
+        padding: 21px;
+
+        border-radius: 16px;
+    }
+
+
+    .floating-wa-panel h3 {
+
+        font-size: 23px;
+    }
+
+}
 
 /* =========================
    SERVICES
@@ -3318,4 +3670,616 @@ body.loading{
 
     font-size:14px;
 
+}
+
+
+
+/* ==========================================================
+   PREMIUM MAROON GRADIENT BUTTONS
+========================================================== */
+
+:root {
+    --royal-maroon: #5A0B16;
+    --dark-mehroon: #3A0710;
+    --deep-burgundy: #6F1121;
+
+    --royal-gold: #D4AF37;
+    --rich-gold: #C89A2B;
+    --light-gold: #F3D57A;
+}
+
+
+/* ==========================================================
+   UNIVERSAL PREMIUM BUTTON
+========================================================== */
+
+.premium-btn,
+.header-action-btn,
+.home-see-all,
+.btn-primary,
+.service-card-btn-filled {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            105deg,
+            #3A0710 0%,
+            #5A0B16 48%,
+            #6F1121 100%
+        ) !important;
+
+    color: #FFFFFF !important;
+
+    border: 1px solid rgba(212, 175, 55, .55);
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 4px 12px rgba(58, 7, 16, .22),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+
+    isolation: isolate;
+}
+
+
+/* ==========================================================
+   PREMIUM LIGHT SWEEP
+========================================================== */
+
+.premium-btn::before,
+.header-action-btn::before,
+.home-see-all::before,
+.btn-primary::before,
+.service-card-btn-filled::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(243,213,122,.16),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left .65s ease;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.premium-btn:hover,
+.header-action-btn:hover,
+.home-see-all:hover,
+.btn-primary:hover,
+.service-card-btn-filled:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            105deg,
+            #3A0710 0%,
+            #6F1121 55%,
+            #5A0B16 100%
+        ) !important;
+
+    border-color: #D4AF37;
+
+    box-shadow:
+        0 8px 22px rgba(58, 7, 16, .30),
+        0 0 0 1px rgba(212,175,55,.08),
+        inset 0 1px 0 rgba(243,213,122,.12);
+}
+
+
+/* Gold light passes across button */
+
+.premium-btn:hover::before,
+.header-action-btn:hover::before,
+.home-see-all:hover::before,
+.btn-primary:hover::before,
+.service-card-btn-filled:hover::before {
+
+    left: 140%;
+}
+
+
+/* ==========================================================
+   ACTIVE / CLICK
+========================================================== */
+
+.premium-btn:active,
+.header-action-btn:active,
+.home-see-all:active,
+.btn-primary:active,
+.service-card-btn-filled:active {
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 3px 8px rgba(58, 7, 16, .25);
+}
+
+
+.header-action-btn {
+    min-width: 125px;
+    height: 44px;
+
+    padding: 0 20px;
+
+    border-radius: 9px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: .1px;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   PREMIUM CATEGORY PILL
+========================================================== */
+
+.store-category-nav {
+
+    width: min(1180px, calc(100% - 100px)) !important;
+
+    height: 72px;
+
+    margin: 0 auto 30px !important;
+
+    display: flex !important;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFF8EF 0%,
+            #F8F1E4 55%,
+            #F3E4C4 100%
+        ) !important;
+
+    border: 1px solid rgba(200,154,43,.35) !important;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 4px 18px rgba(58,7,16,.08),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+
+/* Navbar hover */
+
+.store-category-nav:hover {
+
+    border-color: rgba(200,154,43,.55) !important;
+
+    box-shadow:
+        0 7px 25px rgba(58,7,16,.11),
+        inset 0 1px 0 rgba(255,255,255,.95);
+}
+
+
+/* List */
+
+.store-category-nav ul {
+
+    width: 100% !important;
+    height: 100%;
+
+    margin: 0 !important;
+    padding: 0 18px !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+
+    list-style: none !important;
+}
+
+
+/* Items */
+
+.store-category-nav li {
+    height: 100%;
+
+    display: flex !important;
+    align-items: center;
+
+    margin: 0 !important;
+}
+
+
+/* Links */
+
+.store-category-nav a {
+
+    position: relative;
+
+    height: 100%;
+
+    padding: 0 55px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    color: #5A0B16 !important;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-decoration: none !important;
+
+    white-space: nowrap;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+}
+
+
+/* ==========================================================
+   NAVBAR GOLD UNDERLINE
+========================================================== */
+
+.store-category-nav a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 12px;
+
+    width: 0;
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #C89A2B,
+            #F3D57A,
+            #C89A2B
+        );
+
+    border-radius: 5px;
+
+    transition: width .25s ease;
+}
+
+
+.store-category-nav a:hover {
+
+    color: #3A0710 !important;
+
+    transform: translateY(-1px);
+}
+
+
+.store-category-nav a:hover::after {
+
+    width: 35px;
+}
+
+
+/* ==========================================================
+   HEADER — FINAL SPACING REFINEMENT
+========================================================== */
+
+
+/* =========================
+   HEADER TOP
+========================= */
+
+.store-header-inner {
+    width: calc(100% - 70px) !important;
+
+    min-height: 115px !important;
+
+    margin: 0 auto !important;
+    padding: 0 0 !important;
+
+    display: flex !important;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.store-brand {
+    width: 225px !important;
+    min-width: 225px !important;
+    flex: 0 0 225px !important;
+
+    margin-left: -15px;
+
+    display: flex !important;
+    align-items: center;
+}
+
+
+/* Actual logo */
+
+.brand-logo {
+    width: 160px !important;
+    height: auto;
+
+    display: block;
+}
+
+
+/* If diya animation is being used */
+
+.brand-diya {
+    width: 65px;
+    height: 65px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.store-search {
+    height: 46px !important;
+
+    flex: 1 1 auto !important;
+
+    max-width: 570px;
+
+    margin-left: 5px;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.store-actions {
+    gap: 10px !important;
+}
+
+
+/* ==========================================================
+   CATEGORY PILL
+========================================================== */
+
+.store-category-nav {
+
+    width: min(1180px, calc(100% - 100px)) !important;
+
+    height: 50px !important;
+
+    margin: -2px auto 0 !important;
+
+    display: flex !important;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFF8EF 0%,
+            #F8F1E4 55%,
+            #F3E4C4 100%
+        ) !important;
+
+    border: 1px solid rgba(200,154,43,.35) !important;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 18px rgba(58,7,16,.08),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CATEGORY LIST
+========================= */
+
+.store-category-nav ul {
+
+    width: 100% !important;
+    height: 100%;
+
+    margin: 0 !important;
+    padding: 0 15px !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+
+    list-style: none !important;
+}
+
+
+/* =========================
+   CATEGORY LINKS
+========================= */
+
+.store-category-nav a {
+
+    position: relative;
+
+    height: 100%;
+
+    padding: 0 48px !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    color: #5A0B16 !important;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    text-decoration: none !important;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+}
+
+
+/* Gold underline */
+
+.store-category-nav a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 9px;
+
+    width: 0;
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #C89A2B,
+            #F3D57A,
+            #C89A2B
+        );
+
+    border-radius: 5px;
+
+    transition: width .25s ease;
+}
+
+
+.store-category-nav a:hover {
+
+    color: #3A0710 !important;
+
+    transform: translateY(-1px);
+}
+
+
+.store-category-nav a:hover::after {
+
+    width: 32px;
+}
+
+
+/* ==========================================================
+   SHOP BY CATEGORY — IMAGE CARDS
+========================================================== */
+
+
+.home-category-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform .4s ease,
+        filter .4s ease;
+}
+
+
+
+/* Image zoom */
+
+.home-category-card:hover .home-category-image img {
+    transform: scale(1.06);
+}
+
+
+/* Card */
+
+.home-category-card {
+    overflow: hidden;
+}
+
+
+/* Category title */
+
+.home-category-card h3 {
+    margin-top: 16px;
+
+    padding: 0 8px 18px;
+
+    text-align: center;
+
+    line-height: 1.35;
+}
+
+
+.home-organizer-art {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.home-organizer-art img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+:root {
+    --ivory: #F8F1E4;
 }
