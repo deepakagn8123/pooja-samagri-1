@@ -2312,7 +2312,7 @@ border-bottom: none;
 .home-serviceable {
     padding-top: 58px;
     padding-bottom: 65px;
-
+    
     border-top: 1px solid #eee1d5;
 }
 
@@ -3439,7 +3439,7 @@ border-bottom: none;
     grid-template-columns: repeat(4, 1fr);
 
     align-items: center;
-
+    border-radius: 20px;
     background: #fff5e7;
 }
 
@@ -4282,4 +4282,418 @@ body.loading{
 
 :root {
     --ivory: #F8F1E4;
+}
+
+
+/* ==========================================================
+   HEADER — PREMIUM "DESIGN REVEAL"
+========================================================== */
+
+
+/* ----------------------------------------------------------
+   MAIN HEADER
+---------------------------------------------------------- */
+
+.store-header-top {
+    position: relative;
+
+    animation: headerReveal .9s ease-out both;
+}
+
+
+@keyframes headerReveal {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   LOGO
+---------------------------------------------------------- */
+
+.store-brand {
+
+    animation:
+        brandReveal .9s cubic-bezier(.22,1,.36,1) .1s both;
+}
+
+
+@keyframes brandReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   SEARCH
+---------------------------------------------------------- */
+
+.store-search {
+
+    animation:
+        searchReveal .8s cubic-bezier(.22,1,.36,1) .2s both;
+}
+
+
+@keyframes searchReveal {
+
+    from {
+        opacity: 0;
+        transform: scaleX(.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   ACTIONS
+---------------------------------------------------------- */
+
+.store-actions {
+
+    animation:
+        actionsReveal .8s cubic-bezier(.22,1,.36,1) .3s both;
+}
+
+
+@keyframes actionsReveal {
+
+    from {
+        opacity: 0;
+        transform: translateX(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* ==========================================================
+   CATEGORY NAV — THE MAIN DESIGN EFFECT
+========================================================== */
+
+.store-category-nav {
+
+    position: relative;
+
+    opacity: 0;
+
+    transform:
+        translateY(-8px)
+        scaleX(.94);
+
+    animation:
+        categoryNavReveal
+        1s
+        cubic-bezier(.22,1,.36,1)
+        .35s
+        forwards;
+}
+
+
+@keyframes categoryNavReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px)
+            scaleX(.94);
+
+    }
+
+    60% {
+
+        opacity: 1;
+
+        transform:
+            translateY(2px)
+            scaleX(1.015);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scaleX(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   GOLD "DRAWING" LINE
+========================================================== */
+
+.store-category-nav::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 0;
+    height: 2px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #C89A2B,
+            #F3D57A,
+            #C89A2B,
+            transparent
+        );
+
+    border-radius: 50px;
+
+    animation:
+        navGoldLine
+        1.1s
+        cubic-bezier(.22,1,.36,1)
+        .45s
+        forwards;
+
+    z-index: 5;
+}
+
+
+@keyframes navGoldLine {
+
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 65%;
+        opacity: 1;
+    }
+
+}
+
+
+/* ==========================================================
+   NAV CONTENT REVEAL
+========================================================== */
+
+.store-category-nav ul {
+
+    opacity: 0;
+
+    animation:
+        navContentReveal
+        .7s
+        ease-out
+        .8s
+        forwards;
+}
+
+
+@keyframes navContentReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==========================================================
+   INDIVIDUAL CATEGORY TEXT
+========================================================== */
+
+.store-category-nav li {
+
+    opacity: 0;
+
+    animation:
+        categoryTextReveal
+        .5s
+        ease-out
+        forwards;
+}
+
+
+.store-category-nav li:nth-child(1) {
+    animation-delay: .75s;
+}
+
+.store-category-nav li:nth-child(2) {
+    animation-delay: .85s;
+}
+
+.store-category-nav li:nth-child(3) {
+    animation-delay: .95s;
+}
+
+.store-category-nav li:nth-child(4) {
+    animation-delay: 1.05s;
+}
+
+
+@keyframes categoryTextReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==========================================================
+   SHOP BY CATEGORY — PREMIUM SCROLL REVEAL
+========================================================== */
+
+.home-category-card {
+    opacity: 0;
+
+    will-change: transform, opacity;
+
+    transition:
+        opacity .8s cubic-bezier(.22, 1, .36, 1),
+        transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* Starting positions */
+
+.home-category-card:nth-child(odd) {
+    transform:
+        translateX(-70px)
+        scale(.94);
+}
+
+.home-category-card:nth-child(even) {
+    transform:
+        translateX(70px)
+        scale(.94);
+}
+
+
+/* Visible state */
+
+.home-category-card.category-visible {
+    opacity: 1;
+
+    transform:
+        translateX(0)
+        scale(1);
+}
+
+
+/* ==========================================================
+   IMAGE REVEAL
+========================================================== */
+
+.home-category-card .home-category-image {
+    overflow: hidden;
+}
+
+
+.home-category-card .home-category-image img {
+    transform: scale(1.08);
+
+    transition:
+        transform 1.1s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+.home-category-card.category-visible
+.home-category-image img {
+    transform: scale(1);
+}
+
+
+/* ==========================================================
+   STAGGER
+========================================================== */
+
+.home-category-card:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.home-category-card:nth-child(2) {
+    transition-delay: .08s;
+}
+
+.home-category-card:nth-child(3) {
+    transition-delay: .16s;
+}
+
+.home-category-card:nth-child(4) {
+    transition-delay: .24s;
+}
+
+.home-category-card:nth-child(5) {
+    transition-delay: .32s;
+}
+
+.home-category-card:nth-child(6) {
+    transition-delay: .40s;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-category-card {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .home-category-card .home-category-image img {
+        transform: none !important;
+        transition: none !important;
+    }
+
 }

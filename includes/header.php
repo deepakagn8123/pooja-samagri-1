@@ -33,6 +33,11 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
 <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
 
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+>
+
 </head>
 
 <body>
