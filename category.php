@@ -1,107 +1,586 @@
 <?php
 
 require_once __DIR__ . '/config/app.php';
-require_once __DIR__ . '/includes/product-card.php';
 
-$slug = $_GET['slug'] ?? '';
 
-$category = getCategoryBySlug($pdo, $slug);
+/*
+|--------------------------------------------------------------------------
+| Helper
+|--------------------------------------------------------------------------
+*/
 
-if (!$category) {
-    http_response_code(404);
-    exit('Category not found');
+function e($value): string
+{
+    return htmlspecialchars(
+        (string)$value,
+        ENT_QUOTES,
+        'UTF-8'
+    );
 }
 
-$products = getProductsByCategory($pdo, $slug);
 
-$pageTitle = $category['name'];
+/*
+|--------------------------------------------------------------------------
+| Get slug
+|--------------------------------------------------------------------------
+*/
+
+$slug = trim(
+    $_GET['slug'] ?? ($slug ?? '')
+);
+
+
+if ($slug === '') {
+
+    header('Location: categories.php');
+
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Get category
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT
+        id,
+        parent_id,
+        name,
+        slug,
+        image,
+        description
+
+    FROM categories
+
+    WHERE slug = :slug
+      AND is_active = 1
+
+    LIMIT 1
+");
+
+$stmt->execute([
+    'slug' => $slug
+]);
+
+
+$category = $stmt->fetch();
+
+
+if (!$category) {
+
+    http_response_code(404);
+
+    $pageTitle =
+        'Category Not Found — ShubhSamagri';
+
+    require __DIR__ . '/includes/header.php';
+
+    ?>
+
+    <main class="categories-page">
+
+        <div class="page-banner">
+
+            <span class="eyebrow">
+                404
+            </span>
+
+            <h1>
+                Category nahi mili
+            </h1>
+
+            <p>
+                Yeh category available nahi hai.
+            </p>
+
+            <a
+                href="categories.php"
+                class="btn-primary"
+                style="
+                    display:inline-block;
+                    margin-top:20px;
+                    text-decoration:none;
+                "
+            >
+                Browse Categories
+            </a>
+
+        </div>
+
+    </main>
+
+    <?php
+
+    require __DIR__ . '/includes/footer.php';
+
+    exit;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Get child categories
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT
+        id,
+        parent_id,
+        name,
+        slug,
+        image,
+        description,
+        sort_order
+
+    FROM categories
+
+    WHERE parent_id = :parent_id
+      AND is_active = 1
+
+    ORDER BY
+        sort_order ASC,
+        name ASC
+");
+
+$stmt->execute([
+    'parent_id' => $category['id']
+]);
+
+$subcategories = $stmt->fetchAll();
+
+
+/*
+|--------------------------------------------------------------------------
+| Get products directly inside this category
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT
+        id,
+        name,
+        slug,
+        description,
+        price,
+        old_price,
+        image,
+        badge,
+        tag,
+        unit
+
+    FROM products
+
+    WHERE category_id = :category_id
+      AND is_active = 1
+
+    ORDER BY
+        id DESC
+");
+
+$stmt->execute([
+    'category_id' => $category['id']
+]);
+
+$products = $stmt->fetchAll();
+
+
+/*
+|--------------------------------------------------------------------------
+| Product card
+|--------------------------------------------------------------------------
+*/
+
+function renderCategoryProductCard(
+    array $product
+): void {
+
+?>
+
+    <div class="prod-card">
+
+
+        <a
+            href="product.php?slug=<?= urlencode($product['slug']) ?>"
+            class="prod-link"
+        >
+
+
+            <div class="prod-visual">
+
+
+                <?php if (!empty($product['badge'])): ?>
+
+                    <span class="sale-badge">
+                        <?= e($product['badge']) ?>
+                    </span>
+
+                <?php endif; ?>
+
+
+                <?php if (!empty($product['image'])): ?>
+
+                    <img
+                        src="assets/images/products/<?= rawurlencode($product['image']) ?>"
+                        alt="<?= e($product['name']) ?>"
+                        class="product-card-image"
+                        loading="lazy"
+                    >
+
+                <?php else: ?>
+
+                    <div class="product-image-placeholder">
+                        Image coming soon
+                    </div>
+
+                <?php endif; ?>
+
+
+            </div>
+
+
+            <div class="prod-body">
+
+
+                <h4>
+                    <?= e($product['name']) ?>
+                </h4>
+
+
+                <div class="price">
+
+
+                    <?php if (!empty($product['old_price'])): ?>
+
+                        <s>
+                            ₹<?= number_format(
+                                (float)$product['old_price'],
+                                0
+                            ) ?>
+                        </s>
+
+                    <?php endif; ?>
+
+
+                    ₹<?= number_format(
+                        (float)$product['price'],
+                        0
+                    ) ?>
+
+
+                    <?= e(
+                        $product['unit'] ?? ''
+                    ) ?>
+
+
+                </div>
+
+
+                <?php if (!empty($product['tag'])): ?>
+
+                    <span class="tag">
+
+                        <?= e($product['tag']) ?>
+
+                    </span>
+
+                <?php endif; ?>
+
+
+            </div>
+
+
+        </a>
+
+
+        <button
+            class="quick-add"
+            onclick="quickAdd('<?= e($product['slug']) ?>')"
+            aria-label="Add to cart"
+        >
+            +
+        </button>
+
+
+    </div>
+
+<?php
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Page JavaScript
+|--------------------------------------------------------------------------
+*/
 
 ob_start();
+
 ?>
 
 <script>
 
-function quickAdd(slug)
+function quickAdd(id)
 {
-    addToCart(slug,1);
+    addToCart(id, 1);
 
-    const toast=document.getElementById("added-toast");
+    const toast =
+        document.getElementById('added-toast');
 
-    if(!toast) return;
+    if (!toast) {
+        return;
+    }
 
-    toast.classList.add("show");
+    toast.classList.add('show');
 
-    setTimeout(function(){
-        toast.classList.remove("show");
-    },1800);
+    setTimeout(() => {
+
+        toast.classList.remove('show');
+
+    }, 1800);
 }
 
 </script>
 
 <?php
 
-$pageScripts = ob_get_clean();
+$pageScripts =
+    ob_get_clean();
+
+
+$pageTitle =
+    $category['name'] .
+    ' — ShubhSamagri';
+
 
 require __DIR__ . '/includes/header.php';
 
 ?>
 
-<div class="page-banner">
 
-    <span class="eyebrow">
-
-        Category
-
-    </span>
-
-    <h1>
-
-        <?= htmlspecialchars($category['name']) ?>
-
-    </h1>
-
-    <p>
-
-        <?= count($products) ?> Products Available
-
-    </p>
-
-</div>
+<main class="category-page">
 
 
-<section class="block">
+    <div class="garland">
 
-<?php if(empty($products)): ?>
+        <svg
+            viewBox="0 0 1200 34"
+            preserveAspectRatio="none"
+        >
 
-    <div class="empty-state">
+            <path
+                d="M0 4 Q60 30 120 4 T240 4 T360 4 T480 4 T600 4 T720 4 T840 4 T960 4 T1080 4 T1200 4"
+                stroke="#5C7A4A"
+                stroke-width="2"
+                fill="none"
+            />
 
-        <h2>No Products Found</h2>
+            <g fill="#E8890C">
 
-    </div>
+                <?php
 
-<?php else: ?>
+                for ($x = 20; $x <= 1180; $x += 40):
 
-    <div class="prod-grid">
+                ?>
 
-        <?php foreach($products as $product): ?>
+                    <circle
+                        cx="<?= $x ?>"
+                        cy="<?= ($x / 40) % 2 === 0 ? 14 : 22 ?>"
+                        r="6"
+                    />
 
-            <?php renderProductCard($product); ?>
+                <?php endfor; ?>
 
-        <?php endforeach; ?>
+            </g>
+
+        </svg>
 
     </div>
 
-<?php endif; ?>
 
-</section>
+    <div class="page-banner">
 
 
-<div class="added-toast" id="added-toast">
+        <span class="eyebrow">
+            Category
+        </span>
 
-Cart mein add ho gaya ✓
 
+        <h1>
+            <?= e($category['name']) ?>
+        </h1>
+
+
+        <?php if (!empty($category['description'])): ?>
+
+            <p>
+                <?= e($category['description']) ?>
+            </p>
+
+        <?php endif; ?>
+
+
+    </div>
+
+
+    <?php if ($subcategories): ?>
+
+
+        <section class="block">
+
+
+            <div class="section-head">
+
+                <span class="eyebrow">
+                    Explore
+                </span>
+
+                <h2>
+                    Shop by Subcategory
+                </h2>
+
+            </div>
+
+
+            <div class="category-grid">
+
+
+                <?php foreach ($subcategories as $subcategory): ?>
+
+
+                    <a
+                        href="category.php?slug=<?= urlencode($subcategory['slug']) ?>"
+                        class="category-card"
+                    >
+
+
+                        <div class="category-icon">
+
+
+                            <?php if (!empty($subcategory['image'])): ?>
+
+                                <img
+                                    src="assets/images/categories/<?= rawurlencode($subcategory['image']) ?>"
+                                    alt="<?= e($subcategory['name']) ?>"
+                                    loading="lazy"
+                                >
+
+                            <?php else: ?>
+
+                                🪔
+
+                            <?php endif; ?>
+
+
+                        </div>
+
+
+                        <h3>
+
+                            <?= e($subcategory['name']) ?>
+
+                        </h3>
+
+
+                        <?php if (!empty($subcategory['description'])): ?>
+
+                            <p>
+
+                                <?= e($subcategory['description']) ?>
+
+                            </p>
+
+                        <?php endif; ?>
+
+
+                    </a>
+
+
+                <?php endforeach; ?>
+
+
+            </div>
+
+
+        </section>
+
+
+    <?php endif; ?>
+
+
+    <?php if ($products): ?>
+
+
+        <section class="block">
+
+
+            <div class="section-head">
+
+                <span class="eyebrow">
+                    Products
+                </span>
+
+                <h2>
+                    <?= e($category['name']) ?>
+                </h2>
+
+            </div>
+
+
+            <div class="prod-grid">
+
+
+                <?php foreach ($products as $product): ?>
+
+                    <?php
+                    renderCategoryProductCard(
+                        $product
+                    );
+                    ?>
+
+                <?php endforeach; ?>
+
+
+            </div>
+
+
+        </section>
+
+
+    <?php elseif (!$subcategories): ?>
+
+
+        <section class="block">
+
+            <p>
+                Is category mein abhi products available nahi hain.
+            </p>
+
+        </section>
+
+
+    <?php endif; ?>
+
+
+</main>
+
+
+<div
+    class="added-toast"
+    id="added-toast"
+>
+    Cart mein add ho gaya ✓
 </div>
+
 
 <?php
 
-require __DIR__.'/includes/footer.php';
+require __DIR__ . '/includes/footer.php';
+
+?>

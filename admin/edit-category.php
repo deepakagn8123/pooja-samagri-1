@@ -9,7 +9,7 @@ function e($value): string
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
 
-$categoryId = (int)($_GET['id'] ?? 0);
+$categoryId = (int)($_GET['id'] ?? $_POST['id'] ?? 0);
 
 if ($categoryId < 1) {
     header('Location: categories.php');
@@ -17,17 +17,15 @@ if ($categoryId < 1) {
 }
 
 $stmt = $pdo->prepare("
-    SELECT id, name, slug
+    SELECT *
     FROM categories
     WHERE id = :id
     LIMIT 1
 ");
 
-$stmt->execute([
-    'id' => $categoryId
-]);
+$stmt->execute(['id' => $categoryId]);
 
-$category = $stmt->fetch();
+$category = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$category) {
     header('Location: categories.php');
@@ -36,85 +34,274 @@ if (!$category) {
 
 $error = '';
 
+/*
+|--------------------------------------------------------------------------
+| Save
+|--------------------------------------------------------------------------
+*/
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
 
+    $parentId = !empty($_POST['parent_id'])
+        ? (int)$_POST['parent_id']
+        : null;
+
+    $description = trim($_POST['description'] ?? '');
+
+    $sortOrder = max(0, (int)($_POST['sort_order'] ?? 0));
+
+    $isActive = isset($_POST['is_active']) ? 1 : 0;
+
+    $showOnHomepage = isset($_POST['show_on_homepage']) ? 1 : 0;
+
     if ($name === '') {
-
         $error = 'Category name is required.';
+    }
 
-    } else {
+    if ($error === '') {
 
         if ($slug === '') {
             $slug = $name;
         }
 
         $slug = strtolower($slug);
-
-        $slug = preg_replace(
-            '/[^a-z0-9]+/',
-            '-',
-            $slug
-        );
-
+        $slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
         $slug = trim($slug, '-');
 
         if ($slug === '') {
+            $error = 'Please enter a valid category name or slug.';
+        }
+    }
 
-            $error = 'Please enter a valid slug.';
+    /*
+    |--------------------------------------------------------------------------
+    | Parent validation
+    |--------------------------------------------------------------------------
+    */
 
+    if ($error === '' && $parentId !== null) {
+
+        if ($parentId === $categoryId) {
+            $error = 'A category cannot be its own parent.';
         } else {
 
             $stmt = $pdo->prepare("
                 SELECT id
                 FROM categories
-                WHERE slug = :slug
-                  AND id != :id
+                WHERE id = :id
                 LIMIT 1
             ");
 
-            $stmt->execute([
-                'slug' => $slug,
-                'id' => $categoryId
-            ]);
+            $stmt->execute(['id' => $parentId]);
 
-            if ($stmt->fetch()) {
-
-                $error = 'Another category already uses this slug.';
-
-            } else {
-
-                $stmt = $pdo->prepare("
-                    UPDATE categories
-                    SET
-                        name = :name,
-                        slug = :slug
-                    WHERE id = :id
-                ");
-
-                $stmt->execute([
-                    'name' => $name,
-                    'slug' => $slug,
-                    'id' => $categoryId
-                ]);
-
-                header(
-                    'Location: categories.php?updated=1'
-                );
-
-                exit;
+            if (!$stmt->fetch()) {
+                $error = 'Selected parent category does not exist.';
             }
         }
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Duplicate slug
+    |--------------------------------------------------------------------------
+    */
+
+    if ($error === '') {
+
+        $stmt = $pdo->prepare("
+            SELECT id
+            FROM categories
+            WHERE slug = :slug
+              AND id != :id
+            LIMIT 1
+        ");
+
+        $stmt->execute([
+            'slug' => $slug,
+            'id' => $categoryId
+        ]);
+
+        if ($stmt->fetch()) {
+            $error = 'A category with this slug already exists.';
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Image upload
+    |--------------------------------------------------------------------------
+    */
+
+    $newImageName = $category['image'];
+
+    if (
+        $error === '' &&
+        isset($_FILES['image']) &&
+        $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE
+    ) {
+
+        if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            $error = 'Category image upload failed.';
+        } elseif ((int)$_FILES['image']['size'] > 5 * 1024 * 1024) {
+            $error = 'Category image must be smaller than 5 MB.';
+        } else {
+
+            $info = @getimagesize($_FILES['image']['tmp_name']);
+
+            $allowed = [
+                'image/jpeg' => 'jpg',
+                'image/png'  => 'png',
+                'image/webp' => 'webp',
+                'image/gif'  => 'gif'
+            ];
+
+            $mime = $info['mime'] ?? '';
+
+            if ($info === false || !isset($allowed[$mime])) {
+                $error = 'Only JPG, PNG, WEBP or GIF images are allowed.';
+            } else {
+
+                $newImageName =
+                    'category_' .
+                    bin2hex(random_bytes(12)) .
+                    '.' .
+                    $allowed[$mime];
+
+                $directory = __DIR__ . '/../assets/images/categories/';
+
+                if (!is_dir($directory)) {
+                    mkdir($directory, 0755, true);
+                }
+
+                if (!move_uploaded_file(
+                    $_FILES['image']['tmp_name'],
+                    $directory . $newImageName
+                )) {
+                    $newImageName = $category['image'];
+                    $error = 'Unable to save the category image.';
+                }
+            }
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Save database
+    |--------------------------------------------------------------------------
+    */
+
+    if ($error === '') {
+
+        try {
+
+            $stmt = $pdo->prepare("
+                UPDATE categories
+                SET
+                    parent_id = :parent_id,
+                    name = :name,
+                    slug = :slug,
+                    image = :image,
+                    description = :description,
+                    sort_order = :sort_order,
+                    is_active = :is_active,
+                    show_on_homepage = :show_on_homepage
+                WHERE id = :id
+            ");
+
+            $stmt->execute([
+                'parent_id' => $parentId,
+                'name' => $name,
+                'slug' => $slug,
+                'image' => $newImageName,
+                'description' => $description !== '' ? $description : null,
+                'sort_order' => $sortOrder,
+                'is_active' => $isActive,
+                'show_on_homepage' => $showOnHomepage,
+                'id' => $categoryId
+            ]);
+
+            if (
+                $newImageName !== $category['image'] &&
+                !empty($category['image'])
+            ) {
+
+                $oldPath =
+                    __DIR__ .
+                    '/../assets/images/categories/' .
+                    $category['image'];
+
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+
+            header('Location: categories.php?updated=1');
+            exit;
+
+        } catch (Throwable $e) {
+
+            if (
+                $newImageName !== $category['image'] &&
+                file_exists(
+                    __DIR__ .
+                    '/../assets/images/categories/' .
+                    $newImageName
+                )
+            ) {
+                unlink(
+                    __DIR__ .
+                    '/../assets/images/categories/' .
+                    $newImageName
+                );
+            }
+
+            $error = 'Unable to update category. Please try again.';
+        }
+    }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Parent options
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->prepare("
+    SELECT id, name
+    FROM categories
+    WHERE id != :id
+    ORDER BY sort_order ASC, name ASC
+");
+
+$stmt->execute(['id' => $categoryId]);
+
+$parentCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/*
+|--------------------------------------------------------------------------
+| Current values after validation
+|--------------------------------------------------------------------------
+*/
+
+$currentName = $_POST['name'] ?? $category['name'];
+$currentSlug = $_POST['slug'] ?? $category['slug'];
+$currentParent = $_POST['parent_id'] ?? ($category['parent_id'] ?? '');
+$currentDescription = $_POST['description'] ?? ($category['description'] ?? '');
+$currentSortOrder = $_POST['sort_order'] ?? ($category['sort_order'] ?? 0);
+$currentActive = $_SERVER['REQUEST_METHOD'] === 'POST'
+    ? isset($_POST['is_active'])
+    : ((int)$category['is_active'] === 1);
+$currentHomepage = $_SERVER['REQUEST_METHOD'] === 'POST'
+    ? isset($_POST['show_on_homepage'])
+    : ((int)$category['show_on_homepage'] === 1);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -123,149 +310,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Edit Category — Nitya Ritual E-Store</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f6f6f6;
+    color:#222;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f6f6f6;
-    color: #222;
+.sidebar{
+    width:240px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:#8B1E1E;
+    color:#fff;
 }
 
-.sidebar {
-    width: 240px;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: #8B1E1E;
-    color: white;
+.sidebar-brand{
+    padding:25px 20px;
+    font-size:20px;
+    font-weight:bold;
+    border-bottom:1px solid rgba(255,255,255,.15);
 }
 
-.sidebar-brand {
-    padding: 25px 20px;
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: 1px solid rgba(255,255,255,.15);
-}
+.sidebar nav{padding:20px 0}
 
-.sidebar nav {
-    padding: 20px 0;
-}
-
-.sidebar a {
-    display: block;
-    padding: 13px 20px;
-    color: white;
-    text-decoration: none;
+.sidebar a{
+    display:block;
+    padding:13px 20px;
+    color:#fff;
+    text-decoration:none;
 }
 
 .sidebar a:hover,
-.sidebar a.active {
-    background: rgba(255,255,255,.12);
+.sidebar a.active{
+    background:rgba(255,255,255,.12);
 }
 
-.main {
-    margin-left: 240px;
-    min-height: 100vh;
+.main{
+    margin-left:240px;
+    min-height:100vh;
 }
 
-.topbar {
-    background: white;
-    padding: 18px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
+.topbar{
+    background:#fff;
+    padding:18px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd;
 }
 
-.topbar h2 {
-    margin: 0;
+.topbar h2{margin:0}
+
+.admin-info{
+    display:flex;
+    align-items:center;
+    gap:20px;
 }
 
-.admin-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.logout{
+    color:#8B1E1E;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-.logout {
-    color: #8B1E1E;
-    text-decoration: none;
-    font-weight: bold;
+.content{
+    padding:30px;
+    max-width:900px;
 }
 
-.content {
-    padding: 30px;
+.form-box{
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:10px;
+    padding:25px;
 }
 
-.form-box {
-    max-width: 600px;
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 25px;
+.form-group{margin-bottom:18px}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+    font-size:14px;
 }
 
-.form-group {
-    margin-bottom: 20px;
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font:inherit;
+    background:#fff;
 }
 
-label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: bold;
+textarea{
+    resize:vertical;
+    min-height:100px;
 }
 
-input {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font: inherit;
+input[type="checkbox"]{
+    width:auto;
 }
 
-.help {
-    color: #777;
-    font-size: 12px;
-    margin-top: 5px;
+.check-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-weight:normal;
 }
 
-.alert {
-    padding: 12px 15px;
-    background: #fde8e8;
-    color: #a61b1b;
-    border-radius: 6px;
-    margin-bottom: 20px;
+.help{
+    color:#777;
+    font-size:12px;
+    margin-top:5px;
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
+.alert{
+    padding:12px 15px;
+    border-radius:6px;
+    margin-bottom:18px;
+    background:#fde8e8;
+    color:#a61b1b;
 }
 
-.btn {
-    border: 0;
-    border-radius: 6px;
-    padding: 11px 18px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
+.current-image{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+    border:1px solid #ddd;
+    margin-bottom:10px;
+    display:block;
 }
 
-.btn-primary {
-    background: #8B1E1E;
-    color: white;
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
 }
 
-.btn-secondary {
-    background: #eee;
-    color: #333;
+.btn{
+    border:0;
+    border-radius:6px;
+    padding:11px 16px;
+    background:#8B1E1E;
+    color:#fff;
+    cursor:pointer;
+    font-size:14px;
+    text-decoration:none;
 }
 
+.btn-secondary{
+    background:#eee;
+    color:#333;
+}
+
+@media(max-width:700px){
+    .sidebar{width:190px}
+    .main{margin-left:190px}
+    .content{padding:18px}
+}
 </style>
 
 </head>
@@ -279,25 +490,14 @@ input {
     </div>
 
     <nav>
-
         <a href="index.php">Dashboard</a>
-
         <a href="products.php">Products</a>
-
         <a href="add-product.php">Add Product</a>
-
-        <a href="categories.php" class="active">
-            Categories
-        </a>
-
-        <a href="../index.php" target="_blank">
-            View Website
-        </a>
-
+        <a href="categories.php" class="active">Categories</a>
+        <a href="../index.php" target="_blank">View Website</a>
     </nav>
 
 </div>
-
 
 <div class="main">
 
@@ -306,19 +506,11 @@ input {
         <h2>Edit Category</h2>
 
         <div class="admin-info">
-
-            <span>
-                <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
-            </span>
-
-            <a href="logout.php" class="logout">
-                Logout
-            </a>
-
+            <span><?= e($_SESSION['admin_name'] ?? 'Admin') ?></span>
+            <a href="logout.php" class="logout">Logout</a>
         </div>
 
     </div>
-
 
     <div class="content">
 
@@ -326,73 +518,143 @@ input {
 
         <div class="form-box">
 
-
             <?php if ($error !== ''): ?>
-
                 <div class="alert">
                     <?= e($error) ?>
                 </div>
-
             <?php endif; ?>
 
+            <form method="POST" enctype="multipart/form-data">
 
-            <form method="POST">
-
+                <input
+                    type="hidden"
+                    name="id"
+                    value="<?= $categoryId ?>"
+                >
 
                 <div class="form-group">
-
-                    <label>
-                        Category Name *
-                    </label>
-
+                    <label>Category Name *</label>
                     <input
                         type="text"
                         name="name"
-                        value="<?= e($_POST['name'] ?? $category['name']) ?>"
+                        value="<?= e($currentName) ?>"
                         required
                     >
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Slug *
-                    </label>
-
+                    <label>Slug *</label>
                     <input
                         type="text"
                         name="slug"
-                        value="<?= e($_POST['slug'] ?? $category['slug']) ?>"
+                        value="<?= e($currentSlug) ?>"
                         required
+                    >
+                    <div class="help">
+                        Changing this changes the category URL.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Parent Category</label>
+
+                    <select name="parent_id">
+
+                        <option value="">
+                            — Top Level Category —
+                        </option>
+
+                        <?php foreach ($parentCategories as $parent): ?>
+
+                            <option
+                                value="<?= (int)$parent['id'] ?>"
+                                <?= ((string)$currentParent === (string)$parent['id']) ? 'selected' : '' ?>
+                            >
+                                <?= e($parent['name']) ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Category Image</label>
+
+                    <?php if (!empty($category['image'])): ?>
+
+                        <img
+                            src="../assets/images/categories/<?= e($category['image']) ?>"
+                            alt="<?= e($category['name']) ?>"
+                            class="current-image"
+                        >
+
+                    <?php endif; ?>
+
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/jpeg,image/png,image/webp,image/gif"
                     >
 
                     <div class="help">
-                        Changing this may affect category URLs.
+                        Upload a new image only if you want to replace the current one.
+                        Maximum 5 MB.
                     </div>
-
                 </div>
 
+                <div class="form-group">
+                    <label>Description</label>
+
+                    <textarea name="description"><?= e($currentDescription) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Display Order</label>
+
+                    <input
+                        type="number"
+                        name="sort_order"
+                        min="0"
+                        value="<?= e($currentSortOrder) ?>"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="check-row">
+                        <input
+                            type="checkbox"
+                            name="is_active"
+                            value="1"
+                            <?= $currentActive ? 'checked' : '' ?>
+                        >
+                        Active
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="check-row">
+                        <input
+                            type="checkbox"
+                            name="show_on_homepage"
+                            value="1"
+                            <?= $currentHomepage ? 'checked' : '' ?>
+                        >
+                        Show on Homepage
+                    </label>
+                </div>
 
                 <div class="actions">
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
+                    <button type="submit" class="btn">
                         Save Changes
                     </button>
 
-                    <a
-                        href="categories.php"
-                        class="btn btn-secondary"
-                    >
+                    <a href="categories.php" class="btn btn-secondary">
                         Cancel
                     </a>
 
                 </div>
-
 
             </form>
 

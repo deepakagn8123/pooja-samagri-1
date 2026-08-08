@@ -2,13 +2,64 @@
 
 require_once __DIR__ . '/config/app.php';
 
-$categories = getAllCategories($pdo);
+function e($value): string
+{
+    return htmlspecialchars(
+        (string)$value,
+        ENT_QUOTES,
+        'UTF-8'
+    );
+}
 
-$pageTitle = "All Categories";
+
+/*
+|--------------------------------------------------------------------------
+| Active Top-Level Categories
+|--------------------------------------------------------------------------
+*/
+
+$stmt = $pdo->query("
+    SELECT
+        c.id,
+        c.name,
+        c.slug,
+        c.image,
+        c.description,
+        c.sort_order,
+
+        (
+            SELECT COUNT(*)
+            FROM categories child
+            WHERE child.parent_id = c.id
+              AND child.is_active = 1
+        ) AS subcategory_count,
+
+        (
+            SELECT COUNT(*)
+            FROM products p
+            WHERE p.category_id = c.id
+              AND p.is_active = 1
+        ) AS product_count
+
+    FROM categories c
+
+    WHERE c.parent_id IS NULL
+      AND c.is_active = 1
+
+    ORDER BY
+        c.sort_order ASC,
+        c.name ASC
+");
+
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$pageTitle = 'All Categories — ShubhSamagri';
 
 require __DIR__ . '/includes/header.php';
 
 ?>
+
 
 <div class="page-banner">
 
@@ -21,7 +72,7 @@ require __DIR__ . '/includes/header.php';
     </h1>
 
     <p>
-        Explore all our puja and wedding products.
+        Explore all our puja, wedding and ritual products.
     </p>
 
 </div>
@@ -31,41 +82,108 @@ require __DIR__ . '/includes/header.php';
 
     <div class="category-grid">
 
-        <?php foreach($categories as $category): ?>
 
-            <a
-                href="category.php?slug=<?= urlencode($category['slug']) ?>"
-                class="category-card"
-            >
+        <?php if ($categories): ?>
 
-                <div class="category-icon">
 
-                    🪔
+            <?php foreach ($categories as $category): ?>
 
-                </div>
 
-                <h3>
+                <a
+                    href="category.php?slug=<?= urlencode($category['slug']) ?>"
+                    class="category-card"
+                >
 
-                    <?= htmlspecialchars($category['name']) ?>
 
-                </h3>
+                    <div class="category-icon">
+
+
+                        <?php if (!empty($category['image'])): ?>
+
+                            <img
+                                src="assets/images/categories/<?= rawurlencode($category['image']) ?>"
+                                alt="<?= e($category['name']) ?>"
+                                loading="lazy"
+                            >
+
+                        <?php else: ?>
+
+                            🪔
+
+                        <?php endif; ?>
+
+
+                    </div>
+
+
+                    <h3>
+
+                        <?= e($category['name']) ?>
+
+                    </h3>
+
+
+                    <?php if (!empty($category['description'])): ?>
+
+                        <p>
+
+                            <?= e($category['description']) ?>
+
+                        </p>
+
+                    <?php endif; ?>
+
+
+                    <p>
+
+                        <?= (int)$category['product_count'] ?>
+
+                        Products
+
+                    </p>
+
+
+                    <?php if ((int)$category['subcategory_count'] > 0): ?>
+
+                        <span class="category-subcount">
+
+                            <?= (int)$category['subcategory_count'] ?>
+
+                            Subcategories →
+
+                        </span>
+
+                    <?php endif; ?>
+
+
+                </a>
+
+
+            <?php endforeach; ?>
+
+
+        <?php else: ?>
+
+
+            <div class="home-products-empty">
 
                 <p>
-
-                    <?= $category['total_products'] ?>
-
-                    Products
-
+                    No categories available.
                 </p>
 
-            </a>
+            </div>
 
-        <?php endforeach; ?>
+
+        <?php endif; ?>
+
 
     </div>
 
 </section>
 
+
 <?php
 
-require __DIR__.'/includes/footer.php';
+require __DIR__ . '/includes/footer.php';
+
+?>

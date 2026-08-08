@@ -35,6 +35,42 @@ try {
 }
 
 
+/* =========================================================
+   HOMEPAGE CATEGORIES
+   Only active top-level categories marked for homepage
+========================================================= */
+
+$homeCategories = [];
+
+try {
+
+    $stmt = $pdo->query("
+        SELECT
+            id,
+            parent_id,
+            name,
+            slug,
+            image,
+            description,
+            sort_order
+        FROM categories
+        WHERE is_active = 1
+          AND show_on_homepage = 1
+          AND parent_id IS NULL
+        ORDER BY
+            sort_order ASC,
+            name ASC
+    ");
+
+    $homeCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (Throwable $e) {
+
+    $homeCategories = [];
+
+}
+
+
 function e($value): string
 {
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
@@ -87,40 +123,9 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 
-<!-- ========================================================
-     DECORATIVE GARLAND
+<!-- ===============================<!-- ========================================================
+     SHOP BY CATEGORY
 ======================================================== -->
-
-<div class="garland">
-
-    <svg viewBox="0 0 1200 34" preserveAspectRatio="none">
-
-        <path
-            d="M0 4 Q60 30 120 4 T240 4 T360 4 T480 4 T600 4 T720 4 T840 4 T960 4 T1080 4 T1200 4"
-            stroke="#5C7A4A"
-            stroke-width="2"
-            fill="none"
-        />
-
-        <g fill="#E8890C">
-
-            <?php for ($x = 20; $x <= 1180; $x += 40): ?>
-
-                <circle
-                    cx="<?= $x ?>"
-                    cy="<?= (($x / 40) % 2 === 0) ? 22 : 14 ?>"
-                    r="6"
-                />
-
-            <?php endfor; ?>
-
-        </g>
-
-    </svg>
-
-</div>
-
-
 
 <!-- ========================================================
      SHOP BY CATEGORY
@@ -132,136 +137,104 @@ require __DIR__ . '/includes/header.php';
 
         <h2>Shop by Category</h2>
 
-        <a href="puja-samagri.php" class="home-see-all">
+        <a href="categories.php" class="home-see-all">
             See All →
         </a>
 
     </div>
 
 
-    <div class="home-category-grid">
+    <?php
+
+    $homeCategories = [];
+
+    try {
+
+        $stmt = $pdo->query("
+            SELECT
+                id,
+                name,
+                slug,
+                image,
+                description
+            FROM categories
+            WHERE is_active = 1
+              AND show_on_homepage = 1
+              AND parent_id IS NULL
+            ORDER BY sort_order ASC, name ASC
+        ");
+
+        $homeCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (Throwable $e) {
+
+        $homeCategories = [];
+
+    }
+
+    ?>
 
 
-        <a href="puja-samagri.php" class="home-category-card">
+    <?php if (!empty($homeCategories)): ?>
 
-            <div class="home-category-image">
+        <div class="home-category-grid">
 
-                <img
-                    src="assets/images/categories/Pooja_essential.webp"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >           
+            <?php foreach ($homeCategories as $category): ?>
 
-            </div>
+                <a
+                    href="category.php?slug=<?= rawurlencode($category['slug']) ?>"
+                    class="home-category-card"
+                >
 
-            <h3>
-                Daily Puja Items &amp; Puja Kits
-            </h3>
+                    <div class="home-category-image">
 
-        </a>
+                        <?php if (!empty($category['image'])): ?>
 
+                            <img
+                                src="assets/images/categories/<?= rawurlencode($category['image']) ?>"
+                                alt="<?= e($category['name']) ?>"
+                                loading="lazy"
+                            >
 
+                        <?php else: ?>
 
-        <a href="wedding-items.php" class="home-category-card">
+                            <div class="category-image-placeholder">
+                                🪔
+                            </div>
 
-            <div class="home-category-image">
+                        <?php endif; ?>
 
-                <img
-                    src="assets/images/categories/717vdrxwYZL.jpg"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >  
-
-            </div>
-
-            <h3>
-                Wedding Collections
-            </h3>
-
-        </a>
+                    </div>
 
 
+                    <h3>
+                        <?= e($category['name']) ?>
+                    </h3>
 
-        <a href="puja-samagri.php#flowers" class="home-category-card">
+                </a>
 
-            <div class="home-category-image">
+            <?php endforeach; ?>
 
-                <img
-                    src="assets/images/categories/Untitled-design-79.webp"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >  
+        </div>
 
-            </div>
+    <?php else: ?>
 
-            <h3>
-                Daily Fresh Puja Flowers
-            </h3>
+        <div class="home-products-empty">
 
-        </a>
+            <p>
+                Categories jaldi yahan dikhai denge.
+            </p>
 
+            <a
+                href="categories.php"
+                class="btn-primary"
+            >
+                Browse All Categories
+            </a>
 
+        </div>
 
-        <a href="services.php" class="home-category-card">
-
-            <div class="home-category-image">
-
-                <img
-                    src="assets/images/categories/puja-services.jpg"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >  
-
-            </div>
-
-            <h3>
-                Puja &amp; Ritual Services
-            </h3>
-
-        </a>
-
-
-
-        <a href="puja-samagri.php" class="home-category-card">
-
-            <div class="home-category-image">
-
-                <img
-                    src="assets/images/categories/51HW4wy1edL._SL500_.jpg"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >  
-
-            </div>
-
-            <h3>
-                God Idols &amp; Metal Articles
-            </h3>
-
-        </a>
-
-
-
-        <a href="services.php" class="home-category-card">
-
-            <div class="home-category-image">
-
-                <img
-                    src="assets/images/categories/images.jpg"
-                    alt="Daily Puja Items and Puja Kits"
-                    loading="lazy"
-                >  
-
-            </div>
-
-            <h3>
-                Book Pandit Ji
-            </h3>
-
-        </a>
-
-
-    </div>
+    <?php endif; ?>
 
 </section>
 
