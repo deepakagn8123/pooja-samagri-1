@@ -279,93 +279,6 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 <!-- ========================================================
-     WE ARE ALSO AVAILABLE AT
-======================================================== -->
-
-<section class="home-available">
-
-    <div class="home-available-heading">
-        <h2>We are also available at</h2>
-    </div>
-
-    <div class="home-marketplace-grid">
-
-        <!-- AMAZON -->
-        <a href="#" class="home-marketplace-item">
-            <div class="marketplace-logo amazon-logo">
-                <span class="amazon-a">a</span>
-                <span class="amazon-smile"></span>
-            </div>
-            <span class="marketplace-status">Live</span>
-        </a>
-
-
-        <!-- INSTAMART -->
-        <a href="#" class="home-marketplace-item">
-
-            <div class="marketplace-square instamart-box">
-                <span class="instamart-small">SWIGGY</span>
-                <strong>Instamart</strong>
-            </div>
-
-            <span class="marketplace-status">Live Soon</span>
-
-        </a>
-
-
-        <!-- ZEPTO -->
-        <a href="#" class="home-marketplace-item">
-
-            <div class="marketplace-square zepto-box">
-                <strong>zepto</strong>
-            </div>
-
-            <span class="marketplace-status">Live Soon</span>
-
-        </a>
-
-
-        <!-- BLINKIT -->
-        <a href="#" class="home-marketplace-item">
-
-            <div class="marketplace-square blinkit-box">
-                <strong>blink<span>it</span></strong>
-            </div>
-
-            <span class="marketplace-status">Live Soon</span>
-
-        </a>
-
-
-        <!-- FLIPKART -->
-        <a href="#" class="home-marketplace-item">
-
-            <div class="marketplace-square flipkart-box">
-                <strong>f</strong>
-            </div>
-
-            <span class="marketplace-status">Live</span>
-
-        </a>
-
-
-        <!-- AMAZON -->
-        <a href="#" class="home-marketplace-item">
-
-            <div class="marketplace-logo amazon-logo">
-                <span class="amazon-a">a</span>
-                <span class="amazon-smile"></span>
-            </div>
-
-            <span class="marketplace-status">Live</span>
-
-        </a>
-
-    </div>
-
-</section>
-
-<!-- ========================================================
      OUR SERVICES
 ======================================================== -->
 
@@ -930,7 +843,7 @@ require __DIR__ . '/includes/header.php';
         <div>
 
             <strong>
-                Pan-India
+                Jaipur Based
             </strong>
 
             <span>
@@ -984,10 +897,6 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 
-
-<!-- ========================================================
-     TESTIMONIALS
-======================================================== -->
 <!-- ========================================================
      CUSTOMER REVIEWS
 ======================================================== -->

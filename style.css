@@ -2102,7 +2102,6 @@ border-bottom: none;
    HOMEPAGE — AVAILABLE AT / SERVICES / SERVICEABLE AREAS
 ========================================================== */
 
-.home-available,
 .home-main-services,
 .home-serviceable {
     width: min(1420px, calc(100% - 60px));
@@ -2140,25 +2139,6 @@ border-bottom: none;
     font-size: 15px;
 }
 
-
-/* ==========================================================
-   AVAILABLE AT
-========================================================== */
-
-.home-available {
-    padding-top: 42px;
-    padding-bottom: 48px;
-}
-
-.home-available-grid {
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-}
 
 .home-platform-card {
     min-height: 95px;
@@ -2435,15 +2415,10 @@ border-bottom: none;
 
 @media (max-width: 800px) {
 
-    .home-available,
     .home-main-services,
     .home-serviceable {
         width: calc(100% - 30px);
         padding: 42px 0;
-    }
-
-    .home-available-grid {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     .home-area-grid {
@@ -2748,41 +2723,6 @@ border-bottom: none;
 }
 
 
-/* ==========================================================
-   AVAILABLE AT — PUJADUKAAN STYLE
-========================================================== */
-
-.home-available {
-    width: 100%;
-    margin: 0;
-
-    padding: 34px 55px 28px;
-
-    background: #fff;
-}
-
-
-/* =========================
-   HEADING
-========================= */
-
-.home-available-heading {
-    text-align: center;
-    margin-bottom: 42px;
-}
-
-.home-available-heading h2 {
-    margin: 0;
-
-    color: var(--maroon);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(32px, 3vw, 43px);
-    font-weight: 400;
-    line-height: 1.2;
-}
-
-
 /* =========================
    MARKETPLACE ROW
 ========================= */
@@ -3013,17 +2953,6 @@ border-bottom: none;
 
 @media (max-width: 650px) {
 
-    .home-available {
-        padding:
-            35px
-            18px
-            30px;
-    }
-
-    .home-available-heading {
-        margin-bottom: 30px;
-    }
-
     .home-marketplace-grid {
         grid-template-columns: repeat(2, 1fr);
 
@@ -3076,7 +3005,7 @@ border-bottom: none;
 
     padding: 65px 0 75px;
 
-    background: #fff5e7;
+    background: #F8F1E4;
 }
 
 
