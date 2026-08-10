@@ -79,7 +79,7 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 </dotlottie-player> -->
 
     <img
-        src="assets/images/site-logo.png"
+        src="assets/images/logo.svg"
         alt="Shubh Samagri"
         class="brand-logo"
     >
