@@ -3518,14 +3518,7 @@ body.loading{
 
 }
 
-.brand-diya{
 
-    width:85px;
-    height:85px;
-
-    flex-shrink:0;
-
-}
 
 .brand-logo{
 
@@ -3988,8 +3981,8 @@ body.loading{
 /* If diya animation is being used */
 
 .brand-diya {
-    width: 65px;
-    height: 65px;
+    width: 145px;
+    height: 145px;
 }
 
 
@@ -4005,6 +3998,11 @@ body.loading{
     max-width: 570px;
 
     margin-left: 5px;
+}
+
+.search-bar  {
+    width: 45px;
+    height: 45px;
 }
 
 

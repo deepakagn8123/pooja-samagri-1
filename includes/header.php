@@ -112,6 +112,13 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
                     value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
                 >
 
+<dotlottie-player
+    class="search-bar"
+    src="assets/images/search.lottie"
+    autoplay
+    loop>
+</dotlottie-player>
+
             </form>
 
 
@@ -186,6 +193,15 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
                     ☰
                 </button>
 
+                <dotlottie-player
+    class="brand-diya"
+    src="assets/images/new.lottie"
+    autoplay
+    loop>
+</dotlottie-player>
+
+                
+
             </div>
 
         </div>
@@ -198,7 +214,7 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
          LAYER 2
     ========================== -->
 
-    <nav
+    <!-- <nav
         class="store-category-nav"
         id="mainNav"
     >
@@ -231,7 +247,7 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
         </ul>
 
-    </nav>
+    </nav> -->
 
 
 </header>
