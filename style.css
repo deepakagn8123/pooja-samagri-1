@@ -4624,3 +4624,955 @@ body.loading{
     }
 
 }
+
+
+/* ==========================================================
+   PREMIUM NAVBAR / HEADER GRADIENT
+========================================================== */
+
+.store-header,
+.store-header-top {
+
+    background:
+        linear-gradient(
+            105deg,
+            #3A0710 0%,
+            #5A0B16 48%,
+            #6F1121 100%
+        ) !important;
+
+    color: #FFFFFF;
+
+}
+
+
+/* Premium bottom edge */
+
+.store-header {
+
+    border-bottom: 1px solid rgba(212, 175, 55, .45);
+
+    box-shadow:
+        0 5px 18px rgba(58, 7, 16, .22),
+        inset 0 -1px 0 rgba(243, 213, 122, .08);
+
+}
+
+
+/* ==========================================================
+   SUBTLE GOLD LIGHT EFFECT
+========================================================== */
+
+.store-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.store-header::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 65%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(243, 213, 122, .08),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left .9s ease;
+
+    pointer-events: none;
+
+}
+
+
+/* Light passes across navbar on hover */
+
+.store-header:hover::before {
+    left: 140%;
+}
+
+
+/* Keep header contents above the effect */
+
+.store-header-top,
+.store-header-inner {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ==========================================================
+   PREMIUM IDLE BUTTON ANIMATION
+========================================================== */
+
+.header-action-btn {
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            105deg,
+            #3A0710 0%,
+            #5A0B16 48%,
+            #6F1121 100%
+        );
+
+    border: 1px solid rgba(212, 175, 55, 0.55);
+
+    box-shadow:
+        0 4px 12px rgba(58, 7, 16, 0.20);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* ==========================================================
+   MOVING GOLDEN SHINE
+========================================================== */
+
+.header-action-btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.03) 35%,
+            rgba(243, 213, 122, 0.25) 50%,
+            rgba(255, 255, 255, 0.03) 65%,
+            transparent 100%
+        );
+
+    transform: skewX(-20deg);
+
+    animation:
+        buttonShine 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   SHINE ANIMATION
+========================================================== */
+
+@keyframes buttonShine {
+
+    0% {
+        left: -120%;
+    }
+
+    45% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SUBTLE IDLE GLOW
+========================================================== */
+
+.header-action-btn {
+
+    animation:
+        buttonGlow 4s ease-in-out infinite;
+}
+
+
+@keyframes buttonGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 12px rgba(58, 7, 16, 0.20);
+    }
+
+    50% {
+        box-shadow:
+            0 5px 17px rgba(111, 17, 33, 0.32);
+    }
+
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.header-action-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 20px rgba(58, 7, 16, 0.35),
+        0 0 14px rgba(243, 213, 122, 0.12);
+
+}
+
+
+/* Keep button contents above shine */
+
+.header-action-btn > * {
+
+    position: relative;
+    z-index: 2;
+
+}
+
+/* ==========================================================
+   CART IDLE ANIMATION
+========================================================== */
+
+.store-cart {
+
+    animation:
+        cartIdle 3.5s ease-in-out infinite;
+
+}
+
+
+@keyframes cartIdle {
+
+    0%,
+    85%,
+    100% {
+        transform: translateY(0);
+    }
+
+    90% {
+        transform: translateY(-3px);
+    }
+
+    95% {
+        transform: translateY(0);
+    }
+
+}
+
+/* ==========================================================
+   CATEGORY HOVER DROPDOWN
+========================================================== */
+
+.category-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* ----------------------------------------------------------
+   BUTTON
+---------------------------------------------------------- */
+
+.category-dropdown-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    cursor: pointer;
+}
+
+
+/* Arrow */
+
+.category-dropdown-arrow {
+    font-size: 14px;
+    line-height: 1;
+
+    transition: transform 0.25s ease;
+}
+
+
+/* Rotate arrow */
+
+.category-dropdown:hover .category-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ----------------------------------------------------------
+   DROPDOWN
+---------------------------------------------------------- */
+
+.category-dropdown-menu {
+
+    position: absolute;
+
+    top: calc(100% + 8px);
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        translateY(-10px);
+
+    width: 240px;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3A0710 0%,
+            #5A0B16 50%,
+            #6F1121 100%
+        );
+
+    border:
+        1px solid rgba(212, 175, 55, 0.5);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 14px 35px rgba(35, 4, 10, 0.4),
+        0 0 20px rgba(243, 213, 122, 0.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+
+    z-index: 9999;
+}
+
+
+/* ----------------------------------------------------------
+   HOVER OPEN
+---------------------------------------------------------- */
+
+.category-dropdown:hover .category-dropdown-menu {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* ----------------------------------------------------------
+   CATEGORY LINKS
+---------------------------------------------------------- */
+
+.category-dropdown-item {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 11px 14px;
+
+    box-sizing: border-box;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+
+/* Hover item */
+
+.category-dropdown-item:hover {
+
+    color: #F3D57A;
+
+    background:
+        rgba(243, 213, 122, 0.12);
+
+    padding-left: 19px;
+}
+
+
+/* ----------------------------------------------------------
+   EMPTY
+---------------------------------------------------------- */
+
+.category-dropdown-empty {
+
+    display: block;
+
+    padding: 12px;
+
+    color: rgba(255,255,255,0.65);
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   CATEGORY DROPDOWN STACKING FIX
+========================================================== */
+
+.store-header {
+    position: relative;
+    z-index: 1000;
+    overflow: visible !important;
+}
+
+.store-header-top {
+    position: relative;
+    z-index: 1001;
+    overflow: visible !important;
+}
+
+.store-header-inner {
+    position: relative;
+    z-index: 1002;
+    overflow: visible !important;
+}
+
+.store-actions {
+    position: relative;
+    z-index: 1003;
+    overflow: visible !important;
+}
+
+.category-dropdown {
+    position: relative;
+    z-index: 1004;
+}
+
+.category-dropdown-menu {
+    position: absolute;
+    z-index: 99999 !important;
+}
+
+/* =========================================================
+   PUJA ORGANIZER — BACKGROUND
+========================================================= */
+
+.organizer-background {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background-image: url("assets/images/categories/image (4).png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* Soft overlay for readability */
+
+.organizer-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250, 242, 226, 0.35) 100%
+        );
+
+    z-index: -1;
+}
+
+
+/* Keep section content above background */
+
+.organizer-background > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   SERVICEABLE AREA — BACKGROUND
+========================================================= */
+
+.serviceable-background {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background-image: url("assets/images/categories/image (6).png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+/* Keep content above background */
+
+.serviceable-background > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================================
+   HOMEPAGE HERO SLIDER
+========================================================= */
+
+.home-hero {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.hero-slider {
+    position: relative;
+
+    width: 100%;
+    height: min(620px, 42vw);
+
+    min-height: 430px;
+
+    overflow: hidden;
+
+    background: #2d090f;
+}
+
+
+/* =========================================================
+   SLIDES
+========================================================= */
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0.9s ease;
+}
+
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.hero-slide-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transform: scale(1.03);
+
+    transition:
+        transform 7s ease;
+}
+
+
+.hero-slide.active .hero-slide-image {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.hero-slide-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(28, 5, 10, 0.72) 0%,
+            rgba(28, 5, 10, 0.46) 35%,
+            rgba(28, 5, 10, 0.12) 68%,
+            rgba(28, 5, 10, 0.05) 100%
+        );
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.hero-slide-content {
+    position: absolute;
+
+    top: 50%;
+    left: clamp(35px, 7vw, 110px);
+
+    transform: translateY(-50%);
+
+    width: min(560px, 45%);
+
+    color: #ffffff;
+
+    z-index: 3;
+}
+
+
+.hero-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 14px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #f3d57a;
+}
+
+
+.hero-slide-content h1,
+.hero-slide-content h2 {
+    margin: 0 0 18px;
+
+    font-size: clamp(36px, 4vw, 64px);
+
+    line-height: 1.08;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+
+.hero-slide-content p {
+    max-width: 500px;
+
+    margin: 0 0 28px;
+
+    font-size: clamp(15px, 1.3vw, 18px);
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,0.88);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.hero-btn {
+    display: inline-flex;
+
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3d57a,
+            #d4a93f
+        );
+
+    color: #3a0710;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.2);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.hero-btn span {
+    font-size: 19px;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.hero-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.28);
+}
+
+
+.hero-btn:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   ARROWS
+========================================================= */
+
+.hero-control {
+    position: absolute;
+
+    top: 50%;
+
+    width: 46px;
+    height: 46px;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.22);
+
+    backdrop-filter: blur(8px);
+
+    color: #ffffff;
+
+    font-size: 32px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.hero-control:hover {
+    background: rgba(0,0,0,0.45);
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+
+.hero-prev {
+    left: 25px;
+}
+
+
+.hero-next {
+    right: 25px;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.hero-dots {
+    position: absolute;
+
+    left: 50%;
+    bottom: 24px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 9px;
+
+    z-index: 6;
+}
+
+
+.hero-dot {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.45);
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.hero-dot.active {
+    width: 27px;
+
+    border-radius: 10px;
+
+    background: #f3d57a;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .hero-slider {
+        height: 620px;
+        min-height: 0;
+    }
+
+
+    .hero-slide-image {
+        object-position: 62% center;
+    }
+
+
+    .hero-slide-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(28, 5, 10, 0.18) 0%,
+                rgba(28, 5, 10, 0.50) 48%,
+                rgba(28, 5, 10, 0.82) 100%
+            );
+    }
+
+
+    .hero-slide-content {
+
+        top: auto;
+        bottom: 75px;
+
+        left: 25px;
+
+        transform: none;
+
+        width: calc(100% - 50px);
+    }
+
+
+    .hero-slide-content h1,
+    .hero-slide-content h2 {
+
+        font-size: 34px;
+
+        letter-spacing: -0.5px;
+    }
+
+
+    .hero-slide-content p {
+
+        font-size: 14px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .hero-control {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 26px;
+    }
+
+
+    .hero-prev {
+        left: 12px;
+    }
+
+
+    .hero-next {
+        right: 12px;
+    }
+
+}
+
+
+
+.store-header-inner {
+    min-height: 72px !important;
+}
+
+.brand-logo {
+    width: 135px !important;
+}
+
+.store-search {
+    height: 40px !important;
+}
+
+.store-cart {
+    height: 40px;
+}
+
+.header-action-btn {
+    height: 38px !important;
+}
+
+/* Fix first hero slide appearing without fade */
+.hero-slide:first-child {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hero-slide:first-child.active {
+    opacity: 1;
+    visibility: visible;
+}

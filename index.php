@@ -89,30 +89,6 @@ function productImage(array $product): string
 ob_start();
 ?>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const menuBtn = document.getElementById("menuBtn");
-    const mainNav = document.getElementById("mainNav");
-
-    if (menuBtn && mainNav) {
-
-        menuBtn.addEventListener("click", function () {
-
-            mainNav.classList.toggle("active");
-
-            const isOpen = mainNav.classList.contains("active");
-
-            menuBtn.setAttribute("aria-expanded", isOpen);
-            menuBtn.innerHTML = isOpen ? "✕" : "☰";
-
-        });
-
-    }
-
-});
-</script>
-
 <?php
 
 $pageScripts = ob_get_clean();
@@ -122,11 +98,222 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 
+<section class="home-hero">
+
+    <div class="hero-slider" id="heroSlider">
+
+        <!-- SLIDE 1 -->
+        <div class="hero-slide ">
+
+            <img
+                src="assets/images/categories/image (1).png"
+                alt="Nitya Ritual E-Store - Puja Samagri"
+                class="hero-slide-image"
+            >
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <span class="hero-eyebrow">
+                    Nitya Ritual E-Store
+                </span>
+
+                <h1>
+                    Everything You Need<br>
+                    for Every Sacred Occasion
+                </h1>
+
+                <p>
+                    Authentic puja essentials, carefully curated
+                    for your rituals and celebrations.
+                </p>
+
+                <a href="categories.php" class="hero-btn">
+                    Shop Puja Samagri
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 2 -->
+        <div class="hero-slide">
+
+            <img
+                src="assets/images/categories/image (2).png"
+                alt="Authentic Hindu Puja Essentials"
+                class="hero-slide-image"
+            >
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <span class="hero-eyebrow">
+                    Tradition You Can Trust
+                </span>
+
+                <h2>
+                    Authentic Essentials<br>
+                    for Your Sacred Rituals
+                </h2>
+
+                <p>
+                    Quality products selected with care
+                    for every puja and occasion.
+                </p>
+
+                <a href="categories.php" class="hero-btn">
+                    Explore Collection
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 3 -->
+        <div class="hero-slide">
+
+            <img
+                src="assets/images/categories/image (3).png"
+                alt="Complete Puja Collection"
+                class="hero-slide-image"
+            >
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <span class="hero-eyebrow">
+                    Everything in One Place
+                </span>
+
+                <h2>
+                    From Everyday Puja<br>
+                    to Special Occasions
+                </h2>
+
+                <p>
+                    Discover samagri, flowers, diyas,
+                    devotional items and more.
+                </p>
+
+                <a href="categories.php" class="hero-btn">
+                    Shop Now
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 4 -->
+        <div class="hero-slide">
+
+            <img
+                src="assets/images/categories/image (4).png"
+                alt="Puja and Festival Collection"
+                class="hero-slide-image"
+            >
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <span class="hero-eyebrow">
+                    Celebrate Every Sacred Moment
+                </span>
+
+                <h2>
+                    Bring Home<br>
+                    the Tradition
+                </h2>
+
+                <p>
+                    Beautiful essentials for festivals,
+                    celebrations and everyday devotion.
+                </p>
+
+                <a href="categories.php" class="hero-btn">
+                    Explore Collection
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTROLS -->
+
+        <button
+            type="button"
+            class="hero-control hero-prev"
+            id="heroPrev"
+            aria-label="Previous banner"
+        >
+            ‹
+        </button>
+
+        <button
+            type="button"
+            class="hero-control hero-next"
+            id="heroNext"
+            aria-label="Next banner"
+        >
+            ›
+        </button>
+
+
+        <!-- DOTS -->
+
+        <div class="hero-dots" id="heroDots">
+
+            <button
+                type="button"
+                class="hero-dot active"
+                data-slide="0"
+                aria-label="Go to banner 1"
+            ></button>
+
+            <button
+                type="button"
+                class="hero-dot"
+                data-slide="1"
+                aria-label="Go to banner 2"
+            ></button>
+
+            <button
+                type="button"
+                class="hero-dot"
+                data-slide="2"
+                aria-label="Go to banner 3"
+            ></button>
+
+            <button
+                type="button"
+                class="hero-dot"
+                data-slide="3"
+                aria-label="Go to banner 4"
+            ></button>
+
+        </div>
+
+    </div>
+
+</section>
+
 <!-- ========================================================
      SHOP BY CATEGORY
 ======================================================== -->
 
-<section class="home-shop-section">
+<section class="home-shop-section ">
 
     <div class="home-section-title">
 
@@ -137,36 +324,6 @@ require __DIR__ . '/includes/header.php';
         </a>
 
     </div>
-
-
-    <?php
-
-    $homeCategories = [];
-
-    try {
-
-        $stmt = $pdo->query("
-            SELECT
-                id,
-                name,
-                slug,
-                image,
-                description
-            FROM categories
-            WHERE is_active = 1
-              AND show_on_homepage = 1
-            ORDER BY sort_order ASC, name ASC
-        ");
-
-        $homeCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    } catch (Throwable $e) {
-
-        $homeCategories = [];
-
-    }
-
-    ?>
 
 
     <?php if (!empty($homeCategories)): ?>
@@ -238,7 +395,7 @@ require __DIR__ . '/includes/header.php';
      PUJA ORGANIZER BANNER
 ======================================================== -->
 
-<section class="home-organizer">
+<section class="home-organizer organizer-background">
 
     <div class="home-organizer-inner">
 
@@ -437,7 +594,7 @@ require __DIR__ . '/includes/header.php';
      OUR SERVICEABLE AREA
 ======================================================== -->
 
-<section class="serviceable-area">
+<section class="serviceable-area serviceable-background">
 
     <div class="serviceable-heading">
 
@@ -1114,6 +1271,121 @@ window.addEventListener("load", function () {
 
 </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slides = document.querySelectorAll(".hero-slide");
+    const dots = document.querySelectorAll(".hero-dot");
+
+    const prevButton = document.getElementById("heroPrev");
+    const nextButton = document.getElementById("heroNext");
+
+    if (!slides.length) {
+        return;
+    }
+
+    let currentSlide = 0;
+
+    let autoplayTimer;
+
+
+    function showSlide(index) {
+
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+        slides.forEach(function (slide, i) {
+            slide.classList.toggle("active", i === index);
+        });
+
+
+        dots.forEach(function (dot, i) {
+            dot.classList.toggle("active", i === index);
+        });
+
+
+        currentSlide = index;
+    }
+
+
+    function nextSlide() {
+
+        showSlide(currentSlide + 1);
+
+    }
+
+
+    function previousSlide() {
+
+        showSlide(currentSlide - 1);
+
+    }
+
+
+    function startAutoplay() {
+
+        clearInterval(autoplayTimer);
+
+        autoplayTimer = setInterval(
+            nextSlide,
+            6000
+        );
+
+    }
+
+
+    nextButton.addEventListener(
+        "click",
+        function () {
+
+            nextSlide();
+            startAutoplay();
+
+        }
+    );
+
+
+    prevButton.addEventListener(
+        "click",
+        function () {
+
+            previousSlide();
+            startAutoplay();
+
+        }
+    );
+
+
+    dots.forEach(function (dot) {
+
+        dot.addEventListener(
+            "click",
+            function () {
+
+                showSlide(
+                    Number(dot.dataset.slide)
+                );
+
+                startAutoplay();
+
+            }
+        );
+
+    });
+
+
+    showSlide(0);
+
+    startAutoplay();
+
+});
+</script>
 
 
 

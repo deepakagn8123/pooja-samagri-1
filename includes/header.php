@@ -9,6 +9,46 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once __DIR__ . '/../config/app.php';
+
+$pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
+
+$headerCategories = [];
+
+try {
+
+    $stmt = $pdo->query("
+        SELECT
+            id,
+            name,
+            slug
+        FROM categories
+        WHERE is_active = 1
+        ORDER BY sort_order ASC, name ASC
+    ");
+
+    $headerCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (Throwable $e) {
+
+    $headerCategories = [];
+
+}
+
+$showLoader = !isset($_SESSION['loader_shown']);
+
+if ($showLoader) {
+    $_SESSION['loader_shown'] = true;
+}
+
+?>
+
+<?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $showLoader = !isset($_SESSION['loader_shown']);
 
 if ($showLoader) {
@@ -18,6 +58,8 @@ if ($showLoader) {
 $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="hi">
@@ -161,37 +203,62 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
 
 
                 <a
-                    href="contact.php"
+                    href="index.php"
                     class="header-action-btn"
                 >
-                    Contact Us
+                    Home
                 </a>
 
+
+                <div class="category-dropdown">
+
+    <button
+        type="button"
+        class="header-action-btn category-dropdown-btn"
+    >
+        Categories
+        <span class="category-dropdown-arrow">⌄</span>
+    </button>
+
+
+    <div class="category-dropdown-menu">
+
+        <?php if (!empty($headerCategories)): ?>
+
+            <?php foreach ($headerCategories as $category): ?>
 
                 <a
-                    href="contact.php"
-                    class="header-action-btn"
+                    href="category.php?slug=<?= urlencode($category['slug']) ?>"
+                    class="category-dropdown-item"
                 >
-                    Send Puja List
+                    <?= htmlspecialchars(
+                        $category['name'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </a>
+
+            <?php endforeach; ?>
+
+        <?php else: ?>
+
+            <span class="category-dropdown-empty">
+                No categories available
+            </span>
+
+        <?php endif; ?>
+
+    </div>
+
+</div>
 
 
                 <a
                     href="services.php"
                     class="header-action-btn"
                 >
-                    Book Pandit Ji
+                    Socials
                 </a>
-
-
-                <button
-                    class="menu-btn"
-                    id="menuBtn"
-                    type="button"
-                    aria-label="Menu"
-                >
-                    ☰
-                </button>
 
                 <dotlottie-player
     class="brand-diya"
@@ -207,47 +274,6 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
         </div>
 
     </div>
-
-
-
-    <!-- =========================
-         LAYER 2
-    ========================== -->
-
-    <!-- <nav
-        class="store-category-nav"
-        id="mainNav"
-    >
-
-        <ul>
-
-            <li>
-                <a href="puja-samagri.php">
-                    Puja Items
-                </a>
-            </li>
-
-            <li>
-                <a href="wedding-items.php">
-                    Wedding Items
-                </a>
-            </li>
-
-            <li>
-                <a href="puja-samagri.php">
-                    Puja Flowers
-                </a>
-            </li>
-
-            <li>
-                <a href="categories.php">
-                    All Category
-                </a>
-            </li>
-
-        </ul>
-
-    </nav> -->
 
 
 </header>

@@ -28,13 +28,9 @@
 
             <h4>Categories</h4>
 
-            <a href="puja-samagri.php">
-                Puja Samagri
-            </a>
-
-            <a href="wedding-items.php">
-                Wedding Items
-            </a>
+            <a href="categories.php">
+    All Categories
+</a>
 
             <a href="services.php">
                 Services
@@ -329,9 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ".store-actions",
     ".store-cart",
     ".cart-badge",
-    ".menu-btn",
-    ".store-category-nav",
-    "#mainNav",
 
     /* Floating WhatsApp */
 
@@ -496,7 +489,12 @@ if (
 
 });
 
+
+
+
 </script>
+
+
 
 </body>
 </html>
