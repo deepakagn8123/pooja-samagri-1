@@ -211,3 +211,119 @@ function destroyAdminSession(): void
 
     session_destroy();
 }
+
+function getLoginAttemptCount(
+    PDO $pdo,
+    string $email,
+    string $ipAddress
+): int {
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM admin_login_attempts
+        WHERE
+            email = :email
+            AND ip_address = :ip
+            AND success = 0
+            AND attempted_at >= DATE_SUB(
+                NOW(),
+                INTERVAL 15 MINUTE
+            )
+    ");
+
+    $stmt->execute([
+        'email' => $email,
+        'ip'    => $ipAddress
+    ]);
+
+    return (int)$stmt->fetchColumn();
+}
+
+function isLoginRateLimited(
+    PDO $pdo,
+    string $email,
+    string $ipAddress
+): bool {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Per-account + IP limit
+    |--------------------------------------------------------------------------
+    */
+
+    $emailAttempts = getLoginAttemptCount(
+        $pdo,
+        $email,
+        $ipAddress
+    );
+
+    if ($emailAttempts >= 5) {
+        return true;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | IP-wide limit
+    |--------------------------------------------------------------------------
+    |
+    | Prevent one IP from attacking many accounts.
+    |
+    */
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM admin_login_attempts
+        WHERE
+            ip_address = :ip
+            AND success = 0
+            AND attempted_at >= DATE_SUB(
+                NOW(),
+                INTERVAL 15 MINUTE
+            )
+    ");
+
+    $stmt->execute([
+        'ip' => $ipAddress
+    ]);
+
+    $ipAttempts = (int)$stmt->fetchColumn();
+
+    return $ipAttempts >= 20;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Record Login Attempt
+|--------------------------------------------------------------------------
+*/
+
+function recordLoginAttempt(
+    PDO $pdo,
+    ?string $email,
+    string $ipAddress,
+    bool $success
+): void {
+
+    $stmt = $pdo->prepare("
+        INSERT INTO admin_login_attempts
+        (
+            email,
+            ip_address,
+            success
+        )
+        VALUES
+        (
+            :email,
+            :ip,
+            :success
+        )
+    ");
+
+    $stmt->execute([
+        'email'   => $email,
+        'ip'      => $ipAddress,
+        'success' => $success ? 1 : 0
+    ]);
+}

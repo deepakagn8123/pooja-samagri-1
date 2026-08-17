@@ -8,20 +8,101 @@ if (isAdminLoggedIn()) {
 }
 
 $error = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | CSRF Protection
+    |--------------------------------------------------------------------------
+    */
+
     verify_csrf();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Get Input
+    |--------------------------------------------------------------------------
+    */
 
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
+    $ipAddress = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generic Error Message
+    |--------------------------------------------------------------------------
+    |
+    | IMPORTANT:
+    | Never tell the user whether the email exists.
+    |
+    */
+
+    $error = 'Invalid email or password.';
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Basic Validation
+    |--------------------------------------------------------------------------
+    */
+
     if ($email === '' || $password === '') {
-        $error = 'Email and password are required.';
-    } else {
+
+        $error = 'Invalid email or password.';
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validate Email Format
+    |--------------------------------------------------------------------------
+    */
+
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $error = 'Invalid email or password.';
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Brute-force Protection
+    |--------------------------------------------------------------------------
+    */
+
+    elseif (
+        isLoginRateLimited(
+            $pdo,
+            $email,
+            $ipAddress
+        )
+    ) {
+
+        $error = 'Too many login attempts. Please try again later.';
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authenticate
+    |--------------------------------------------------------------------------
+    */
+
+    else {
 
         $stmt = $pdo->prepare("
-            SELECT id, name, email, password
+            SELECT
+                id,
+                name,
+                email,
+                password
             FROM admins
             WHERE email = :email
             LIMIT 1
@@ -33,25 +114,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $admin = $stmt->fetch();
 
-        if ($admin && password_verify($password, $admin['password'])) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Successful Authentication
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            $admin &&
+            password_verify(
+                $password,
+                $admin['password']
+            )
+        ) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Record Successful Login
+            |--------------------------------------------------------------------------
+            */
+
+            recordLoginAttempt(
+                $pdo,
+                $email,
+                $ipAddress,
+                true
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Prevent Session Fixation
+            |--------------------------------------------------------------------------
+            */
 
             session_regenerate_id(true);
 
-           session_regenerate_id(true);
 
-initializeAdminSession(
-    (int)$admin['id'],
-    $admin['name']
-);
+            /*
+            |--------------------------------------------------------------------------
+            | Initialize Secure Admin Session
+            |--------------------------------------------------------------------------
+            */
+
+            initializeAdminSession(
+                (int)$admin['id'],
+                $admin['name']
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Rotate CSRF Token
+            |--------------------------------------------------------------------------
+            */
 
             rotate_csrf_token();
 
-            header('Location: index.php');
-            exit;
 
-        } else {
-            $error = 'Invalid email or password.';
+            /*
+            |--------------------------------------------------------------------------
+            | Redirect
+            |--------------------------------------------------------------------------
+            */
+
+            header('Location: index.php');
+
+            exit;
         }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Failed Authentication
+        |--------------------------------------------------------------------------
+        */
+
+        recordLoginAttempt(
+            $pdo,
+            $email,
+            $ipAddress,
+            false
+        );
+
+        $error = 'Invalid email or password.';
     }
 }
 ?>
