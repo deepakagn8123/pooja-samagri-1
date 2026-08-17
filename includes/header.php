@@ -34,31 +34,7 @@ try {
     $headerCategories = [];
 
 }
-
-$showLoader = !isset($_SESSION['loader_shown']);
-
-if ($showLoader) {
-    $_SESSION['loader_shown'] = true;
-}
-
 ?>
-
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$showLoader = !isset($_SESSION['loader_shown']);
-
-if ($showLoader) {
-    $_SESSION['loader_shown'] = true;
-}
-
-$pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
-
-?>
-
 
 
 <!DOCTYPE html>
@@ -80,23 +56,56 @@ $pageTitle = $pageTitle ?? 'Nitya Ritual E-Store';
     href="https://unpkg.com/aos@2.3.4/dist/aos.css"
 >
 
+<script>
+
+(function () {
+
+    const LOADER_KEY = "nitya_ritual_loader_shown";
+
+    try {
+
+        if (sessionStorage.getItem(LOADER_KEY) === "true") {
+
+            document.documentElement.classList.add("loader-skip");
+
+        } else {
+
+            /*
+             * Mark immediately.
+             *
+             * This means:
+             * - refresh = no loader
+             * - same tab navigation = no loader
+             * - new tab = loader again
+             */
+            sessionStorage.setItem(LOADER_KEY, "true");
+
+        }
+
+    } catch (error) {
+
+        console.warn("Loader sessionStorage unavailable:", error);
+
+    }
+
+})();
+
+</script>
+
 </head>
 
 <body>
-
-<?php if ($showLoader): ?>
 <!-- Page Loader -->
 <div id="page-loader">
 
     <dotlottie-player
+        id="loader-diya"
         src="assets/images/Diya.lottie"
         autoplay
         style="width:220px;height:220px;">
     </dotlottie-player>
 
 </div>
-
-<?php endif; ?>
 
 <header class="store-header">
 
