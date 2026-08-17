@@ -10,6 +10,8 @@ if (isAdminLoggedIn()) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    verify_csrf();
 
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -37,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $_SESSION['admin_id'] = $admin['id'];
             $_SESSION['admin_name'] = $admin['name'];
+
+            rotate_csrf_token();
 
             header('Location: index.php');
             exit;
@@ -104,6 +108,8 @@ button {
     <?php endif; ?>
 
     <form method="POST">
+
+     <?= csrf_field() ?>
 
         <input
             type="email"

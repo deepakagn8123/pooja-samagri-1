@@ -12,8 +12,3 @@ function requireAdmin(): void
         exit;
     }
 }
-
-
-
-// Email:    admin@nitya.local
-// Password: Admin@123

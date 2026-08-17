@@ -55,6 +55,8 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+verify_csrf();
+
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $categoryId = (int)($_POST['category_id'] ?? 0);
@@ -689,9 +691,15 @@ textarea {
             <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
         </span>
 
-        <a href="logout.php" class="logout">
-            Logout
-        </a>
+        <form method="POST" action="logout.php">
+
+    <?= csrf_field() ?>
+
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
 
     </div>
 
@@ -728,6 +736,8 @@ textarea {
     method="POST"
     enctype="multipart/form-data"
 >
+
+<?= csrf_field() ?>
 
 
 <div class="form-grid">

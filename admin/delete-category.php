@@ -4,6 +4,8 @@ require_once __DIR__ . '/../config/app.php';
 
 requireAdmin();
 
+verify_csrf();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -545,7 +547,7 @@ function e($value): string
 
 
             <form method="POST">
-
+                <?= csrf_field() ?>
 
                 <input
                     type="hidden"
@@ -640,6 +642,8 @@ function e($value): string
 
 
         <form method="POST">
+
+        <?= csrf_field() ?>
 
 
             <input

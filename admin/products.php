@@ -306,9 +306,15 @@ th {
                 <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
             </span>
 
-            <a href="logout.php" class="logout">
-                Logout
-            </a>
+            <form method="POST" action="logout.php">
+
+    <?= csrf_field() ?>
+
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
 
         </div>
 
@@ -482,6 +488,8 @@ th {
     action="toggle-product.php"
     style="margin:0;"
 >
+
+<?= csrf_field() ?>
 
     <input
         type="hidden"

@@ -31,6 +31,8 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    verify_csrf();
+
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
 
@@ -996,14 +998,15 @@ th {
             </span>
 
 
-            <a
-                href="logout.php"
-                class="logout"
-            >
+            <form method="POST" action="logout.php">
 
-                Logout
+    <?= csrf_field() ?>
 
-            </a>
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
 
 
         </div>
@@ -1121,6 +1124,8 @@ th {
 
 
                     <form method="POST">
+
+                    <?= csrf_field() ?>
 
 
                         <div class="form-group">
@@ -1575,6 +1580,7 @@ th {
                                             "
                                         >
 
+                                            <?= csrf_field() ?>
 
                                             <input
                                                 type="hidden"

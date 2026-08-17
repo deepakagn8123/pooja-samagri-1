@@ -42,6 +42,8 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    verify_csrf();
+
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
 
@@ -733,12 +735,15 @@ input[type="checkbox"] {
             </span>
 
 
-            <a
-                href="logout.php"
-                class="logout"
-            >
-                Logout
-            </a>
+            <form method="POST" action="logout.php">
+
+    <?= csrf_field() ?>
+
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
 
         </div>
 
@@ -770,6 +775,8 @@ input[type="checkbox"] {
                 method="POST"
                 enctype="multipart/form-data"
             >
+
+            <?= csrf_field() ?>
 
 
                 <input

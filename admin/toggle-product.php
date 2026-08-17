@@ -4,6 +4,8 @@ require_once __DIR__ . '/../config/app.php';
 
 requireAdmin();
 
+verify_csrf();
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: products.php');
     exit;

@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/products.php';
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/csrf.php';
 
 function searchProducts(PDO $pdo, string $keyword): array
 {

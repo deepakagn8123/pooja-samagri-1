@@ -331,6 +331,8 @@ th {
             Categories
         </a>
 
+        <a href="settings.php">Security Settings</a>
+
         <a href="../index.php" target="_blank">
             View Website
         </a>
@@ -353,9 +355,15 @@ th {
                 <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
             </span>
 
-            <a href="logout.php" class="logout">
-                Logout
-            </a>
+            <form method="POST" action="logout.php">
+
+    <?= csrf_field() ?>
+
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
 
         </div>
 
