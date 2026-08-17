@@ -3,7 +3,8 @@
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/includes/product-card.php';
 
-$q = trim($_GET['q'] ?? '');
+$q = request_string($_GET['q'] ?? null);
+$q = mb_substr($q, 0, 100);
 
 $products = searchProducts($pdo, $q);
 

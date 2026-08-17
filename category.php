@@ -25,9 +25,11 @@ function e($value): string
 |--------------------------------------------------------------------------
 */
 
-$slug = trim(
+$slug = request_string(
     $_GET['slug'] ?? ($slug ?? '')
 );
+
+$slug = mb_substr($slug, 0, 120);
 
 
 if ($slug === '') {
@@ -265,7 +267,7 @@ function renderCategoryProductCard(
 
         <button
             class="quick-add"
-            onclick="quickAdd('<?= e($product['slug']) ?>')"
+            onclick="quickAdd(<?= js_json($product['slug']) ?>)"
             aria-label="Add to cart"
         >
             +

@@ -85,12 +85,12 @@ function renderProductCard(array $product): void
     </a>
 
 
-    <button
-        class="quick-add"
-        onclick="quickAdd('<?= htmlspecialchars($product['slug'], ENT_QUOTES, 'UTF-8') ?>')"
-    >
-        +
-    </button>
+<button
+    class="quick-add"
+    onclick="quickAdd(<?= js_json($product['slug']) ?>)"
+>
+    +
+</button>
 
 </div>
 

@@ -44,15 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     verify_csrf();
 
-    $name = trim($_POST['name'] ?? '');
-    $slug = trim($_POST['slug'] ?? '');
+$name = request_string($_POST['name'] ?? null);
+$slug = request_string($_POST['slug'] ?? null);
 
-    $description = trim($_POST['description'] ?? '');
+$description = request_string(
+    $_POST['description'] ?? null
+);
 
-    $sortOrder = max(
-        0,
-        (int)($_POST['sort_order'] ?? 0)
-    );
+$sortOrder = filter_var(
+    $_POST['sort_order'] ?? null,
+    FILTER_VALIDATE_INT
+);
+
+$sortOrder = $sortOrder !== false && $sortOrder !== null
+    ? max(0, $sortOrder)
+    : 0;
 
     $isActive = isset($_POST['is_active'])
         ? 1

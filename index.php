@@ -860,7 +860,7 @@ require __DIR__ . '/includes/header.php';
             <button
                 type="button"
                 class="home-product-add"
-                onclick='homeAddToCart(<?= json_encode($product["slug"]) ?>)'
+                onclick="homeAddToCart(<?= js_json($product['slug']) ?>)"
                 aria-label="Add <?= e($product['name']) ?> to cart"
             >
 

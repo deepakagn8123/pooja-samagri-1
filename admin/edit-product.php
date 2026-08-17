@@ -57,17 +57,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 verify_csrf();
 
-    $name = trim($_POST['name'] ?? '');
-    $slug = trim($_POST['slug'] ?? '');
-    $categoryId = (int)($_POST['category_id'] ?? 0);
+$name = request_string($_POST['name'] ?? null);
+$slug = request_string($_POST['slug'] ?? null);
+$categoryId = filter_var(
+    $_POST['category_id'] ?? null,
+    FILTER_VALIDATE_INT
+);
 
-    $price = trim($_POST['price'] ?? '');
-    $oldPrice = trim($_POST['old_price'] ?? '');
+$categoryId = $categoryId !== false && $categoryId !== null
+    ? $categoryId
+    : 0;
 
-    $unit = trim($_POST['unit'] ?? '');
-    $description = trim($_POST['description'] ?? '');
-    $tag = trim($_POST['tag'] ?? '');
-    $badge = trim($_POST['badge'] ?? '');
+$price = request_string($_POST['price'] ?? null);
+$oldPrice = request_string($_POST['old_price'] ?? null);
+
+$unit = request_string($_POST['unit'] ?? null);
+$description = request_string($_POST['description'] ?? null);
+$tag = request_string($_POST['tag'] ?? null);
+$badge = request_string($_POST['badge'] ?? null);
 
     $isActive = isset($_POST['is_active']) ? 1 : 0;
 

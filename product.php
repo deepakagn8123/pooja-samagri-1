@@ -102,8 +102,8 @@ function buyOnWhatsApp()
 {
     <?php if ($product): ?>
 
-    const name = <?= json_encode($product['name']) ?>;
-    const price = <?= json_encode((float)$product['price']) ?>;
+    const name = <?= js_json($product['name']) ?>;
+const price = <?= js_json((float)$product['price']) ?>;
 
     const total = price * currentQty;
 
@@ -315,7 +315,7 @@ require __DIR__ . '/includes/header.php';
             <button
                 class="btn-primary"
                 style="border:none;cursor:pointer;"
-                onclick="addToCartFromDetail('<?= e($product['slug']) ?>')"
+                onclick="addToCartFromDetail(<?= js_json($product['slug']) ?>)"
             >
                 Cart mein add karein
             </button>
