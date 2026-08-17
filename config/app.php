@@ -1,6 +1,66 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Secure Session Configuration
+|--------------------------------------------------------------------------
+*/
+
 if (session_status() === PHP_SESSION_NONE) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Detect HTTPS
+    |--------------------------------------------------------------------------
+    |
+    | Secure cookies must be enabled in production HTTPS.
+    | This detection also allows local HTTP development.
+    |
+    */
+
+    $isHttps = (
+        !empty($_SERVER['HTTPS']) &&
+        $_SERVER['HTTPS'] !== 'off'
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Security
+    |--------------------------------------------------------------------------
+    */
+
+    ini_set('session.use_only_cookies', '1');
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_trans_sid', '0');
+
+    ini_set('session.cookie_httponly', '1');
+    ini_set(
+        'session.cookie_secure',
+        $isHttps ? '1' : '0'
+    );
+
+    ini_set('session.cookie_samesite', 'Lax');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Parameters
+    |--------------------------------------------------------------------------
+    */
+
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Start Session
+    |--------------------------------------------------------------------------
+    */
+
     session_start();
 }
 

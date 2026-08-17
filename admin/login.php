@@ -37,8 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             session_regenerate_id(true);
 
-            $_SESSION['admin_id'] = $admin['id'];
-            $_SESSION['admin_name'] = $admin['name'];
+           session_regenerate_id(true);
+
+initializeAdminSession(
+    (int)$admin['id'],
+    $admin['name']
+);
 
             rotate_csrf_token();
 
