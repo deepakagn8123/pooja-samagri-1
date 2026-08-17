@@ -477,7 +477,7 @@ require __DIR__ . '/includes/header.php';
                 Delivered across India and abroad.
             </p>
 
-            <a href="puja-samagri.php"
+            <a href="categories.php"
                class="service-card-btn service-card-btn-filled">
                 Shop Now
             </a>
@@ -719,7 +719,7 @@ require __DIR__ . '/includes/header.php';
 
         </div>
 
-        <a href="puja-samagri.php" class="home-see-all">
+        <a href="categories.php" class="home-see-all">
             View All →
         </a>
 
@@ -740,115 +740,157 @@ require __DIR__ . '/includes/header.php';
 
                 <article class="home-product-card">
 
+    <!-- PRODUCT IMAGE -->
+    <a
+        href="product.php?slug=<?= rawurlencode($product['slug']) ?>"
+        class="home-product-image"
+    >
 
-                    <a
-                        href="product.php?slug=<?= rawurlencode($product['slug']) ?>"
-                        class="home-product-image"
-                    >
+        <div class="home-product-image-frame">
 
+            <?php if ($image !== ''): ?>
 
-                        <?php if (!empty($product['badge'])): ?>
+                <img
+                    src="<?= e($image) ?>"
+                    alt="<?= e($product['name']) ?>"
+                    loading="lazy"
+                >
 
-                            <span class="home-product-badge">
-                                <?= e($product['badge']) ?>
-                            </span>
+            <?php else: ?>
 
-                        <?php endif; ?>
+                <div class="home-product-placeholder">
 
+                    <svg viewBox="0 0 100 100">
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="32"
+                            fill="#F7E2B2"
+                        />
 
-                        <?php if ($image !== ''): ?>
+                        <path
+                            d="M40 65
+                               C40 42 50 25 50 25
+                               C50 25 60 42 60 65Z"
+                            fill="#8A1621"
+                        />
+                    </svg>
 
-                            <img
-                                src="<?= e($image) ?>"
-                                alt="<?= e($product['name']) ?>"
-                                loading="lazy"
-                            >
+                </div>
 
-                        <?php else: ?>
+            <?php endif; ?>
 
-                            <div class="home-product-placeholder">
+        </div>
 
-                                <svg viewBox="0 0 100 100">
-
-                                    <circle
-                                        cx="50"
-                                        cy="50"
-                                        r="32"
-                                        fill="#FBD599"
-                                    />
-
-                                    <path
-                                        d="M40 65
-                                           C40 42 50 25 50 25
-                                           C50 25 60 42 60 65Z"
-                                        fill="#E8890C"
-                                    />
-
-                                </svg>
-
-                            </div>
-
-                        <?php endif; ?>
+    </a>
 
 
-                    </a>
+    <!-- PRODUCT INFORMATION -->
+    <div class="home-product-info">
 
 
-                    <div class="home-product-info">
+        <!-- BADGE IS NOT OVER IMAGE -->
+        <?php if (!empty($product['badge'])): ?>
+
+            <span class="home-product-badge">
+                <?= e($product['badge']) ?>
+            </span>
+
+        <?php endif; ?>
 
 
-                        <a
-                            href="product.php?slug=<?= rawurlencode($product['slug']) ?>"
-                            class="home-product-name"
-                        >
+        <!-- CATEGORY -->
+        <?php if (!empty($product['category_name'])): ?>
 
-                            <?= e($product['name']) ?>
+            <span class="home-product-category">
+                <?= e($product['category_name']) ?>
+            </span>
 
-                        </a>
-
-
-                        <div class="home-product-price">
+        <?php endif; ?>
 
 
-                            <?php if (!empty($product['old_price'])): ?>
-
-                                <s>
-                                    ₹<?= number_format((float)$product['old_price'], 0) ?>
-                                </s>
-
-                            <?php endif; ?>
-
-
-                            <strong>
-                                ₹<?= number_format((float)$product['price'], 0) ?>
-                            </strong>
+        <!-- TITLE -->
+        <a
+            href="product.php?slug=<?= rawurlencode($product['slug']) ?>"
+            class="home-product-name"
+        >
+            <?= e($product['name']) ?>
+        </a>
 
 
-                            <?php if (!empty($product['unit'])): ?>
+        <!-- SHORT DETAILS -->
+        <div class="home-product-details">
 
-                                <small>
-                                    <?= e($product['unit']) ?>
-                                </small>
+            <?php if (!empty($product['unit'])): ?>
 
-                            <?php endif; ?>
+                <span>
+                    <?= e($product['unit']) ?>
+                </span>
 
+            <?php endif; ?>
 
-                        </div>
+            <span>
+                Quality Assured
+            </span>
 
-
-                        <button
-                            type="button"
-                            class="home-product-add"
-                            onclick='homeAddToCart(<?= json_encode($product["slug"]) ?>)'
-                            aria-label="Add <?= e($product['name']) ?> to cart"
-                        >
-                            +
-                        </button>
+        </div>
 
 
-                    </div>
+        <!-- PRICE + CART -->
+        <div class="home-product-bottom">
 
-                </article>
+
+            <div class="home-product-price">
+
+                <?php if (!empty($product['old_price'])): ?>
+
+                    <span class="home-product-old-price">
+                        ₹<?= number_format((float)$product['old_price'], 0) ?>
+                    </span>
+
+                <?php endif; ?>
+
+                <strong>
+                    ₹<?= number_format((float)$product['price'], 0) ?>
+                </strong>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="home-product-add"
+                onclick='homeAddToCart(<?= json_encode($product["slug"]) ?>)'
+                aria-label="Add <?= e($product['name']) ?> to cart"
+            >
+
+                <span>Add to Cart</span>
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+
+                    <path
+                        d="M1 1h4l2.7 13.4
+                           a2 2 0 0 0 2 1.6
+                           h9.7a2 2 0 0 0 2-1.6L23 6H6"
+                    />
+                </svg>
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</article>
 
 
             <?php endforeach; ?>
@@ -866,7 +908,7 @@ require __DIR__ . '/includes/header.php';
                 Products jaldi yahan dikhai denge.
             </p>
 
-            <a href="puja-samagri.php" class="btn-primary">
+            <a href="categories.php" class="btn-primary">
                 Puja Samagri dekhein
             </a>
 
@@ -1222,6 +1264,61 @@ function homeAddToCart(slug) {
 
 }
 
+function handleHomeProductAdd(button, slug) {
+
+    if (button.classList.contains("adding")) {
+        return;
+    }
+
+    const label = button.querySelector("span");
+
+    button.classList.add("adding");
+
+    if (label) {
+        label.textContent = "Adding...";
+    }
+
+    if (typeof addToCart !== "function") {
+        console.error("cart.js is not loaded.");
+
+        button.classList.remove("adding");
+
+        if (label) {
+            label.textContent = "Add to Cart";
+        }
+
+        return;
+    }
+
+
+    addToCart(slug, 1);
+
+
+    setTimeout(function () {
+
+        button.classList.remove("adding");
+
+        button.classList.add("added");
+
+        if (label) {
+            label.textContent = "Added ✓";
+        }
+
+
+        setTimeout(function () {
+
+            button.classList.remove("added");
+
+            if (label) {
+                label.textContent = "Add to Cart";
+            }
+
+        }, 1200);
+
+    }, 350);
+
+}
+
 // Normal Lottie js, loads at every refresh
 
 // document.body.classList.add("loading");
@@ -1270,6 +1367,8 @@ window.addEventListener("load", function () {
 });
 
 </script>
+
+
 
 
 <script>

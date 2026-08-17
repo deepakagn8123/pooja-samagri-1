@@ -147,6 +147,41 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+<!-- =========================
+     FLOATING CART
+========================== -->
+
+<a
+    href="cart.php"
+    class="floating-cart"
+    aria-label="Shopping Cart"
+>
+
+    <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+    >
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+
+        <path
+            d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
+        />
+    </svg>
+
+    <span
+        class="floating-cart-count"
+        id="cart-count"
+        style="display:none;"
+    >
+        0
+    </span>
+
+</a>
+
 <!-- ==========================================================
      GLOBAL FLOATING PUJA LIST WHATSAPP
 ========================================================== -->

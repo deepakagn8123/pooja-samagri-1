@@ -164,7 +164,7 @@ async function renderCart()
                     </p>
 
                     <a
-                        href="puja-samagri.php"
+                        href="categories.php"
                         class="btn-primary"
                         style="display:inline-flex;"
                     >
