@@ -79,6 +79,10 @@ $badge = request_string($_POST['badge'] ?? null);
 
         $slug = trim($slug, '-');
 
+        if ($slug === '' || !preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)) {
+    $error = 'Please enter a valid product slug.';
+}
+
 
         /*
         |--------------------------------------------------------------------------
@@ -86,22 +90,22 @@ $badge = request_string($_POST['badge'] ?? null);
         |--------------------------------------------------------------------------
         */
 
-        $stmt = $pdo->prepare("
-            SELECT id
-            FROM products
-            WHERE slug = :slug
-            LIMIT 1
-        ");
+if ($error === '') {
+    $stmt = $pdo->prepare("
+        SELECT id
+        FROM products
+        WHERE slug = :slug
+        LIMIT 1
+    ");
 
-        $stmt->execute([
-            'slug' => $slug
-        ]);
+    $stmt->execute([
+        'slug' => $slug
+    ]);
 
-        if ($stmt->fetch()) {
-
-            $error = 'A product with this slug already exists.';
-
-        } else {
+    if ($stmt->fetch()) {
+        $error = 'A product with this slug already exists.';
+    }
+} else {
 
             /*
             |--------------------------------------------------------------------------

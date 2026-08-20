@@ -93,6 +93,13 @@ $sortOrder = $sortOrder !== false && $sortOrder !== null
 
         $slug = trim($slug, '-');
 
+        if (
+    $slug === '' ||
+    !preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)
+) {
+    $error = 'Please enter a valid category slug.';
+}
+
 
         if ($slug === '') {
 
