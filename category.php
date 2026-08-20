@@ -26,10 +26,15 @@ function e($value): string
 */
 
 $slug = request_string(
-    $_GET['slug'] ?? ($slug ?? '')
+    $_GET['slug'] ?? ''
 );
 
 $slug = mb_substr($slug, 0, 120);
+
+if (!valid_slug($slug, 120)) {
+    http_response_code(400);
+    exit('Invalid category.');
+}
 
 
 if ($slug === '') {

@@ -4,7 +4,13 @@ require_once __DIR__ . '/config/app.php';
 
 $slug = trim($_GET['slug'] ?? '');
 
-$product = $slug !== ''
+$slug = request_string(
+    $_GET['slug'] ?? ''
+);
+
+$slug = mb_substr($slug, 0, 180);
+
+$product = valid_slug($slug)
     ? getProductBySlug($pdo, $slug)
     : null;
 

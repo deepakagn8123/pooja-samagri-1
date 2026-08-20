@@ -16,10 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$data = json_decode(
-    file_get_contents('php://input'),
-    true
-);
+$rawBody = file_get_contents('php://input');
+
+try {
+
+    $data = json_decode(
+        $rawBody,
+        true,
+        32,
+        JSON_THROW_ON_ERROR
+    );
+
+} catch (JsonException $e) {
+
+    http_response_code(400);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Invalid request.'
+    ]);
+
+    exit;
+}
 
 $cart = $data['cart'] ?? [];
 
@@ -40,18 +58,18 @@ $requestedProducts = [];
 
 foreach ($cart as $item) {
 
-    $slug = trim((string)($item['slug'] ?? ''));
-    $qty = (int)($item['qty'] ?? 0);
+$slug = trim((string)($item['slug'] ?? ''));
 
-    if ($slug === '' || $qty < 1) {
-        continue;
-    }
+$qty = filter_var(
+    $item['qty'] ?? null,
+    FILTER_VALIDATE_INT
+);
 
-    /*
-     * Limit quantities here too.
-     * Browser data must never be trusted.
-     */
-    $qty = min($qty, 100);
+if ($slug === '' || $qty === false || $qty < 1) {
+    continue;
+}
+
+$qty = min($qty, 100);
 
     if (isset($requestedProducts[$slug])) {
         $requestedProducts[$slug] += $qty;

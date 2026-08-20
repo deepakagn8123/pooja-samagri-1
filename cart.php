@@ -36,6 +36,187 @@ require __DIR__ . '/includes/header.php';
 
 </div>
 
+<div
+    id="order-modal"
+    class="order-modal"
+    aria-hidden="true"
+>
+    <div
+        class="order-modal-backdrop"
+        data-close-order-modal
+    ></div>
+
+    <div
+        class="order-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="order-modal-title"
+    >
+
+        <button
+            type="button"
+            class="order-modal-close"
+            id="close-order-modal"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+        <div class="order-modal-header">
+
+            <span class="eyebrow">
+                Order Details
+            </span>
+
+            <h2 id="order-modal-title">
+                Complete Your Order
+            </h2>
+
+            <p>
+                Delivery ke liye kuch basic details enter karein.
+            </p>
+
+        </div>
+
+
+        <form id="order-details-form">
+
+            <div class="order-field">
+
+                <label for="order-name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="order-name"
+                    name="name"
+                    maxlength="100"
+                    required
+                    autocomplete="name"
+                    placeholder="Enter your full name"
+                >
+
+            </div>
+
+
+            <div class="order-field">
+
+                <label for="order-phone">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="order-phone"
+                    name="phone"
+                    maxlength="10"
+                    required
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    placeholder="10-digit mobile number"
+                >
+
+            </div>
+
+
+            <div class="order-field">
+
+                <label for="order-address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="order-address"
+                    name="address"
+                    rows="3"
+                    maxlength="500"
+                    required
+                    autocomplete="street-address"
+                    placeholder="Enter your complete delivery address"
+                ></textarea>
+
+            </div>
+
+
+            <label class="order-check-row">
+
+                <input
+                    type="checkbox"
+                    id="call-before-delivery"
+                    name="call_before_delivery"
+                >
+
+                <span>
+                    Call me 15 minutes before delivery
+                </span>
+
+            </label>
+
+
+            <label class="order-check-row">
+
+                <input
+                    type="checkbox"
+                    id="add-order-note"
+                    name="add_note"
+                >
+
+                <span>
+                    Add a note
+                </span>
+
+            </label>
+
+
+            <div
+                class="order-field"
+                id="order-note-wrap"
+                style="display:none;"
+            >
+
+                <label for="order-note">
+                    Your Note
+                </label>
+
+                <textarea
+                    id="order-note"
+                    name="note"
+                    rows="3"
+                    maxlength="500"
+                    placeholder="Any special instructions?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="order-modal-total">
+
+                <span>
+                    Order Total
+                </span>
+
+                <strong id="order-modal-total">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="wa-btn order-submit-btn"
+            >
+
+                Continue to WhatsApp
+
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
 
 <?php
 
@@ -46,6 +227,8 @@ ob_start();
 <script>
 
 let currentCartProducts = [];
+const ADMIN_WHATSAPP = "917008227337";
+let latestCartData = null;
 
 
 function fmtPrice(price)
@@ -114,6 +297,7 @@ async function renderCart()
     try {
 
         const data = await getValidatedCart();
+        latestCartData = data;  
 
         currentCartProducts = data.items;
 
@@ -394,58 +578,545 @@ function removeItem(slug)
     renderCart();
 }
 
-
-async function checkoutOnWhatsApp()
+function checkoutOnWhatsApp()
 {
-    try {
+    if (
+        !latestCartData ||
+        !latestCartData.items ||
+        !latestCartData.items.length
+    ) {
+        alert("Aapki cart khaali hai.");
+        return;
+    }
 
-        /*
-         * Fetch again before checkout so we don't use
-         * stale browser prices.
-         */
-        const data = await getValidatedCart();
+    document.getElementById(
+        "order-modal-total"
+    ).textContent = fmtPrice(
+        latestCartData.subtotal
+    );
+
+    document.getElementById(
+        "order-modal"
+    ).classList.add("is-open");
+
+    document.getElementById(
+        "order-modal"
+    ).setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.getElementById(
+        "order-name"
+    ).focus();
+}
+
+const orderModal =
+    document.getElementById("order-modal");
+
+const closeOrderModal =
+    document.getElementById("close-order-modal");
+
+const orderForm =
+    document.getElementById("order-details-form");
+
+const addNoteCheckbox =
+    document.getElementById("add-order-note");
+
+const orderNoteWrap =
+    document.getElementById("order-note-wrap");
 
 
-        if (!data.items.length) {
+function closeOrderDetailsModal()
+{
+    orderModal.classList.remove("is-open");
+
+    orderModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+}
+
+
+closeOrderModal.addEventListener(
+    "click",
+    closeOrderDetailsModal
+);
+
+
+document.querySelector(
+    "[data-close-order-modal]"
+).addEventListener(
+    "click",
+    closeOrderDetailsModal
+);
+
+
+addNoteCheckbox.addEventListener(
+    "change",
+    function()
+    {
+        orderNoteWrap.style.display =
+            this.checked
+                ? "block"
+                : "none";
+
+        if (!this.checked) {
+            document.getElementById(
+                "order-note"
+            ).value = "";
+        }
+    }
+);
+
+orderForm.addEventListener(
+    "submit",
+    async function(event)
+    {
+        event.preventDefault();
+
+
+        if (
+            !latestCartData ||
+            !latestCartData.items ||
+            !latestCartData.items.length
+        ) {
+            alert("Aapki cart khaali hai.");
             return;
         }
 
 
-        const lines = [
-            "Namaste! Mujhe yeh order karna hai:"
-        ];
-
-
-        data.items.forEach(product => {
-
-            lines.push(
-                `- ${product.name} x${product.qty} — ${fmtPrice(product.line_total)}`
+        const submitButton =
+            orderForm.querySelector(
+                'button[type="submit"]'
             );
 
-        });
+
+        const formData =
+            new FormData(orderForm);
 
 
-        lines.push(
-            `Total: ${fmtPrice(data.subtotal)}`
-        );
+        const name =
+            String(
+                formData.get("name") || ""
+            ).trim();
 
 
-        window.open(
-            `https://wa.me/910000000000?text=${encodeURIComponent(lines.join("\n"))}`,
-            "_blank"
-        );
+        const phone =
+            String(
+                formData.get("phone") || ""
+            ).trim();
 
 
-    } catch (error) {
+        const address =
+            String(
+                formData.get("address") || ""
+            ).trim();
 
-        console.error(error);
 
-        alert(
-            "Latest product details load nahi ho paayi. Please dobara try karein."
-        );
+        const callBeforeDelivery =
+            formData.get(
+                "call_before_delivery"
+            ) === "on";
+
+
+        const note =
+            String(
+                formData.get("note") || ""
+            ).trim();
+
+
+        /*
+         * Client-side validation.
+         */
+        if (!name) {
+
+            alert(
+                "Please enter your name."
+            );
+
+            document
+                .getElementById("order-name")
+                .focus();
+
+            return;
+        }
+
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+            alert(
+                "Please enter a valid 10-digit mobile number."
+            );
+
+            document
+                .getElementById("order-phone")
+                .focus();
+
+            return;
+        }
+
+
+        if (!address) {
+
+            alert(
+                "Please enter your delivery address."
+            );
+
+            document
+                .getElementById("order-address")
+                .focus();
+
+            return;
+        }
+
+
+        /*
+         * Prevent double-clicking the order button.
+         */
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Creating your order...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "config/create-order.php",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            cart: getCart(),
+
+                            name: name,
+
+                            phone: phone,
+
+                            address: address,
+
+                            call_before_delivery:
+                                callBeforeDelivery,
+
+                            note: note
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to create order."
+                );
+            }
+
+
+            /*
+             * Build WhatsApp message from
+             * SERVER-VERIFIED order data.
+             */
+            const lines = [
+
+                "🙏 NITYA RITUAL E-STORE",
+
+                "━━━━━━━━━━━━━━━━━━",
+
+                "",
+
+                `🧾 ORDER ID: ${data.order_number}`,
+
+                "",
+
+                "👤 CUSTOMER DETAILS",
+
+                `Name: ${data.customer.name}`,
+
+                `Mobile: ${data.customer.phone}`,
+
+                `Address: ${data.customer.address}`,
+
+                "",
+
+                "📦 ORDER DETAILS",
+
+                "━━━━━━━━━━━━━━━━━━",
+
+                ""
+
+            ];
+
+
+            data.items.forEach(
+                (product, index) =>
+                {
+
+                    lines.push(
+                        `${index + 1}. ${product.name}`
+                    );
+
+                    lines.push(
+                        `   Qty: ${product.qty}`
+                    );
+
+                    lines.push(
+                        `   Price: ${fmtPrice(product.price)} ${product.unit || ""}`
+                    );
+
+                    lines.push(
+                        `   Subtotal: ${fmtPrice(product.line_total)}`
+                    );
+
+                    lines.push("");
+
+                }
+            );
+
+
+            lines.push(
+                "━━━━━━━━━━━━━━━━━━"
+            );
+
+
+            lines.push(
+                `💰 TOTAL: ${fmtPrice(data.subtotal)}`
+            );
+
+
+            lines.push("");
+
+
+            lines.push(
+                `📞 Call before delivery: ${
+                    data.customer.call_before_delivery
+                        ? "Yes"
+                        : "No"
+                }`
+            );
+
+
+            if (
+                data.customer.note
+            ) {
+
+                lines.push("");
+
+                lines.push(
+                    "📝 CUSTOMER NOTE"
+                );
+
+                lines.push(
+                    data.customer.note
+                );
+            }
+
+
+            lines.push("");
+
+            lines.push(
+                "Please confirm the order and share payment details."
+            );
+
+
+            const message =
+                lines.join("\n");
+
+
+            const whatsappUrl =
+                `https://wa.me/${ADMIN_WHATSAPP}?text=` +
+                encodeURIComponent(
+                    message
+                );
+
+
+            /*
+             * Keep the message available as a
+             * fallback if WhatsApp doesn't open.
+             */
+            window.generatedOrderMessage =
+                message;
+
+            window.generatedWhatsAppUrl =
+                whatsappUrl;
+
+            window.generatedOrderNumber =
+                data.order_number;
+
+
+            /*
+             * Show the final WhatsApp screen.
+             */
+            showOrderReadyState(
+                whatsappUrl
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                error.message ||
+                "Order create nahi ho paaya. Please try again."
+            );
+
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Continue to WhatsApp";
+        }
+
     }
-}
+);
 
+function showOrderReadyState(whatsappUrl)
+{
+    const dialog =
+        document.querySelector(
+            ".order-modal-dialog"
+        );
+
+    dialog.innerHTML = `
+        <button
+            type="button"
+            class="order-modal-close"
+            id="close-order-modal"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+        <div class="order-modal-header">
+
+            <span class="eyebrow">
+                Order Ready
+            </span>
+
+            <h2>
+                Your order is ready
+            </h2>
+            <p
+    style="
+        margin-top:8px;
+        font-size:13px;
+        color:var(--ink-soft);
+    "
+>
+    Order ID:
+    <strong>
+        ${window.generatedOrderNumber}
+    </strong>
+</p>
+
+            <p>
+                Continue to WhatsApp to send your
+                order details to us.
+            </p>
+
+        </div>
+
+
+        <div class="order-modal-total">
+
+            <span>
+                Order Total
+            </span>
+
+            <strong>
+                ${fmtPrice(latestCartData.subtotal)}
+            </strong>
+
+        </div>
+
+
+        <a
+    href="#"
+    id="open-whatsapp-order"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="wa-btn order-submit-btn"
+>
+    Continue to WhatsApp
+</a>
+
+
+        <p
+            style="
+                text-align:center;
+                margin:14px 0 8px;
+                color:var(--ink-soft);
+                font-size:13px;
+            "
+        >
+            WhatsApp nahi khul raha?
+        </p>
+
+
+        <button
+            type="button"
+            id="copy-order-details"
+            class="order-copy-btn"
+        >
+            Copy Order Details
+        </button>
+
+    `;
+
+    document
+    .getElementById("open-whatsapp-order")
+    .href = whatsappUrl;
+
+
+    document
+        .getElementById("close-order-modal")
+        .addEventListener(
+            "click",
+            closeOrderDetailsModal
+        );
+
+
+    document
+        .getElementById("copy-order-details")
+        .addEventListener(
+            "click",
+            async function()
+            {
+                try {
+
+                    await navigator.clipboard.writeText(
+                        window.generatedOrderMessage
+                    );
+
+                    this.textContent =
+                        "✓ Order Details Copied";
+
+                } catch (error) {
+
+                    alert(
+                        "Order details copy nahi ho paaye. Please WhatsApp manually open karein."
+                    );
+                }
+            }
+        );
+}
 
 renderCart();
 

@@ -159,3 +159,34 @@ function request_string($value, string $default = ''): string
 
     return trim($value);
 }
+
+
+function valid_slug(string $slug, int $max = 180): bool
+{
+    if ($slug === '' || mb_strlen($slug) > $max) {
+        return false;
+    }
+
+    return preg_match(
+        '/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+        $slug
+    ) === 1;
+}
+
+
+function apply_security_headers(): void
+{
+    if (headers_sent()) {
+        return;
+    }
+
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+
+    // Basic XSS protection for older browsers.
+    header('X-XSS-Protection: 1; mode=block');
+}
+
+apply_security_headers();
