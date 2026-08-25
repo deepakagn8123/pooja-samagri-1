@@ -117,7 +117,7 @@ const price = <?= js_json((float)$product['price']) ?>;
         `Namaste! Mujhe yeh order karna hai: ${name} (Qty: ${currentQty}) — ₹${total.toLocaleString("en-IN")}`;
 
     window.open(
-        `https://wa.me/910000000000?text=${encodeURIComponent(msg)}`,
+        `https://wa.me/917008227337?text=${encodeURIComponent(msg)}`,
         "_blank"
     );
 

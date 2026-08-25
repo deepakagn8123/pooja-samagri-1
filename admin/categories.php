@@ -36,7 +36,121 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $name = request_string($_POST['name'] ?? null);
 $slug = request_string($_POST['slug'] ?? null);
 
-$image = request_string($_POST['image'] ?? null);
+$image = null;
+
+if (
+    isset($_FILES['image']) &&
+    $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE
+) {
+
+    if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+
+        $error = 'Image upload failed. Please try again.';
+
+    } else {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validate image size
+        |--------------------------------------------------------------------------
+        */
+
+        if ($_FILES['image']['size'] > 5 * 1024 * 1024) {
+
+            $error = 'Image must be smaller than 5 MB.';
+
+        } else {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Validate actual MIME type
+            |--------------------------------------------------------------------------
+            */
+
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+            $mime = $finfo->file(
+                $_FILES['image']['tmp_name']
+            );
+
+            $allowedTypes = [
+                'image/jpeg' => 'jpg',
+                'image/png'  => 'png',
+                'image/webp' => 'webp',
+                'image/gif'  => 'gif'
+            ];
+
+            if (!isset($allowedTypes[$mime])) {
+
+                $error =
+                    'Invalid image. Only JPG, PNG, WEBP and GIF are allowed.';
+
+            } else {
+
+                /*
+                |--------------------------------------------------------------------------
+                | Upload directory
+                |--------------------------------------------------------------------------
+                */
+
+                $uploadDir =
+                    __DIR__ .
+                    '/../assets/images/categories/';
+
+                if (!is_dir($uploadDir)) {
+
+                    mkdir(
+                        $uploadDir,
+                        0755,
+                        true
+                    );
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Generate random filename
+                |--------------------------------------------------------------------------
+                */
+
+                $filename =
+                    'category_' .
+                    bin2hex(random_bytes(16)) .
+                    '.' .
+                    $allowedTypes[$mime];
+
+                $destination =
+                    $uploadDir . $filename;
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Move uploaded file
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    !move_uploaded_file(
+                        $_FILES['image']['tmp_name'],
+                        $destination
+                    )
+                ) {
+
+                    $error =
+                        'Unable to save the uploaded image.';
+
+                } else {
+
+                    $image = $filename;
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
 
 $description = request_string(
     $_POST['description'] ?? null
@@ -174,10 +288,7 @@ $sortOrder = $sortOrder !== false && $sortOrder !== null
                     'slug' =>
                         $slug,
 
-                    'image' =>
-                        $image !== ''
-                            ? $image
-                            : null,
+                    'image' => $image,
 
                     'description' =>
                         $description !== ''
@@ -1135,7 +1246,8 @@ th {
                 <div class="box-body">
 
 
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
+                        
 
                     <?= csrf_field() ?>
 
@@ -1191,30 +1303,21 @@ th {
 
                         <div class="form-group">
 
-                            <label>
-                                Category Image
-                            </label>
+    <label>
+        Category Image
+    </label>
 
+    <input
+        type="file"
+        name="image"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+    >
 
-                            <input
-                                type="text"
-                                name="image"
-                                value="<?= e(
-                                    $_POST['image']
-                                    ?? ''
-                                ) ?>"
-                                placeholder="example.webp"
-                            >
+    <div class="help">
+        Upload JPG, PNG, WEBP or GIF. Maximum size: 5 MB.
+    </div>
 
-
-                            <div class="help">
-
-                                Put the image inside:
-                                assets/images/categories/
-
-                            </div>
-
-                        </div>
+</div>
 
 
                         <div class="form-group">

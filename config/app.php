@@ -85,16 +85,24 @@ function searchProducts(PDO $pdo, string $keyword): array
 
     foreach ($words as $index => $word) {
 
-        $param = ":word{$index}";
+        $nameParam = ":name{$index}";
+        $descriptionParam = ":description{$index}";
+        $tagParam = ":tag{$index}";
+        $categoryParam = ":category{$index}";
 
         $where[] = "(
-            p.name LIKE $param
-            OR p.description LIKE $param
-            OR p.tag LIKE $param
-            OR c.name LIKE $param
+            p.name LIKE {$nameParam}
+            OR p.description LIKE {$descriptionParam}
+            OR p.tag LIKE {$tagParam}
+            OR c.name LIKE {$categoryParam}
         )";
 
-        $params["word{$index}"] = "%{$word}%";
+        $searchValue = "%{$word}%";
+
+        $params["name{$index}"] = $searchValue;
+        $params["description{$index}"] = $searchValue;
+        $params["tag{$index}"] = $searchValue;
+        $params["category{$index}"] = $searchValue;
     }
 
     $sql = "
@@ -114,6 +122,7 @@ function searchProducts(PDO $pdo, string $keyword): array
     ";
 
     $stmt = $pdo->prepare($sql);
+
     $stmt->execute($params);
 
     return $stmt->fetchAll();

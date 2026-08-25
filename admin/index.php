@@ -328,7 +328,7 @@ th {
         </a>
         
 
-        <a href="#">
+        <a href="add-product.php">
             Add Product
         </a>
 
