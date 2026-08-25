@@ -47,6 +47,33 @@ try {
 
 <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
 
+<script>
+(function () {
+
+    try {
+
+        if (
+            sessionStorage.getItem("nitya_ritual_loader_shown") === "true"
+        ) {
+
+            document.write(
+                '<style>#page-loader{display:none!important}</style>'
+            );
+
+        } else {
+
+            sessionStorage.setItem(
+                "nitya_ritual_loader_shown",
+                "true"
+            );
+
+        }
+
+    } catch (e) {}
+
+})();
+</script>
+
 <link rel="stylesheet" href="style.css">
 
 <script type="module" src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"></script>
@@ -56,41 +83,6 @@ try {
     href="https://unpkg.com/aos@2.3.4/dist/aos.css"
 >
 
-<script>
-
-(function () {
-
-    const LOADER_KEY = "nitya_ritual_loader_shown";
-
-    try {
-
-        if (sessionStorage.getItem(LOADER_KEY) === "true") {
-
-            document.documentElement.classList.add("loader-skip");
-
-        } else {
-
-            /*
-             * Mark immediately.
-             *
-             * This means:
-             * - refresh = no loader
-             * - same tab navigation = no loader
-             * - new tab = loader again
-             */
-            sessionStorage.setItem(LOADER_KEY, "true");
-
-        }
-
-    } catch (error) {
-
-        console.warn("Loader sessionStorage unavailable:", error);
-
-    }
-
-})();
-
-</script>
 
 </head>
 

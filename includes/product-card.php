@@ -86,8 +86,10 @@ function renderProductCard(array $product): void
 
 
 <button
+    type="button"
     class="quick-add"
-    onclick="quickAdd(<?= js_json($product['slug']) ?>)"
+    onclick="quickAdd('<?= e($product['slug']) ?>')"
+    aria-label="Add to cart"
 >
     +
 </button>

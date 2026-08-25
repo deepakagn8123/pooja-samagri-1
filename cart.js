@@ -180,3 +180,25 @@ document.addEventListener(
     "DOMContentLoaded",
     updateCartBadge
 );
+
+
+function homeAddToCart(slug)
+{
+    if (!slug) {
+        return;
+    }
+
+    addToCart(slug, 1);
+
+    const toast = document.getElementById("added-toast");
+
+    if (toast) {
+
+        toast.classList.add("show");
+
+        setTimeout(function () {
+            toast.classList.remove("show");
+        }, 1600);
+
+    }
+}

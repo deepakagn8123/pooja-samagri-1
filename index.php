@@ -1322,35 +1322,26 @@ function handleHomeProductAdd(button, slug) {
 // Normal Lottie js, loads at every refresh
 
 // document.body.classList.add("loading");
-
-// window.addEventListener("load", function () {
-
-//     setTimeout(function () {
-
-//         document.getElementById("page-loader").classList.add("hide");
-//         document.body.classList.remove("loading");
-
-//     }, 5500);   // Adjust if you want the loader to stay slightly longer
-
-// });
-
-// Lottie js for one load per tab
 window.addEventListener("load", function () {
 
     const loader = document.getElementById("page-loader");
 
-    // Has the loader already been shown in this tab?
-    if (sessionStorage.getItem("loaderShown")) {
-
-        loader.remove();
-        document.body.classList.remove("loading");
+    if (!loader) {
         return;
-
     }
 
-    // Mark loader as shown for this tab
-    sessionStorage.setItem("loaderShown", "true");
+    /*
+     * If the inline CSS hid the loader,
+     * remove it and do nothing else.
+     */
+    if (getComputedStyle(loader).display === "none") {
+        loader.remove();
+        return;
+    }
 
+    /*
+     * First load in this tab.
+     */
     setTimeout(function () {
 
         loader.classList.add("hide");
@@ -1358,14 +1349,12 @@ window.addEventListener("load", function () {
         setTimeout(function () {
 
             loader.remove();
-            document.body.classList.remove("loading");
 
         }, 800);
 
     }, 5500);
 
 });
-
 </script>
 
 

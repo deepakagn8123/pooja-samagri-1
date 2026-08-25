@@ -7686,3 +7686,917 @@ html.loader-skip #page-loader {
     outline: 2px solid var(--ink);
     outline-offset: 2px;
 }
+
+/* RESPONSIVE  */
+
+/* ==========================================================
+   HEADER — RESPONSIVE DESKTOP CONTROL
+   FINAL OVERRIDE
+   Keep this at the VERY END of style.css
+========================================================== */
+
+
+/* ==========================================================
+   LARGE DESKTOP
+   1201px+
+========================================================== */
+
+@media (min-width: 1201px) {
+
+    .store-header-inner {
+        width: calc(100% - 70px) !important;
+        min-height: 115px !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+
+        display: flex !important;
+        align-items: center;
+
+        gap: 18px !important;
+
+        flex-wrap: nowrap !important;
+    }
+
+
+    /* -------------------------
+       LOGO
+    ------------------------- */
+
+    .store-brand {
+        width: 225px !important;
+        min-width: 225px !important;
+        max-width: 225px !important;
+
+        flex: 0 0 225px !important;
+
+        margin-left: -15px !important;
+
+        display: flex !important;
+        align-items: center;
+    }
+
+
+    .brand-logo {
+        width: 160px !important;
+        height: auto;
+    }
+
+
+    /* -------------------------
+       SEARCH
+    ------------------------- */
+
+    .store-search {
+        flex: 1 1 auto !important;
+
+        width: auto !important;
+
+        min-width: 280px !important;
+        max-width: 570px !important;
+
+        height: 46px !important;
+
+        margin-left: 5px !important;
+
+        display: flex !important;
+        align-items: center;
+    }
+
+
+    .store-search input {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+
+    /* -------------------------
+       ACTIONS
+    ------------------------- */
+
+    .store-actions {
+        flex: 0 0 auto !important;
+
+        display: flex !important;
+        align-items: center;
+
+        gap: 10px !important;
+
+        min-width: max-content;
+    }
+
+
+    .store-cart {
+        flex: 0 0 46px !important;
+    }
+
+
+    .header-action-btn {
+        min-width: 125px !important;
+
+        height: 44px !important;
+
+        padding: 0 20px !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    /* -------------------------
+       CATEGORY NAV
+    ------------------------- */
+
+    .store-category-nav {
+        width: min(1180px, calc(100% - 100px)) !important;
+
+        height: 50px !important;
+
+        margin: -2px auto 0 !important;
+
+        display: flex !important;
+        align-items: center;
+    }
+
+
+    .store-category-nav ul {
+        width: 100% !important;
+
+        padding: 0 15px !important;
+
+        display: flex !important;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+
+    .store-category-nav a {
+        padding: 0 48px !important;
+
+        white-space: nowrap !important;
+
+        font-size: 14px !important;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+   1001px – 1200px
+
+   Still desktop.
+   We reduce spacing instead of switching layouts.
+========================================================== */
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+
+    .store-header-inner {
+        width: calc(100% - 40px) !important;
+
+        min-height: 100px !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+
+        display: flex !important;
+        align-items: center;
+
+        gap: 12px !important;
+
+        flex-wrap: nowrap !important;
+    }
+
+
+    /* -------------------------
+       LOGO
+    ------------------------- */
+
+    .store-brand {
+        width: 190px !important;
+        min-width: 190px !important;
+        max-width: 190px !important;
+
+        flex: 0 0 190px !important;
+
+        margin-left: 0 !important;
+
+        display: flex !important;
+        align-items: center;
+    }
+
+
+    .brand-logo {
+        width: 145px !important;
+        height: auto;
+    }
+
+
+    /* -------------------------
+       SEARCH
+    ------------------------- */
+
+    .store-search {
+        flex: 1 1 auto !important;
+
+        width: auto !important;
+
+        min-width: 220px !important;
+        max-width: none !important;
+
+        height: 44px !important;
+
+        margin-left: 0 !important;
+    }
+
+
+    .store-search input {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+
+    /* -------------------------
+       ACTIONS
+    ------------------------- */
+
+    .store-actions {
+        flex: 0 0 auto !important;
+
+        display: flex !important;
+        align-items: center;
+
+        gap: 7px !important;
+
+        min-width: max-content;
+    }
+
+
+    .store-cart {
+        flex: 0 0 44px !important;
+
+        width: 44px !important;
+    }
+
+
+    .header-action-btn {
+        min-width: auto !important;
+
+        height: 40px !important;
+
+        padding: 0 13px !important;
+
+        font-size: 12px !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    /* -------------------------
+       CATEGORY NAV
+    ------------------------- */
+
+    .store-category-nav {
+        width: calc(100% - 60px) !important;
+
+        max-width: 1180px !important;
+
+        height: 50px !important;
+
+        margin: -2px auto 0 !important;
+    }
+
+
+    .store-category-nav ul {
+        padding: 0 8px !important;
+
+        justify-content: space-between !important;
+    }
+
+
+    .store-category-nav a {
+        padding: 0 20px !important;
+
+        font-size: 13px !important;
+
+        white-space: nowrap !important;
+    }
+
+}
+
+
+/* ==========================================================
+   SMALL TABLET
+   701px – 1000px
+
+   This is where the existing compact header takes over.
+========================================================== */
+
+@media (min-width: 701px) and (max-width: 1000px) {
+
+    .store-header-inner {
+        width: calc(100% - 30px) !important;
+
+        min-height: 85px !important;
+
+        margin: 0 auto !important;
+
+        display: flex !important;
+        align-items: center;
+
+        gap: 10px !important;
+
+        flex-wrap: nowrap !important;
+    }
+
+
+    .store-brand {
+        width: auto !important;
+
+        min-width: 150px !important;
+        max-width: 190px !important;
+
+        flex: 0 1 auto !important;
+
+        margin-left: 0 !important;
+    }
+
+
+    .brand-logo {
+        width: 135px !important;
+        height: auto;
+    }
+
+
+    .store-search {
+        flex: 1 1 auto !important;
+
+        width: auto !important;
+
+        min-width: 180px !important;
+        max-width: none !important;
+
+        height: 44px !important;
+
+        margin-left: 0 !important;
+    }
+
+
+    .store-actions {
+        flex: 0 0 auto !important;
+
+        gap: 5px !important;
+    }
+
+
+    .header-action-btn {
+        display: none !important;
+    }
+
+
+    .store-header .menu-btn {
+        display: block !important;
+
+        flex: 0 0 auto;
+
+        border: 0;
+        background: transparent;
+
+        font-size: 27px;
+
+        color: var(--maroon);
+
+        cursor: pointer;
+    }
+
+
+    /*
+       Keep category navigation from creating
+       horizontal overflow.
+    */
+
+    .store-category-nav {
+        width: calc(100% - 30px) !important;
+
+        max-width: none !important;
+
+        height: 50px !important;
+
+        margin: 0 auto !important;
+    }
+
+
+    .store-category-nav ul {
+        padding: 0 5px !important;
+
+        justify-content: space-around !important;
+    }
+
+
+    .store-category-nav a {
+        padding: 0 10px !important;
+
+        font-size: 13px !important;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   <= 700px
+
+   Preserve the existing mobile architecture.
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .store-header-inner {
+        width: calc(100% - 28px) !important;
+
+        min-height: auto !important;
+
+        padding: 12px 0 !important;
+
+        flex-wrap: wrap !important;
+
+        gap: 10px !important;
+    }
+
+
+    .store-brand {
+        width: auto !important;
+
+        min-width: 0 !important;
+        max-width: none !important;
+
+        flex: 1 1 auto !important;
+
+        margin-left: 0 !important;
+    }
+
+
+    .store-search {
+        order: 10 !important;
+
+        flex: 1 0 100% !important;
+
+        width: 100% !important;
+
+        min-width: 100% !important;
+        max-width: none !important;
+
+        height: 44px !important;
+
+        margin-left: 0 !important;
+    }
+
+
+    .store-actions {
+        flex: 0 0 auto !important;
+    }
+
+
+    .header-action-btn {
+        display: none !important;
+    }
+
+
+    .store-category-nav {
+        display: none !important;
+    }
+
+
+    .store-category-nav.active {
+        display: block !important;
+    }
+
+}
+
+/* =========================================================
+   DESKTOP HEADER — SEARCH SPACE FIX
+========================================================= */
+
+@media (min-width: 1201px) {
+
+    .store-header-inner {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+    }
+
+    .store-search {
+        flex: 1 1 0 !important;
+        width: 0 !important;
+        min-width: 280px !important;
+        max-width: none !important;
+
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+
+    .store-search input {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .store-actions {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: max-content !important;
+    }
+
+}
+
+/* ==========================================================
+   HOMEPAGE HERO — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .hero-slider {
+        width: 100%;
+        height: clamp(420px, 38vw, 620px);
+        min-height: 420px;
+        max-height: 620px;
+
+        overflow: hidden;
+    }
+
+
+    .hero-slide-image {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center center;
+    }
+
+
+    .hero-slide-content {
+        width: min(520px, 42vw);
+
+        left: clamp(40px, 6vw, 100px);
+
+        top: 50%;
+
+        transform: translateY(-50%);
+    }
+
+
+    .hero-slide-content h1,
+    .hero-slide-content h2 {
+
+        font-size: clamp(
+            38px,
+            3.4vw,
+            58px
+        );
+
+        line-height: 1.05;
+    }
+
+
+    .hero-slide-content p {
+
+        max-width: 480px;
+
+        font-size: clamp(
+            14px,
+            1.1vw,
+            17px
+        );
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1200px) {
+
+    .hero-slider {
+        height: 480px;
+        min-height: 480px;
+    }
+
+
+    .hero-slide-content {
+        width: 440px;
+
+        left: 45px;
+    }
+
+
+    .hero-slide-content h1,
+    .hero-slide-content h2 {
+        font-size: 42px;
+    }
+
+}
+
+/* ==========================================================
+   SHOP BY CATEGORY — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .home-shop-section {
+        width: 100%;
+        padding-left: clamp(25px, 5vw, 80px);
+        padding-right: clamp(25px, 5vw, 80px);
+    }
+
+
+    .home-shop-inner {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+
+    .home-shop-grid {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+
+        gap: clamp(8px, 1vw, 16px);
+    }
+
+
+    .home-shop-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .home-shop-card-image {
+        width: 100%;
+        height: auto;
+
+        aspect-ratio: 1 / 1;
+
+        object-fit: cover;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+   769px – 1100px
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .home-shop-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+
+    .home-shop-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+}
+
+/* ==========================================================
+   ORGANIZER / PROMO BANNER — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .home-organizer-section {
+        width: 100%;
+        padding-left: clamp(25px, 5vw, 80px);
+        padding-right: clamp(25px, 5vw, 80px);
+    }
+
+
+    .home-organizer-inner {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+
+    .home-organizer-banner {
+        width: 100%;
+        height: auto;
+
+        min-height: 280px;
+
+        overflow: hidden;
+    }
+
+
+    .home-organizer-banner img {
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+   769px – 1100px
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .home-organizer-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+
+    .home-organizer-banner {
+        min-height: 230px;
+    }
+
+}
+
+/* ==========================================================
+   HOME PRODUCTS — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .home-products-section {
+        width: 100%;
+        padding-left: clamp(25px, 5vw, 80px);
+        padding-right: clamp(25px, 5vw, 80px);
+    }
+
+    .home-products-inner {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+    .home-products-grid {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: clamp(12px, 1.5vw, 22px);
+    }
+
+    .home-products-grid > * {
+        min-width: 0;
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+   769px – 1100px
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .home-products-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .home-products-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+}
+
+/* ==========================================================
+   FLOWER / SECONDARY PRODUCT GRID — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .home-flower-section {
+        width: 100%;
+        padding-left: clamp(25px, 5vw, 80px);
+        padding-right: clamp(25px, 5vw, 80px);
+    }
+
+    .home-flower-inner {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+    .home-flower-grid {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: clamp(12px, 1.5vw, 22px);
+    }
+
+    .home-flower-grid > * {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .home-flower-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .home-flower-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+}
+
+
+/* ==========================================================
+   SERVICES SECTION — DESKTOP RESPONSIVE
+========================================================== */
+
+@media (min-width: 769px) {
+
+    .services-section {
+        width: 100%;
+        padding-left: clamp(25px, 5vw, 80px);
+        padding-right: clamp(25px, 5vw, 80px);
+    }
+
+    .services-inner {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: clamp(12px, 1.5vw, 22px);
+    }
+
+    .services-grid > * {
+        min-width: 0;
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================================
+   MEDIUM DESKTOP
+========================================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .services-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .services-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+}
+

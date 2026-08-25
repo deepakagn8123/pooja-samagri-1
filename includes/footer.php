@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         <a
-            href="contact.php"
+            href="https://wa.me/917008227337"
             class="floating-wa-send"
         >
 

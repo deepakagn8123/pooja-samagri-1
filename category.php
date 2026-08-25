@@ -271,12 +271,13 @@ function renderCategoryProductCard(
 
 
         <button
-            class="quick-add"
-            onclick="quickAdd(<?= js_json($product['slug']) ?>)"
-            aria-label="Add to cart"
-        >
-            +
-        </button>
+    type="button"
+    class="quick-add"
+    onclick="quickAdd('<?= e($product['slug']) ?>')"
+    aria-label="Add to cart"
+>
+    +
+</button>
 
 
     </div>

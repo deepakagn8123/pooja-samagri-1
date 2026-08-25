@@ -319,12 +319,12 @@ require __DIR__ . '/includes/header.php';
 
 
             <button
-                class="btn-primary"
-                style="border:none;cursor:pointer;"
-                onclick="addToCartFromDetail(<?= js_json($product['slug']) ?>)"
-            >
-                Cart mein add karein
-            </button>
+    class="btn-primary"
+    style="border:none;cursor:pointer;"
+    onclick="addToCartFromDetail('<?= e($product['slug']) ?>')"
+>
+    Cart mein add karein
+</button>
 
 
             <a

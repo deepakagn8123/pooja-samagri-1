@@ -318,10 +318,15 @@ th {
         <a href="index.php" class="active">
             Dashboard
         </a>
+<!-- 
+        <a href="orders.php">
+    Orders
+</a> -->
 
         <a href="products.php">
             Products
         </a>
+        
 
         <a href="#">
             Add Product
