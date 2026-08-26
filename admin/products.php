@@ -22,7 +22,7 @@ $stmt = $pdo->query("
         c.name AS category_name
     FROM products p
     INNER JOIN categories c ON c.id = p.category_id
-    ORDER BY p.id DESC
+    ORDER BY p.is_active DESC, p.id DESC
 ");
 
 $products = $stmt->fetchAll();
@@ -254,6 +254,267 @@ th {
     color: #777;
 }
 
+/* =========================================
+   Mobile Products Page
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Main layout */
+
+    .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* Topbar */
+
+    .topbar {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .topbar h2 {
+        font-size: 20px;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info {
+        gap: 8px;
+    }
+
+    .admin-info button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    /* Content */
+
+    .content {
+        padding: 18px 12px;
+    }
+
+    /* Page heading */
+
+    .page-head {
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .page-head h1 {
+        font-size: 23px;
+    }
+
+    .page-head p {
+        font-size: 13px;
+    }
+
+    .page-head .btn {
+        padding: 9px 11px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    /* Table container */
+
+    .table-box {
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    /* Table */
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    /* Hide unnecessary columns */
+
+    th:nth-child(2),
+    td:nth-child(2),
+    th:nth-child(4),
+    td:nth-child(4) {
+        display: none;
+    }
+
+    /* Product column */
+
+    th:first-child,
+    td:first-child {
+        width: 58%;
+    }
+
+    /* Price */
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 18%;
+    }
+
+    /* Status */
+
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 24%;
+    }
+
+    /* Actions */
+
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 100%;
+        display: block;
+    }
+
+    /* Hide desktop table header for actions */
+
+    thead th:nth-child(6) {
+        display: none;
+    }
+
+    th,
+    td {
+        padding: 11px 8px;
+        font-size: 12px;
+    }
+
+    /* Product */
+
+    .product-info {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .product-image,
+    .image-placeholder {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+
+    .product-info > div:last-child {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .product-info strong {
+        display: block;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .product-slug {
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Price */
+
+    td:nth-child(3) {
+        white-space: nowrap;
+        font-size: 12px;
+    }
+
+    .price-old {
+        font-size: 10px;
+    }
+
+    /* Status */
+
+    td:nth-child(5) {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .status {
+        padding: 4px 7px;
+        font-size: 10px;
+    }
+
+    /* Actions */
+
+    td:nth-child(6) {
+        padding: 8px;
+        background: #fafafa;
+        border-bottom: 1px solid #eee;
+    }
+
+    .actions {
+        display: flex;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .action-btn {
+        flex: 1;
+        text-align: center;
+        padding: 7px 5px;
+        font-size: 11px;
+    }
+
+}
+
+
+.product-cell {
+    cursor: pointer;
+}
+
+.product-cell:hover {
+    background: #fafafa;
+}
+
+@media (max-width: 700px) {
+
+    .product-cell {
+        cursor: pointer;
+    }
+
+    .product-cell:active {
+        background: #f3f3f3;
+    }
+
+    .product-info {
+        width: 100%;
+    }
+
+}
+
+
+.product-row {
+    cursor: pointer;
+}
+
+.product-row:hover {
+    background: #fafafa;
+}
+
+@media (max-width: 700px) {
+
+    .product-row:active {
+        background: #f3f3f3;
+    }
+
+}
 </style>
 
 </head>
@@ -377,142 +638,135 @@ th {
 
                     <?php foreach ($products as $product): ?>
 
-                        <tr>
+                        <tr class="product-row"
+    onclick="window.location.href='edit-product.php?id=<?= (int)$product['id'] ?>'">
 
-
-                            <td>
-
-                                <div class="product-info">
-
-
-                                    <?php if (!empty($product['image'])): ?>
-
-                                        <img
-                                            src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
-                                            alt="<?= e($product['name']) ?>"
-                                            class="product-image"
-                                        >
-
-                                    <?php else: ?>
-
-                                        <div class="image-placeholder">
-                                            No image
-                                        </div>
-
-                                    <?php endif; ?>
-
-
-                                    <div>
-
-                                        <strong>
-                                            <?= e($product['name']) ?>
-                                        </strong>
-
-                                        <div class="product-slug">
-                                            <?= e($product['slug']) ?>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-
-                            <td>
-                                <?= e($product['category_name']) ?>
-                            </td>
-
-
-                            <td>
-
-                                <?php if (!empty($product['old_price'])): ?>
-
-                                    <span class="price-old">
-                                        ₹<?= number_format((float)$product['old_price'], 0) ?>
-                                    </span>
-
-                                <?php endif; ?>
-
-                                ₹<?= number_format((float)$product['price'], 0) ?>
-
-                            </td>
-
-
-                            <td>
-                                <?= e($product['unit'] ?? '-') ?>
-                            </td>
-
-
-                            <td>
-
-                                <?php if ($product['is_active']): ?>
-
-                                    <span class="status active">
-                                        Active
-                                    </span>
-
-                                <?php else: ?>
-
-                                    <span class="status inactive">
-                                        Inactive
-                                    </span>
-
-                                <?php endif; ?>
-
-                            </td>
-
-
-                            <td>
-
-                                <div class="actions">
-
-                                    <a
-                                        href="../product.php?slug=<?= urlencode($product['slug']) ?>"
-                                        class="action-btn"
-                                        target="_blank"
-                                    >
-                                        View
-                                    </a>
-
-
-                                    <a
-    href="edit-product.php?id=<?= (int)$product['id'] ?>"
-    class="action-btn"
->
-    Edit
-</a>
-
-<form
-    method="POST"
-    action="toggle-product.php"
-    style="margin:0;"
+    <td
+    class="product-cell"
+    onclick="window.location.href='edit-product.php?id=<?= (int)$product['id'] ?>'"
 >
 
-<?= csrf_field() ?>
+    <div class="product-info">
 
-    <input
-        type="hidden"
-        name="id"
-        value="<?= (int)$product['id'] ?>"
-    >
+        <?php if (!empty($product['image'])): ?>
 
-    <button
-        type="submit"
-        class="action-btn"
-        style="cursor:pointer;"
-    >
-        <?= $product['is_active'] ? 'Disable' : 'Activate' ?>
-    </button>
+            <img
+                src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
+                alt="<?= e($product['name']) ?>"
+                class="product-image"
+            >
 
-</form>
+        <?php else: ?>
 
-                                </div>
+            <div class="image-placeholder">
+                No image
+            </div>
 
-                            </td>
+        <?php endif; ?>
 
+        <div>
 
-                        </tr>
+            <strong>
+                <?= e($product['name']) ?>
+            </strong>
+
+            <div class="product-slug">
+                <?= e($product['slug']) ?>
+            </div>
+
+        </div>
+
+    </div>
+
+</td>
+
+    <td>
+        <?= e($product['category_name']) ?>
+    </td>
+
+    <td>
+        <?php if (!empty($product['old_price'])): ?>
+            <span class="price-old">
+                ₹<?= number_format((float)$product['old_price'], 0) ?>
+            </span>
+        <?php endif; ?>
+
+        ₹<?= number_format((float)$product['price'], 0) ?>
+    </td>
+
+    <td>
+        <?= e($product['unit'] ?? '-') ?>
+    </td>
+
+    <td>
+
+        <?php if ($product['is_active']): ?>
+
+            <span class="status active">
+                Active
+            </span>
+
+        <?php else: ?>
+
+            <span class="status inactive">
+                Inactive
+            </span>
+
+        <?php endif; ?>
+
+    </td>
+
+    <td>
+
+        <div class="actions">
+
+            <a
+                href="../product.php?slug=<?= urlencode($product['slug']) ?>"
+                class="action-btn"
+                target="_blank"
+                onclick="event.stopPropagation()"
+            >
+                View
+            </a>
+
+            <a
+                href="edit-product.php?id=<?= (int)$product['id'] ?>"
+                class="action-btn"
+                onclick="event.stopPropagation()"
+            >
+                Edit
+            </a>
+
+            <form
+                method="POST"
+                action="toggle-product.php"
+                style="margin:0; flex:1;"
+                onclick="event.stopPropagation()"
+            >
+
+                <?= csrf_field() ?>
+
+                <input
+                    type="hidden"
+                    name="id"
+                    value="<?= (int)$product['id'] ?>"
+                >
+
+                <button
+                    type="submit"
+                    class="action-btn"
+                    style="cursor:pointer; width:100%;"
+                >
+                    <?= $product['is_active'] ? 'Disable' : 'Activate' ?>
+                </button>
+
+            </form>
+
+        </div>
+
+    </td>
+
+</tr>
 
                     <?php endforeach; ?>
 

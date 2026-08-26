@@ -289,6 +289,438 @@ th {
     color: #b42318;
 }
 
+/* =========================================
+   Mobile Dashboard Products
+========================================= */
+
+.mobile-price {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    /* Never allow horizontal scrolling */
+
+    .section {
+        overflow: hidden;
+    }
+
+    table {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+
+    /* Hide category on mobile */
+
+    .category-column,
+    th.category-column {
+        display: none;
+    }
+
+    /* Hide desktop price column */
+
+    .price-column,
+    th.price-column {
+        display: none;
+    }
+
+    /* Product column */
+
+
+
+    /* Status column */
+
+
+    .status-column {
+        width: 30%;
+        text-align: right;
+    }
+
+    th,
+    td {
+        padding: 13px 12px;
+        font-size: 13px;
+    }
+
+    /* Product layout */
+
+    .product-info {
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .product-image {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+    }
+
+    .product-details {
+        min-width: 0;
+    }
+
+    .product-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .product-name strong {
+        font-size: 13px;
+    }
+
+    /* Price shown below product name */
+
+    .mobile-price {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+        color: #777;
+        font-weight: 600;
+    }
+
+    /* Status */
+
+    .status-column {
+        text-align: right;
+        vertical-align: middle;
+    }
+
+    .status {
+        padding: 5px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+}
+
+/* =========================================
+   Mobile Navigation
+========================================= */
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    font-size: 26px;
+    cursor: pointer;
+    color: #8B1E1E;
+    padding: 0;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width: 900px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Sidebar */
+
+    .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Overlay */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+    /* Main */
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* Topbar */
+
+    .topbar {
+        padding: 15px 18px;
+        gap: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .topbar h2 {
+        font-size: 20px;
+        flex: 1;
+    }
+
+    .admin-info {
+        gap: 10px;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info form {
+        margin: 0;
+    }
+
+    .admin-info button {
+        padding: 7px 11px;
+        font-size: 13px;
+    }
+
+    /* Content */
+
+    .content {
+        padding: 20px 15px;
+    }
+
+    .welcome {
+        margin-bottom: 20px;
+    }
+
+    .welcome h1 {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+
+    .welcome p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Stats */
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .stat-card span {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .stat-card h2 {
+        font-size: 25px;
+        margin-top: 7px;
+    }
+
+    /* Section */
+
+    .section {
+        border-radius: 8px;
+    }
+
+    .section-header {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .section-header h3 {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 8px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    /* Table becomes horizontally scrollable */
+
+    .section {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    th,
+    td {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .product-image {
+        width: 42px;
+        height: 42px;
+    }
+
+}
+
+
+/* =========================================
+   Very Small Phones
+========================================= */
+
+@media (max-width: 400px) {
+
+    .content {
+        padding: 16px 12px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 14px 12px;
+    }
+
+    .stat-card h2 {
+        font-size: 22px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .section-header .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .section {
+        overflow: hidden;
+    }
+
+    table {
+        width: 100%;
+        min-width: 0;
+        table-layout: auto;
+    }
+
+    /* Hide Category and desktop Price */
+
+    .category-column,
+    .price-column,
+    th.category-column,
+    th.price-column {
+        display: none;
+    }
+
+    /* Remove unnecessary table spacing */
+
+    th,
+    td {
+        padding: 12px 10px;
+    }
+
+    /* Product column */
+
+    th:first-child,
+    td:first-child {
+        width: auto;
+    }
+
+    /* Status column */
+
+    th.status-column,
+    td.status-column {
+        width: 1%;
+        white-space: nowrap;
+        text-align: right;
+        padding-left: 5px;
+    }
+
+    /* Product */
+
+    .product-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .product-image {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+
+    .product-details {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .product-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .product-name strong {
+        font-size: 13px;
+    }
+
+    /* Mobile price */
+
+    .mobile-price {
+        display: block;
+        margin-top: 3px;
+        font-size: 12px;
+        color: #777;
+        font-weight: 600;
+    }
+
+    /* Status */
+
+    .status {
+        display: inline-block;
+        padding: 5px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+}
+
 
 /* Responsive */
 
@@ -318,8 +750,8 @@ th {
         <a href="index.php" class="active">
             Dashboard
         </a>
-<!-- 
-        <a href="orders.php">
+
+        <!-- <a href="orders.php">
     Orders
 </a> -->
 
@@ -346,11 +778,17 @@ th {
 
 </div>
 
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
 
 <div class="main">
 
 
     <div class="topbar">
+
+    <button class="menu-toggle" type="button" onclick="toggleSidebar()">
+    ☰
+</button>
 
         <h2>Dashboard</h2>
 
@@ -457,18 +895,14 @@ th {
 
             <table>
 
-                <thead>
-
-                    <tr>
-
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
+<thead>
+    <tr>
+        <th>Product</th>
+        <th class="category-column">Category</th>
+        <th class="price-column">Price</th>
+        <th class="status-column">Status</th>
+    </tr>
+</thead>
 
 
                 <tbody>
@@ -490,71 +924,69 @@ th {
 
                     <?php foreach ($recentProducts as $product): ?>
 
-                        <tr>
+<tr>
 
+    <td>
 
-                            <td>
+        <div class="product-info">
 
-                                <div class="product-info">
+            <?php if (!empty($product['image'])): ?>
 
-                                    <?php if (!empty($product['image'])): ?>
+                <img
+                    src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
+                    class="product-image"
+                    alt="<?= e($product['name']) ?>"
+                >
 
-                                        <img
-                                            src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
-                                            class="product-image"
-                                            alt="<?= e($product['name']) ?>"
-                                        >
+            <?php endif; ?>
 
-                                    <?php endif; ?>
+            <div class="product-details">
 
+                <div class="product-name">
+                    <strong>
+                        <?= e($product['name']) ?>
+                    </strong>
+                </div>
 
-                                    <div>
+                <div class="mobile-price">
+                    ₹<?= number_format((float)$product['price'], 0) ?>
+                </div>
 
-                                        <strong>
-                                            <?= e($product['name']) ?>
-                                        </strong>
+            </div>
 
-                                    </div>
+        </div>
 
-                                </div>
+    </td>
 
-                            </td>
+    <td class="category-column">
+        <?= e($product['category_name']) ?>
+    </td>
 
+    <td class="price-column">
+        ₹<?= number_format((float)$product['price'], 0) ?>
+    </td>
 
-                            <td>
-                                <?= e($product['category_name']) ?>
-                            </td>
+    <td class="status-column">
 
+        <?php if ($product['is_active']): ?>
 
-                            <td>
+            <span class="status active">
+                Active
+            </span>
 
-                                ₹<?= number_format((float)$product['price'], 0) ?>
+        <?php else: ?>
 
-                            </td>
+            <span class="status inactive">
+                Inactive
+            </span>
 
+        <?php endif; ?>
 
-                            <td>
+    </td>
 
-                                <?php if ($product['is_active']): ?>
+</tr>
 
-                                    <span class="status active">
-                                        Active
-                                    </span>
-
-                                <?php else: ?>
-
-                                    <span class="status inactive">
-                                        Inactive
-                                    </span>
-
-                                <?php endif; ?>
-
-                            </td>
-
-
-                        </tr>
-
-                    <?php endforeach; ?>
+<?php endforeach; ?>
 
 
                 <?php endif; ?>
@@ -572,7 +1004,17 @@ th {
 
 </div>
 
+<script>
 
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+</script>
 </body>
 
 </html>
