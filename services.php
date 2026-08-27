@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = 'Services — ShubhSamagri';
+$pageTitle = 'Services — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 

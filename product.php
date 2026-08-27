@@ -117,7 +117,7 @@ const price = <?= js_json((float)$product['price']) ?>;
         `Namaste! Mujhe yeh order karna hai: ${name} (Qty: ${currentQty}) — ₹${total.toLocaleString("en-IN")}`;
 
     window.open(
-        `https://wa.me/917008227337?text=${encodeURIComponent(msg)}`,
+        `https://wa.me/919352732506?text=${encodeURIComponent(msg)}`,
         "_blank"
     );
 
@@ -131,8 +131,8 @@ const price = <?= js_json((float)$product['price']) ?>;
 $pageScripts = ob_get_clean();
 
 $pageTitle = $product
-    ? $product['name'] . ' — ShubhSamagri'
-    : 'Product — ShubhSamagri';
+    ? $product['name'] . ' — Nitya Ritual E-Store'
+    : 'Product — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 

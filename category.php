@@ -73,15 +73,15 @@ $stmt->execute([
 ]);
 
 
-$category = $stmt->fetch();
+$currentCategory = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-if (!$category) {
+if (!$currentCategory) {
 
     http_response_code(404);
 
     $pageTitle =
-        'Category Not Found — ShubhSamagri';
+        'Category Not Found — Nitya Ritual E-Store';
 
     require __DIR__ . '/includes/header.php';
 
@@ -156,9 +156,8 @@ $stmt = $pdo->prepare("
 ");
 
 $stmt->execute([
-    'category_id' => $category['id']
+    'category_id' => $currentCategory['id']
 ]);
-
 $products = $stmt->fetchAll();
 
 
@@ -328,8 +327,8 @@ $pageScripts =
 
 
 $pageTitle =
-    $category['name'] .
-    ' — ShubhSamagri';
+    $currentCategory['name'] .
+    ' — Nitya Ritual E-Store';
 
 
 require __DIR__ . '/includes/header.php';
@@ -382,17 +381,17 @@ require __DIR__ . '/includes/header.php';
         Category
     </span>
 
-    <h1>
-        <?= e($category['name']) ?>
-    </h1>
+<h1>
+    <?= e($currentCategory['name']) ?>
+</h1>
 
-    <?php if (!empty($category['description'])): ?>
+<?php if (!empty($currentCategory['description'])): ?>
 
-        <p>
-            <?= e($category['description']) ?>
-        </p>
+    <p>
+        <?= e($currentCategory['description']) ?>
+    </p>
 
-    <?php endif; ?>
+<?php endif; ?>
 
 </div>
 

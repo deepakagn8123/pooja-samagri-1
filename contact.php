@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = 'Contact — ShubhSamagri';
+$pageTitle = 'Contact — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 
@@ -149,7 +149,7 @@ require __DIR__ . '/includes/header.php';
                     </h4>
 
                     <p>
-                        +91 00000 00000 — 24x7 order aur booking ke liye
+                        +91 93527 32506 — 24x7 order aur booking ke liye
                     </p>
 
                 </div>
@@ -185,7 +185,7 @@ require __DIR__ . '/includes/header.php';
                     </h4>
 
                     <p>
-                        hello@shubhsamagri.com
+                        mail.nitya@gmail.com
                     </p>
 
                 </div>
@@ -314,7 +314,7 @@ require __DIR__ . '/includes/header.php';
                 <h4>Store Address</h4>
 
                 <p>
-                    ShubhSamagri Retail Store<br>
+                    Nitya Ritual E-Store<br>
                     Ashok Rajpath, Near Patna City<br>
                     Patna, Bihar — 800001
                 </p>
@@ -362,8 +362,8 @@ require __DIR__ . '/includes/header.php';
                 style="border:0;"
                 loading="lazy"
                 allowfullscreen
-                title="ShubhSamagri Store Location"
-                aria-label="Map showing ShubhSamagri store location in Patna, Bihar"
+                title="Nitya Ritual E-Store Store Location"
+                aria-label="Map showing Nitya Ritual E-Store store location in Patna, Bihar"
             ></iframe>
 
             <a

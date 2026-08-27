@@ -11669,3 +11669,426 @@ img, video, svg, iframe { max-width: 100%; height: auto; }
     }
 
 }
+
+
+/* =========================================================
+   HAMBURGER COLOR
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .mobile-menu-toggle span {
+        background: #FBF2E3 !important;
+    }
+
+}
+
+/* Smooth page scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================================
+   UNIVERSAL COMING SOON PAGE
+========================================================= */
+
+.coming-soon-page {
+
+    min-height: calc(100vh - 180px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(232, 137, 12, 0.055),
+            transparent 58%
+        );
+
+    padding: 50px 20px 70px;
+}
+
+
+/* =========================================================
+   GARLAND
+========================================================= */
+
+.coming-soon-garland {
+
+    position: absolute;
+
+    top: 12px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 34px;
+
+    opacity: .8;
+
+    pointer-events: none;
+}
+
+.coming-soon-garland svg {
+
+    display: block;
+
+    width: 100%;
+
+    height: 34px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.coming-soon-content {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.coming-soon-eyebrow {
+
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: var(--maroon);
+
+    font-family:
+        "Cormorant Garamond",
+        "Baskerville",
+        Georgia,
+        serif;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: .25em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.coming-soon-divider {
+
+    color: #D89A20;
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+
+    margin-bottom: 14px;
+
+    text-shadow:
+        0 0 5px rgba(218, 155, 32, .35);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.coming-soon-content h1 {
+
+    margin: 0;
+
+    color: var(--maroon);
+
+    font-family:
+        "Cormorant Garamond",
+        "Bodoni MT",
+        "Didot",
+        "Baskerville",
+        Georgia,
+        serif;
+
+    font-size: clamp(54px, 7vw, 88px);
+
+    font-weight: 500;
+
+    line-height: .95;
+
+    letter-spacing: .025em;
+}
+
+
+/* =========================================================
+   GOLD UNDERLINE
+========================================================= */
+
+.coming-soon-content h1::after {
+
+    content: "";
+
+    display: block;
+
+    width: 90px;
+
+    height: 2px;
+
+    margin: 22px auto 24px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #D69A24,
+            #F1CB62,
+            #D69A24,
+            transparent
+        );
+
+    box-shadow:
+        0 0 6px rgba(214, 154, 36, .3);
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.coming-soon-message {
+
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 19px;
+
+    line-height: 1.65;
+
+    letter-spacing: .02em;
+}
+
+
+/* =========================================================
+   SANSKRIT / HINDI LINE
+========================================================= */
+
+.coming-soon-subtext {
+
+    margin: 22px 0 0;
+
+    color: #B47B19;
+
+    font-family:
+        "Noto Serif Devanagari",
+        "Mangal",
+        serif;
+
+    font-size: 16px;
+
+    letter-spacing: .08em;
+}
+
+
+/* =========================================================
+   ORNAMENT
+========================================================= */
+
+.coming-soon-ornament {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    margin: 30px auto;
+}
+
+
+.coming-soon-ornament span:not(.ornament-diya) {
+
+    width: 75px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(184, 128, 25, .65)
+        );
+}
+
+
+.coming-soon-ornament span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(184, 128, 25, .65),
+            transparent
+        );
+}
+
+
+.ornament-diya {
+
+    font-size: 19px;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(224, 159, 30, .35)
+        );
+}
+
+
+/* =========================================================
+   HOME BUTTON
+========================================================= */
+
+.coming-soon-home {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 155px;
+
+    height: 42px;
+
+    padding: 0 22px;
+
+    border-radius: 8px;
+
+    background: var(--maroon);
+
+    color: var(--ivory);
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: .04em;
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+
+.coming-soon-home:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--maroon-2);
+
+    box-shadow:
+        0 7px 18px
+        rgba(92, 31, 31, .18);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .coming-soon-page {
+
+        min-height: calc(100vh - 140px);
+
+        padding:
+            45px 18px
+            60px;
+    }
+
+
+    .coming-soon-eyebrow {
+
+        font-size: 12px;
+
+        letter-spacing: .18em;
+
+        margin-bottom: 15px;
+    }
+
+
+    .coming-soon-content h1 {
+
+        font-size: clamp(48px, 15vw, 68px);
+    }
+
+
+    .coming-soon-content h1::after {
+
+        width: 70px;
+
+        margin-top: 18px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .coming-soon-message {
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+
+    .coming-soon-subtext {
+
+        font-size: 14px;
+    }
+
+
+    .coming-soon-ornament span:not(.ornament-diya) {
+
+        width: 45px;
+    }
+
+}

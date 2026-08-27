@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = 'Cart — ShubhSamagri';
+$pageTitle = 'Cart — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 
@@ -227,7 +227,7 @@ ob_start();
 <script>
 
 let currentCartProducts = [];
-const ADMIN_WHATSAPP = "917008227337";
+const ADMIN_WHATSAPP = "919352732506";
 let latestCartData = null;
 
 

@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = 'About Us — ShubhSamagri';
+$pageTitle = 'About Us — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 
@@ -75,7 +75,7 @@ require __DIR__ . '/includes/header.php';
     </h1>
 
     <p>
-        ShubhSamagri — ek dil se ki hui koshish ki har ghar mein puja ki shuddh samagri
+        Nitya Ritual E-Store — ek dil se ki hui koshish ki har ghar mein puja ki shuddh samagri
         aasaani se mil sake. Authentic, trusted aur poore Bharat mein delivered.
     </p>
 
@@ -94,7 +94,7 @@ require __DIR__ . '/includes/header.php';
 
             <img
                 src="assets/images/categories/about_us.jpg"
-                alt="ShubhSamagri — Our Story"
+                alt="Nitya Ritual E-Store — Our Story"
                 loading="lazy"
             >
 
@@ -122,7 +122,7 @@ require __DIR__ . '/includes/header.php';
             </h2>
 
             <p>
-                ShubhSamagri ki shuruat ek chhoti si local dukaan se hui thi —
+                Nitya Ritual E-Store ki shuruat ek chhoti si local dukaan se hui thi —
                 jahan ghar ghar ke liye puja essentials milte the.
                 Saalon ke anubhav aur lakho grahkon ke vishwas ne hume prerit
                 kiya ki hum ye sewa poore Bharat tak pahunchayen.
@@ -493,7 +493,7 @@ require __DIR__ . '/includes/header.php';
             </span>
 
             <h2>
-                ShubhSamagri ki Khasiyat
+                Nitya Ritual E-Store ki Khasiyat
             </h2>
 
             <p>
@@ -718,7 +718,7 @@ require __DIR__ . '/includes/header.php';
             <p>
                 "Durga Puja ke liye Bengali tradition ki pure samagri
                 ek hi jagah mili — dhoop, sindoor, chandan, paan, sab kuch.
-                Bohot khush hoon ShubhSamagri se."
+                Bohot khush hoon Nitya Ritual E-Store se."
             </p>
 
             <div class="testi-name">Ananya Banerjee</div>

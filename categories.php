@@ -54,7 +54,7 @@ $stmt = $pdo->query("
 $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-$pageTitle = 'All Categories — ShubhSamagri';
+$pageTitle = 'All Categories — Nitya Ritual E-Store';
 
 require __DIR__ . '/includes/header.php';
 

@@ -63,11 +63,11 @@
             <h4>Contact</h4>
 
             <a href="#">
-                WhatsApp: +91 00000 00000
+                WhatsApp: +91 93527 32506
             </a>
 
             <a href="#">
-                hello@shubhsamagri.com
+                mail.nitya@gmail.com
             </a>
 
             <a href="#">
@@ -82,7 +82,7 @@
     <div class="foot-bottom">
 
         <span>
-            © <?= date('Y') ?> ShubhSamagri.
+            © <?= date('Y') ?> Nitya Ritual E-Store.
         </span>
 
         <span>
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         <a
-            href="https://wa.me/917008227337"
+            href="https://wa.me/919352732506"
             class="floating-wa-send"
         >
 

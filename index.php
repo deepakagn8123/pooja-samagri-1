@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/config/app.php';
 
-$pageTitle = 'ShubhSamagri — Puja Samagri & Wedding Items';
+$pageTitle = 'Nitya Ritual E-Store — Puja Samagri & Wedding Items';
 
 
 /* =========================================================
@@ -106,7 +106,7 @@ require __DIR__ . '/includes/header.php';
         <div class="hero-slide ">
 
             <img
-                src="assets/images/categories/image (1).png"
+                src="assets/images/categories/image (8).png"
                 alt="Nitya Ritual E-Store - Puja Samagri"
                 class="hero-slide-image"
             >
@@ -143,7 +143,7 @@ require __DIR__ . '/includes/header.php';
         <div class="hero-slide">
 
             <img
-                src="assets/images/categories/image (2).png"
+                src="assets/images/categories/image (7).png"
                 alt="Authentic Hindu Puja Essentials"
                 class="hero-slide-image"
             >
@@ -511,7 +511,7 @@ require __DIR__ . '/includes/header.php';
                 Available in selected serviceable areas.
             </p>
 
-            <a href="services.php"
+            <a href="coming-soon.php"
                class="service-card-btn">
                 Subscribe
             </a>
@@ -545,7 +545,7 @@ require __DIR__ . '/includes/header.php';
                 Griha Pravesh and other ceremonies.
             </p>
 
-            <a href="services.php"
+            <a href="coming-soon.php"
                class="service-card-btn">
                 Book Pandit
             </a>
@@ -579,7 +579,7 @@ require __DIR__ . '/includes/header.php';
                 Be a guest at your own Puja.
             </p>
 
-            <a href="services.php"
+            <a href="coming-soon.php"
                class="service-card-btn">
                 Explore Now
             </a>
@@ -1107,7 +1107,7 @@ require __DIR__ . '/includes/header.php';
         <h2>Customer Reviews</h2>
 
         <p>
-            What our customers say about ShubhSamagri
+            What our customers say about Nitya Ritual E-Store
         </p>
 
     </div>
