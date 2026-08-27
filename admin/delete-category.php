@@ -85,52 +85,136 @@ if (
     isset($_POST['confirm_delete'])
 ) {
 
-    $replacementId = (int)($_POST['replacement_category_id'] ?? 0);
+    $deleteMode = $_POST['delete_mode'] ?? '';
+
+    $replacementId = (int)(
+        $_POST['replacement_category_id'] ?? 0
+    );
 
 
     /*
     |--------------------------------------------------------------------------
-    | If Products Exist, Validate Replacement Category
+    | Validate Delete Mode
+    |--------------------------------------------------------------------------
+    */
+
+    if (!in_array($deleteMode, ['empty', 'move', 'force'], true)) {
+
+        header(
+            'Location: categories.php?delete_error=' .
+            urlencode('Invalid delete operation.')
+        );
+
+        exit;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Category Has Products
     |--------------------------------------------------------------------------
     */
 
     if ($productCount > 0) {
 
-        if (
-            $replacementId < 1 ||
-            $replacementId === $categoryId
-        ) {
 
-            header(
-                'Location: categories.php?delete_error=' .
-                urlencode('Please select a valid replacement category.')
-            );
+        /*
+        |--------------------------------------------------------------------------
+        | MOVE PRODUCTS
+        |--------------------------------------------------------------------------
+        */
 
-            exit;
+        if ($deleteMode === 'move') {
+
+            /*
+            | A replacement category is required.
+            */
+
+            if (
+                $replacementId < 1 ||
+                $replacementId === $categoryId
+            ) {
+
+                header(
+                    'Location: categories.php?delete_error=' .
+                    urlencode(
+                        'Please select a valid replacement category.'
+                    )
+                );
+
+                exit;
+            }
+
+
+            /*
+            | Make sure replacement category exists
+            */
+
+            $stmt = $pdo->prepare("
+                SELECT id
+                FROM categories
+                WHERE id = :id
+                AND is_active = 1
+                LIMIT 1
+            ");
+
+            $stmt->execute([
+                'id' => $replacementId
+            ]);
+
+
+            if (!$stmt->fetch()) {
+
+                header(
+                    'Location: categories.php?delete_error=' .
+                    urlencode(
+                        'Replacement category does not exist.'
+                    )
+                );
+
+                exit;
+            }
+
         }
 
 
         /*
-        | Make sure replacement category exists
+        |--------------------------------------------------------------------------
+        | FORCE DELETE
+        |--------------------------------------------------------------------------
+        |
+        | No replacement category is required.
+        |
         */
 
-        $stmt = $pdo->prepare("
-            SELECT id
-            FROM categories
-            WHERE id = :id
-            AND is_active = 1
-            LIMIT 1
-        ");
+        elseif ($deleteMode === 'force') {
 
-        $stmt->execute([
-            'id' => $replacementId
-        ]);
+            /*
+            | Nothing to validate here.
+            |
+            | Products will be permanently deleted below.
+            */
 
-        if (!$stmt->fetch()) {
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | EMPTY MODE
+        |--------------------------------------------------------------------------
+        |
+        | A category containing products cannot be deleted
+        | using the empty mode.
+        |
+        */
+
+        elseif ($deleteMode === 'empty') {
 
             header(
                 'Location: categories.php?delete_error=' .
-                urlencode('Replacement category does not exist.')
+                urlencode(
+                    'This category contains products. Please choose move or force delete.'
+                )
             );
 
             exit;
@@ -139,9 +223,9 @@ if (
     }
 
 
-    /*
+        /*
     |--------------------------------------------------------------------------
-    | Delete Category Safely
+    | Perform Delete
     |--------------------------------------------------------------------------
     */
 
@@ -151,10 +235,13 @@ if (
 
 
         /*
-        | Move existing products to replacement category
+        | Move products to another category
         */
 
-        if ($productCount > 0) {
+        if (
+            $productCount > 0 &&
+            $deleteMode === 'move'
+        ) {
 
             $stmt = $pdo->prepare("
                 UPDATE products
@@ -166,14 +253,64 @@ if (
                 'replacement_id' => $replacementId,
                 'category_id' => $categoryId
             ]);
-
         }
 
 
         /*
-        |--------------------------------------------------------------------------
-        | Delete Category
-        |--------------------------------------------------------------------------
+        | Force delete products
+        */
+
+        if (
+            $productCount > 0 &&
+            $deleteMode === 'force'
+        ) {
+
+            /* Get product images first */
+            $stmt = $pdo->prepare("
+                SELECT image
+                FROM products
+                WHERE category_id = :category_id
+            ");
+
+            $stmt->execute([
+                'category_id' => $categoryId
+            ]);
+
+            $productImages = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+
+            /* Delete products */
+            $stmt = $pdo->prepare("
+                DELETE FROM products
+                WHERE category_id = :category_id
+            ");
+
+            $stmt->execute([
+                'category_id' => $categoryId
+            ]);
+
+
+            /* Delete product images */
+            foreach ($productImages as $productImage) {
+
+                if (empty($productImage)) {
+                    continue;
+                }
+
+                $productImagePath =
+                    __DIR__ .
+                    '/../assets/images/products/' .
+                    $productImage;
+
+                if (is_file($productImagePath)) {
+                    @unlink($productImagePath);
+                }
+            }
+        }
+
+
+        /*
+        | Delete category
         */
 
         $stmt = $pdo->prepare("
@@ -187,9 +324,7 @@ if (
 
 
         /*
-        |--------------------------------------------------------------------------
-        | Delete Category Image
-        |--------------------------------------------------------------------------
+        | Delete category image
         */
 
         if (!empty($category['image'])) {
@@ -199,22 +334,17 @@ if (
                 '/../assets/images/categories/' .
                 $category['image'];
 
-
-            /*
-            | Only delete the image if it actually exists.
-            */
-
             if (is_file($imagePath)) {
-
                 @unlink($imagePath);
-
             }
-
         }
 
 
-        $pdo->commit();
+        /*
+        | Commit
+        */
 
+        $pdo->commit();
 
         header('Location: categories.php?deleted=1');
         exit;
@@ -223,22 +353,21 @@ if (
     } catch (Throwable $e) {
 
         if ($pdo->inTransaction()) {
-
             $pdo->rollBack();
-
         }
-
 
         header(
             'Location: categories.php?delete_error=' .
-            urlencode('Category could not be deleted. No data was changed.')
+            urlencode(
+                'Category could not be deleted. No data was changed.'
+            )
         );
 
         exit;
-
     }
 
 }
+
 
 
 /*

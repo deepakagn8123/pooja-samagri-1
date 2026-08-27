@@ -33,6 +33,10 @@ $price = request_string($_POST['price'] ?? null);
 $oldPrice = request_string($_POST['old_price'] ?? null);
 
 $unit = request_string($_POST['unit'] ?? null);
+
+if ($unit === '') {
+    $unit = 'piece';
+}
 $description = request_string($_POST['description'] ?? null);
 $tag = request_string($_POST['tag'] ?? null);
 $badge = request_string($_POST['badge'] ?? null);
@@ -408,7 +412,7 @@ body {
 }
 
 .content {
-    padding: 30px;
+    padding: 30px 36px;
 }
 
 .page-head {
@@ -425,18 +429,19 @@ body {
 }
 
 .form-box {
-    max-width: 900px;
+    width: 100%;
+    max-width: none;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
 }
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
+} 
 
 .form-group {
     margin-bottom: 20px;
@@ -532,6 +537,279 @@ textarea {
 
 }
 
+/* =========================================
+   Admin Mobile Sidebar
+========================================= */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #8B1E1E;
+    font-size: 26px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Sidebar */
+
+    .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Overlay */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+    /* Main */
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Topbar */
+
+    .topbar {
+        padding: 14px 16px;
+        gap: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .topbar h2 {
+        font-size: 19px;
+    }
+
+    .admin-info {
+        gap: 8px;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    /* Content */
+
+    .content {
+        padding: 18px 12px;
+    }
+
+    /* Page heading */
+
+    .page-head {
+        margin-bottom: 18px;
+    }
+
+    .page-head h1 {
+        font-size: 23px;
+        margin-bottom: 5px;
+    }
+
+    .page-head p {
+        font-size: 13px;
+    }
+
+    /* Form */
+
+    .form-box {
+        width: 100%;
+        max-width: none;
+        padding: 18px 14px;
+        border-radius: 8px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group,
+    .form-group.full {
+        grid-column: auto;
+        margin-bottom: 18px;
+    }
+
+    /* Labels */
+
+    label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    /* Inputs */
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 150px;
+    }
+
+    /* File input */
+
+    input[type="file"] {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    /* Help text */
+
+    .help {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    /* Checkbox */
+
+    .checkbox-row {
+        padding: 4px 0;
+    }
+
+    .checkbox-row input {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    .checkbox-row label {
+        font-size: 13px;
+    }
+
+    /* Buttons */
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .btn {
+        flex: 1;
+        text-align: center;
+        padding: 11px 12px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   Very Small Phones
+========================================= */
+
+@media (max-width: 400px) {
+
+    .content {
+        padding: 14px 10px;
+    }
+
+    .form-box {
+        padding: 16px 12px;
+    }
+
+    .topbar {
+        padding: 13px 12px;
+    }
+
+    .topbar h2 {
+        font-size: 18px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+}
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
+
 </style>
 
 </head>
@@ -572,12 +850,30 @@ textarea {
 </div>
 
 
+<div
+    class="sidebar-overlay"
+    onclick="toggleSidebar()"
+></div>
+
 <div class="main">
 
 
-    <div class="topbar">
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
         <h2>Add Product</h2>
+
+    </div>
 
         <div class="admin-info">
 
@@ -588,10 +884,12 @@ textarea {
             <form method="POST" action="logout.php">
 
     <?= csrf_field() ?>
-
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -748,12 +1046,14 @@ textarea {
                             Unit
                         </label>
 
-                        <input
-                            type="text"
-                            name="unit"
-                            placeholder="/ piece"
-                            value="<?= e($_POST['unit'] ?? '') ?>"
-                        >
+<input
+    type="text"
+    name="unit"
+    value="<?= e($_POST['unit'] ?? 'piece') ?>"
+>
+<div class="help">
+    Enter only the unit, e.g. pack, day, kg, dozen.
+</div>
 
                     </div>
 
@@ -876,18 +1176,26 @@ textarea {
 
 <script>
 
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+</script>
+
+<script>
+
 const nameInput = document.getElementById("product-name");
 const slugInput = document.getElementById("product-slug");
 
 let slugManuallyEdited = false;
 
-
 slugInput.addEventListener("input", function () {
-
     slugManuallyEdited = true;
-
 });
-
 
 nameInput.addEventListener("input", function () {
 
@@ -903,8 +1211,15 @@ nameInput.addEventListener("input", function () {
 
 });
 
+
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
 </script>
-
-
 </body>
 </html>

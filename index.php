@@ -821,13 +821,13 @@ require __DIR__ . '/includes/header.php';
         <!-- SHORT DETAILS -->
         <div class="home-product-details">
 
-            <?php if (!empty($product['unit'])): ?>
+<?php if (!empty($product['unit'])): ?>
 
-                <span>
-                    <?= e($product['unit']) ?>
-                </span>
+    <small class="product-unit">
+        / <?= e($product['unit']) ?>
+    </small>
 
-            <?php endif; ?>
+<?php endif; ?>
 
             <span>
                 Quality Assured

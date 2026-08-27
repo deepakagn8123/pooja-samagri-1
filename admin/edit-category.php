@@ -527,20 +527,17 @@ body {
 }
 
 .content {
-    padding: 30px;
-
-    max-width: 900px;
+    padding: 30px 36px;
+    width: 100%;
+    max-width: none;
 }
 
 .form-box {
+    width: 100%;
     background: #fff;
-
-    border:
-        1px solid #e5e5e5;
-
+    border: 1px solid #e5e5e5;
     border-radius: 10px;
-
-    padding: 25px;
+    padding: 30px;
 }
 
 .form-group {
@@ -663,22 +660,351 @@ input[type="checkbox"] {
     color: #333;
 }
 
-@media(max-width:700px) {
+/* =========================================
+   ADMIN MOBILE SIDEBAR
+========================================= */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #8B1E1E;
+    font-size: 25px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Sidebar */
 
     .sidebar {
-        width: 190px;
+        width: 260px;
+        height: 100vh;
+
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+
+        z-index: 1000;
     }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+
+    /* Overlay */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+
+    /* Main */
 
     .main {
-        margin-left: 190px;
+        width: 100%;
+        margin-left: 0;
+        min-width: 0;
     }
 
+
+    /* Topbar */
+
+    .topbar {
+        width: 100%;
+        min-height: 58px;
+
+        padding: 12px 14px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .topbar-left {
+        min-width: 0;
+
+        display: flex;
+        align-items: center;
+
+        gap: 9px;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .topbar h2 {
+        margin: 0;
+        font-size: 18px;
+        white-space: nowrap;
+    }
+
+
+    /* Admin */
+
+    .admin-info {
+        display: flex;
+        align-items: center;
+
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info button {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+
+
+    /* Content */
+
     .content {
-        padding: 18px;
+        width: 100%;
+        max-width: none;
+
+        padding: 16px 12px 25px;
+    }
+
+
+    /* Page heading */
+
+    .content > h1 {
+        margin: 0 0 16px;
+
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+
+    /* Form */
+
+    .form-box {
+        width: 100%;
+        padding: 18px 14px;
+
+        border-radius: 8px;
+    }
+
+
+    /* Form groups */
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 17px;
+    }
+
+
+    /* Labels */
+
+    label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+
+    /* Inputs */
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        min-width: 0;
+
+        padding: 11px;
+
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 130px;
+    }
+
+
+    /* Current image */
+
+    .current-image {
+        width: 100px;
+        height: 100px;
+
+        object-fit: cover;
+
+        margin-bottom: 10px;
+    }
+
+
+    /* File input */
+
+    input[type="file"] {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+
+    /* Help */
+
+    .help {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+
+    /* Checkboxes */
+
+    .check-row {
+        display: flex;
+        align-items: center;
+
+        gap: 9px;
+
+        font-size: 13px;
+    }
+
+    .check-row input {
+        width: 18px;
+        height: 18px;
+
+        flex-shrink: 0;
+    }
+
+
+    /* Buttons */
+
+    .actions {
+        display: flex;
+
+        width: 100%;
+
+        gap: 8px;
+
+        margin-top: 20px;
+    }
+
+    .actions .btn {
+        flex: 1;
+
+        width: 50%;
+
+        padding: 11px 8px;
+
+        text-align: center;
+
+        font-size: 13px;
     }
 
 }
 
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+    .topbar {
+        padding: 11px 10px;
+    }
+
+    .topbar h2 {
+        font-size: 17px;
+    }
+
+    .admin-info button {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+    .content {
+        padding: 14px 10px 22px;
+    }
+
+    .form-box {
+        padding: 16px 12px;
+    }
+
+    .content > h1 {
+        font-size: 21px;
+    }
+
+    .actions {
+        gap: 7px;
+    }
+
+    .actions .btn {
+        padding: 10px 6px;
+        font-size: 12px;
+    }
+
+}
+
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
 </style>
 
 </head>
@@ -728,17 +1054,34 @@ input[type="checkbox"] {
 </div>
 
 
+<div
+    class="sidebar-overlay"
+    onclick="toggleSidebar()"
+></div>
+
 <div class="main">
 
 
-    <div class="topbar">
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
         <h2>
             Edit Category
         </h2>
 
+    </div>
 
-        <div class="admin-info">
+    <div class="admin-info">
 
             <span>
                 <?= e(
@@ -752,9 +1095,12 @@ input[type="checkbox"] {
 
     <?= csrf_field() ?>
 
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -983,6 +1329,18 @@ input[type="checkbox"] {
 
 </div>
 
+<script>
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+</script>
 
 </body>
 

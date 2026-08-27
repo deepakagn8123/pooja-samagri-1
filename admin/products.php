@@ -254,13 +254,16 @@ th {
     color: #777;
 }
 
+
 /* =========================================
    Mobile Products Page
 ========================================= */
 
 @media (max-width: 700px) {
 
-    /* Main layout */
+    /* -------------------------------------
+       Main layout
+    ------------------------------------- */
 
     .sidebar {
         width: 260px;
@@ -276,9 +279,13 @@ th {
     .main {
         margin-left: 0;
         width: 100%;
+        min-width: 0;
     }
 
-    /* Topbar */
+
+    /* -------------------------------------
+       Topbar
+    ------------------------------------- */
 
     .topbar {
         padding: 15px;
@@ -289,12 +296,12 @@ th {
         font-size: 20px;
     }
 
-    .admin-info span {
-        display: none;
-    }
-
     .admin-info {
         gap: 8px;
+    }
+
+    .admin-info span {
+        display: none;
     }
 
     .admin-info button {
@@ -302,13 +309,14 @@ th {
         font-size: 12px;
     }
 
-    /* Content */
+
+    /* -------------------------------------
+       Content
+    ------------------------------------- */
 
     .content {
         padding: 18px 12px;
     }
-
-    /* Page heading */
 
     .page-head {
         align-items: flex-start;
@@ -330,81 +338,122 @@ th {
         white-space: nowrap;
     }
 
-    /* Table container */
+
+    /* -------------------------------------
+       Table box
+    ------------------------------------- */
 
     .table-box {
         overflow: hidden;
         border-radius: 8px;
     }
 
-    /* Table */
+
+    /* -------------------------------------
+       Table
+    ------------------------------------- */
 
     table {
         width: 100%;
         table-layout: fixed;
     }
 
-    /* Hide unnecessary columns */
+    th,
+    td {
+        padding: 11px 8px;
+        font-size: 12px;
+        vertical-align: middle;
+    }
+
+
+    /* -------------------------------------
+       Hide Category
+    ------------------------------------- */
 
     th:nth-child(2),
-    td:nth-child(2),
-    th:nth-child(4),
-    td:nth-child(4) {
+    td:nth-child(2) {
         display: none;
     }
 
-    /* Product column */
 
-    th:first-child,
-    td:first-child {
-        width: 58%;
+    /* -------------------------------------
+       Product
+    ------------------------------------- */
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 47%;
     }
 
-    /* Price */
+
+    /* -------------------------------------
+       Price
+    ------------------------------------- */
 
     th:nth-child(3),
     td:nth-child(3) {
         width: 18%;
     }
 
-    /* Status */
 
-    th:nth-child(5),
-    td:nth-child(5) {
-        width: 24%;
-    }
+    /* -------------------------------------
+       Hide Unit
+    ------------------------------------- */
 
-    /* Actions */
-
-    th:nth-child(6),
-    td:nth-child(6) {
-        width: 100%;
-        display: block;
-    }
-
-    /* Hide desktop table header for actions */
-
-    thead th:nth-child(6) {
+    th:nth-child(4),
+    td:nth-child(4) {
         display: none;
     }
 
-    th,
-    td {
-        padding: 11px 8px;
-        font-size: 12px;
+
+    /* -------------------------------------
+       Status
+    ------------------------------------- */
+
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 20%;
+        text-align: center;
     }
 
-    /* Product */
+
+    /* -------------------------------------
+       Actions
+    ------------------------------------- */
+
+    th:nth-child(6),
+    td:nth-child(6) {
+        width: 15%;
+        display: table-cell;
+    }
+
+    thead th:nth-child(6) {
+        text-align: center;
+    }
+
+    td:nth-child(6) {
+        padding: 8px 4px;
+    }
+
+
+    /* -------------------------------------
+       Product information
+    ------------------------------------- */
 
     .product-info {
         min-width: 0;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+
         gap: 8px;
     }
 
     .product-image,
     .image-placeholder {
-        width: 42px;
-        height: 42px;
+        width: 45px;
+        height: 45px;
         flex-shrink: 0;
     }
 
@@ -415,20 +464,25 @@ th {
 
     .product-info strong {
         display: block;
+
         font-size: 12px;
+
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+
+    /* Hide slug on phone */
 
     .product-slug {
-        font-size: 10px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        display: none;
     }
 
-    /* Price */
+
+    /* -------------------------------------
+       Price
+    ------------------------------------- */
 
     td:nth-child(3) {
         white-space: nowrap;
@@ -439,37 +493,70 @@ th {
         font-size: 10px;
     }
 
-    /* Status */
 
-    td:nth-child(5) {
-        text-align: right;
+    /* -------------------------------------
+       Status
+    ------------------------------------- */
+
+    .status {
+        padding: 4px 6px;
+        font-size: 10px;
         white-space: nowrap;
     }
 
-    .status {
-        padding: 4px 7px;
-        font-size: 10px;
-    }
 
-    /* Actions */
-
-    td:nth-child(6) {
-        padding: 8px;
-        background: #fafafa;
-        border-bottom: 1px solid #eee;
-    }
+    /* -------------------------------------
+       Actions
+    ------------------------------------- */
 
     .actions {
         display: flex;
-        gap: 6px;
         width: 100%;
+        gap: 0;
     }
 
-    .action-btn {
+    /* Hide View + Edit */
+
+    .actions a {
+        display: none;
+    }
+
+    /* Keep only Disable / Activate */
+
+    .actions form {
+        display: block;
+        width: 100%;
         flex: 1;
+        margin: 0;
+    }
+
+    .actions form .action-btn {
+        display: block;
+
+        width: 100%;
+
+        padding: 6px 3px;
+
+        font-size: 10px;
+
         text-align: center;
-        padding: 7px 5px;
-        font-size: 11px;
+
+        white-space: nowrap;
+
+        border-radius: 5px;
+    }
+
+
+    /* -------------------------------------
+       Row interaction
+    ------------------------------------- */
+
+    .product-row {
+        cursor: pointer;
+    }
+
+    .product-row:active {
+        background: #f3f3f3;
     }
 
 }
@@ -515,6 +602,89 @@ th {
     }
 
 }
+
+/* =========================================
+   Mobile Sidebar Controls
+========================================= */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #8B1E1E;
+    font-size: 26px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+}
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
 </style>
 
 </head>
@@ -554,14 +724,29 @@ th {
 
 </div>
 
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
 
 <div class="main">
+    
+<div class="topbar">
 
-    <div class="topbar">
+    <div class="topbar-left">
+
+        <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
         <h2>Products</h2>
 
-        <div class="admin-info">
+    </div>
+
+    <div class="admin-info">
 
             <span>
                 <?= e($_SESSION['admin_name'] ?? 'Admin') ?>
@@ -571,9 +756,12 @@ th {
 
     <?= csrf_field() ?>
 
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -641,10 +829,7 @@ th {
                         <tr class="product-row"
     onclick="window.location.href='edit-product.php?id=<?= (int)$product['id'] ?>'">
 
-    <td
-    class="product-cell"
-    onclick="window.location.href='edit-product.php?id=<?= (int)$product['id'] ?>'"
->
+    <td>
 
     <div class="product-info">
 
@@ -783,6 +968,17 @@ th {
 
 </div>
 
+<script>
+
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+</script>
 
 </body>
 

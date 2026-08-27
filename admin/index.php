@@ -32,31 +32,6 @@ $totalCategories = (int) $pdo->query("
     FROM categories
 ")->fetchColumn();
 
-
-/*
-|--------------------------------------------------------------------------
-| Recent Products
-|--------------------------------------------------------------------------
-*/
-
-$stmt = $pdo->query("
-    SELECT
-        p.id,
-        p.name,
-        p.slug,
-        p.price,
-        p.image,
-        p.is_active,
-        c.name AS category_name
-    FROM products p
-    INNER JOIN categories c ON c.id = p.category_id
-    ORDER BY p.id DESC
-    LIMIT 5
-");
-
-$recentProducts = $stmt->fetchAll();
-
-
 function e($value): string
 {
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
@@ -298,6 +273,29 @@ th {
 }
 
 @media (max-width: 700px) {
+
+.quick-link {
+    padding: 15px;
+    gap: 12px;
+}
+
+.quick-link-info {
+    min-width: 0;
+}
+
+.quick-link-info strong {
+    font-size: 14px;
+}
+
+.quick-link-info span {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.quick-link .btn {
+    padding: 9px 11px;
+    font-size: 11px;
+}
 
     /* Never allow horizontal scrolling */
 
@@ -732,6 +730,80 @@ th {
 
 }
 
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
+   Quick Links
+========================================= */
+
+.quick-link-list {
+    width: 100%;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid #eee;
+
+    gap: 20px;
+}
+
+.quick-link:last-child {
+    border-bottom: none;
+}
+
+.quick-link-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quick-link-info strong {
+    font-size: 15px;
+}
+
+.quick-link-info span {
+    color: #777;
+    font-size: 13px;
+}
+
+.quick-link .btn {
+    flex-shrink: 0;
+}
 </style>
 
 </head>
@@ -802,9 +874,12 @@ th {
 
     <?= csrf_field() ?>
 
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -879,126 +954,59 @@ th {
         </div>
 
 
-        <div class="section">
+<div class="section quick-links">
+
+    <div class="section-header">
+
+        <h3>Quick Links</h3>
+
+    </div>
 
 
-            <div class="section-header">
+    <div class="quick-link-list">
 
-                <h3>Recent Products</h3>
+        <div class="quick-link">
 
-                <a href="products.php" class="btn">
-                    Manage Products
-                </a>
+            <div class="quick-link-info">
 
-            </div>
+                <strong>Add Product</strong>
 
-
-            <table>
-
-<thead>
-    <tr>
-        <th>Product</th>
-        <th class="category-column">Category</th>
-        <th class="price-column">Price</th>
-        <th class="status-column">Status</th>
-    </tr>
-</thead>
-
-
-                <tbody>
-
-
-                <?php if (!$recentProducts): ?>
-
-                    <tr>
-
-                        <td colspan="4">
-                            No products found.
-                        </td>
-
-                    </tr>
-
-
-                <?php else: ?>
-
-
-                    <?php foreach ($recentProducts as $product): ?>
-
-<tr>
-
-    <td>
-
-        <div class="product-info">
-
-            <?php if (!empty($product['image'])): ?>
-
-                <img
-                    src="../assets/images/products/<?= rawurlencode($product['image']) ?>"
-                    class="product-image"
-                    alt="<?= e($product['name']) ?>"
-                >
-
-            <?php endif; ?>
-
-            <div class="product-details">
-
-                <div class="product-name">
-                    <strong>
-                        <?= e($product['name']) ?>
-                    </strong>
-                </div>
-
-                <div class="mobile-price">
-                    ₹<?= number_format((float)$product['price'], 0) ?>
-                </div>
+                <span>
+                    Create a new product for your store.
+                </span>
 
             </div>
 
-        </div>
-
-    </td>
-
-    <td class="category-column">
-        <?= e($product['category_name']) ?>
-    </td>
-
-    <td class="price-column">
-        ₹<?= number_format((float)$product['price'], 0) ?>
-    </td>
-
-    <td class="status-column">
-
-        <?php if ($product['is_active']): ?>
-
-            <span class="status active">
-                Active
-            </span>
-
-        <?php else: ?>
-
-            <span class="status inactive">
-                Inactive
-            </span>
-
-        <?php endif; ?>
-
-    </td>
-
-</tr>
-
-<?php endforeach; ?>
-
-
-                <?php endif; ?>
-
-
-                </tbody>
-
-            </table>
-
+            <a
+                href="add-product.php"
+                class="btn"
+            >
+                Add Product
+            </a>
 
         </div>
 
+
+        <div class="quick-link">
+
+            <div class="quick-link-info">
+
+                <strong>Add Category</strong>
+
+                <span>
+                    Create a new product category.
+                </span>
+
+            </div>
+
+            <a
+                href="categories.php"
+                class="btn"
+            >
+                Add Category
+            </a>
+
+        </div>
 
     </div>
 

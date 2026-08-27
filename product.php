@@ -270,7 +270,9 @@ require __DIR__ . '/includes/header.php';
 
             ₹<?= number_format((float)$product['price'], 0) ?>
 
-            <?= e($product['unit'] ?? '') ?>
+            <span class="product-unit">
+    / <?= e($product['unit']) ?>
+</span>
 
         </div>
 

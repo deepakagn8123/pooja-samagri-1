@@ -8600,3 +8600,10 @@ html.loader-skip #page-loader {
 
 }
 
+.product-unit {
+    color: #999;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 4px;
+    white-space: nowrap;
+}

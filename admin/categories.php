@@ -357,8 +357,9 @@ $stmt = $pdo->query("
         c.show_on_homepage
 
     ORDER BY
-        c.sort_order ASC,
-        c.name ASC
+    c.is_active DESC,
+    c.sort_order ASC,
+    c.name ASC
 ");
 
 $categories = $stmt->fetchAll(
@@ -952,73 +953,688 @@ th {
 
 }
 
+/* =========================================
+   Admin Mobile Sidebar
+========================================= */
 
-@media (max-width: 800px) {
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-    .sidebar {
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #8B1E1E;
+    font-size: 26px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
 
-        width: 190px;
-
-    }
-
-    .main {
-
-        margin-left: 190px;
-
-    }
-
-    .content {
-
-        padding: 20px;
-
-    }
-
+.sidebar-overlay {
+    display: none;
 }
 
 
-@media (max-width: 650px) {
+/* =========================================
+   Mobile
+========================================= */
 
-    .sidebar {
+@media (max-width: 700px) {
 
-        position: static;
-
-        width: 100%;
-
-        height: auto;
-
-    }
-
-    .main {
-
-        margin-left: 0;
-
-    }
-
-    .topbar {
-
-        padding: 15px 20px;
-
-    }
-
-    .grid {
-
-        grid-template-columns: 1fr;
-
-    }
+    /* =====================================
+       Category Table
+    ===================================== */
 
     table {
+        width: 100%;
+        table-layout: fixed;
+    }
 
-        min-width: 900px;
+    th,
+    td {
+        padding: 11px 8px;
+        font-size: 12px;
+    }
 
+    /* Hide slug */
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        display: none;
+    }
+
+    /* Hide homepage */
+
+    th:nth-child(6),
+    td:nth-child(6) {
+        display: none;
+    }
+
+    /* Image */
+
+    th:nth-child(1),
+    td:nth-child(1) {
+        width: 48px;
+    }
+
+    .category-image,
+    .no-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .no-image {
+        font-size: 17px;
+    }
+
+    /* Category */
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: auto;
+    }
+
+    td:nth-child(2) strong {
+        display: block;
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Products */
+
+    th:nth-child(4),
+    td:nth-child(4) {
+        width: 55px;
+        text-align: center;
+    }
+
+    .count {
+        padding: 4px 7px;
+        font-size: 11px;
+    }
+
+    /* Status */
+
+    th:nth-child(5),
+    td:nth-child(5) {
+        width: 65px;
+        text-align: center;
+    }
+
+    .status {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    /* Actions */
+
+    th:nth-child(7),
+    td:nth-child(7) {
+        width: 95px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 4px;
+    }
+
+    .actions .btn {
+        padding: 6px 7px;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .actions form {
+        flex: 1;
+    }
+
+    /* Sidebar */
+
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Overlay */
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+    /* Main */
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Topbar */
+
+    .topbar {
+        padding: 14px 16px;
+        gap: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .topbar h2 {
+        font-size: 19px;
+    }
+
+    .admin-info {
+        gap: 8px;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    /* Content */
+
+    .content {
+        padding: 18px 12px;
+    }
+
+    .page-head {
+        margin-bottom: 18px;
+    }
+
+    .page-head h1 {
+        font-size: 23px;
+        margin-bottom: 5px;
+    }
+
+    .page-head p {
+        font-size: 13px;
+    }
+
+    /* Add Category + Categories */
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .box {
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
-        overflow-x: auto;
+    .box-head {
+        padding: 15px;
+    }
 
+    .box-head h3 {
+        font-size: 16px;
+    }
+
+    .box-body {
+        padding: 15px;
+    }
+
+    /* Form */
+
+    label {
+        font-size: 13px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 14px;
+        padding: 11px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+
+    .help {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    /* Add button */
+
+    .box-body .btn {
+        width: 100%;
+        text-align: center;
+        padding: 11px;
     }
 
 }
+
+.category-row {
+    cursor: pointer;
+}
+
+.category-row:hover {
+    background: #fafafa;
+}
+
+@media (max-width: 700px) {
+
+    .category-row:active {
+        background: #f3f3f3;
+    }
+
+    /* Hide Edit button on phone */
+
+    .category-row .btn-edit {
+        display: none;
+    }
+
+}
+
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   Category Delete Modal
+========================================= */
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 2000;
+}
+
+.delete-modal.show {
+    display: flex;
+}
+
+.delete-modal-box {
+    width: 100%;
+    max-width: 470px;
+
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+
+    background: #fff;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, .20);
+}
+
+
+/* Icon */
+
+.delete-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fde8e8;
+
+    color: #b42318;
+
+    font-size: 21px;
+    font-weight: bold;
+}
+
+
+/* Heading */
+
+.delete-modal-box h3 {
+    margin: 0 0 10px;
+
+    font-size: 21px;
+    color: #222;
+}
+
+.delete-modal-box p {
+    margin: 8px 0;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* Options */
+
+.delete-option {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    text-align: left;
+
+    background: #fafafa;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 9px;
+}
+
+
+/*
+   IMPORTANT:
+   The span gives the text its own flex area.
+*/
+
+.delete-option label {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 0;
+
+    padding: 0;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.45;
+
+    text-align: left;
+}
+
+
+.delete-option label span {
+    display: block;
+
+    flex: 1;
+
+    min-width: 0;
+
+    width: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    text-align: left;
+}
+
+
+.delete-option input[type="radio"] {
+    width: 17px;
+    height: 17px;
+
+    min-width: 17px;
+
+    margin: 2px 0 0 0;
+
+    padding: 0;
+
+    flex: 0 0 17px;
+}
+
+
+.delete-option select {
+    display: block;
+
+    width: calc(100% - 27px);
+
+    margin: 11px 0 0 27px;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    font: inherit;
+
+    font-size: 13px;
+}
+
+.delete-option select:disabled {
+    background: #f1f1f1;
+
+    color: #999;
+}
+
+
+/* Warning */
+
+.force-warning {
+    color: #b42318 !important;
+
+    font-size: 12px !important;
+
+    margin-top: 14px !important;
+}
+
+
+/* Buttons */
+
+.delete-modal-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.modal-cancel,
+.modal-confirm {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modal-cancel {
+    border: 1px solid #ddd;
+
+    background: #f5f5f5;
+
+    color: #333;
+}
+
+.modal-confirm {
+    border: 0;
+
+    background: #8B1E1E;
+
+    color: #fff;
+}
+
+.modal-confirm:hover {
+    background: #721818;
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 700px) {
+
+    .delete-modal {
+        padding: 12px;
+    }
+
+    .delete-modal-box {
+        width: 100%;
+
+        max-width: 100%;
+
+        max-height: calc(100vh - 24px);
+
+        padding: 22px 16px;
+
+        border-radius: 11px;
+    }
+
+    .delete-icon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 19px;
+
+        margin-bottom: 12px;
+    }
+
+    .delete-modal-box h3 {
+        font-size: 19px;
+    }
+
+    .delete-modal-box p {
+        font-size: 13px;
+    }
+
+    .delete-option {
+        padding: 12px;
+
+        margin-top: 10px;
+    }
+
+    .delete-option label {
+        gap: 9px;
+
+        font-size: 12px;
+
+        line-height: 1.45;
+    }
+
+    .delete-option input[type="radio"] {
+        width: 16px;
+        height: 16px;
+
+        min-width: 16px;
+
+        flex-basis: 16px;
+    }
+
+    .delete-option select {
+        width: calc(100% - 25px);
+
+        margin-left: 25px;
+
+        font-size: 12px;
+
+        padding: 9px;
+    }
+
+    .force-warning {
+        font-size: 11px !important;
+    }
+
+    .delete-modal-actions {
+        gap: 8px;
+
+        margin-top: 18px;
+    }
+
+    .modal-cancel,
+    .modal-confirm {
+        padding: 10px 8px;
+
+        font-size: 12px;
+    }
+}
+
 
 </style>
 
@@ -1091,6 +1707,11 @@ th {
 </div>
 
 
+<div
+    class="sidebar-overlay"
+    onclick="toggleSidebar()"
+></div>
+
 <!-- =========================================================
      MAIN
 ========================================================= -->
@@ -1100,12 +1721,24 @@ th {
 
     <!-- TOPBAR -->
 
-    <div class="topbar">
+<div class="topbar">
 
+    <div class="topbar-left">
+
+        <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
         <h2>
             Categories
         </h2>
+
+    </div>
 
 
         <div class="admin-info">
@@ -1125,9 +1758,12 @@ th {
 
     <?= csrf_field() ?>
 
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -1512,7 +2148,8 @@ th {
                         ): ?>
 
 
-                            <tr>
+                            <tr class="category-row"
+    onclick="window.location.href='edit-category.php?id=<?= (int)$category['id'] ?>'">
 
 
                                 <!-- IMAGE -->
@@ -1686,15 +2323,11 @@ th {
 
 
                                         <form
-                                            method="POST"
-                                            action="delete-category.php"
-                                            onsubmit="
-                                                return confirm(
-                                                    'Delete this category?'
-                                                );
-                                            "
-                                        >
-
+    method="POST"
+    action="delete-category.php"
+    class="delete-category-form"
+    onclick="event.stopPropagation()"
+>
                                             <?= csrf_field() ?>
 
                                             <input
@@ -1703,15 +2336,20 @@ th {
                                                 value="<?= (int)$category['id'] ?>"
                                             >
 
-
-                                            <button
-                                                type="submit"
-                                                class="btn btn-delete"
-                                            >
-
-                                                Delete
-
-                                            </button>
+<button
+    type="button"
+    class="btn btn-delete"
+    onclick="
+        event.stopPropagation();
+        openCategoryDeleteModal(
+            <?= (int)$category['id'] ?>,
+            '<?= e($category['name']) ?>',
+            <?= (int)$category['product_count'] ?>
+        );
+    "
+>
+    Delete
+</button>
 
 
                                         </form>
@@ -1809,8 +2447,354 @@ nameInput.addEventListener(
     }
 );
 
+
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+
+let deleteCategoryForm = null;
+
+function openCategoryDeleteModal(
+    categoryId,
+    categoryName,
+    productCount
+) {
+
+    document.getElementById(
+        'deleteCategoryId'
+    ).value = categoryId;
+
+    document.getElementById(
+        'deleteCategoryName'
+    ).textContent = categoryName;
+
+    document.getElementById(
+        'deleteProductCount'
+    ).textContent = productCount;
+
+
+    const emptyContent =
+        document.getElementById(
+            'emptyCategoryContent'
+        );
+
+    const productsContent =
+        document.getElementById(
+            'categoryProductsContent'
+        );
+
+
+    if (productCount === 0) {
+
+        emptyContent.style.display = 'block';
+
+        productsContent.style.display = 'none';
+
+        document.getElementById(
+            'deleteMode'
+        ).value = 'empty';
+
+
+        document.getElementById(
+            'confirmCategoryDelete'
+        ).textContent =
+            'Delete Category';
+
+    } else {
+
+        emptyContent.style.display = 'none';
+
+        productsContent.style.display = 'block';
+
+
+        document.querySelector(
+            'input[name="categoryDeleteMode"][value="move"]'
+        ).checked = true;
+
+
+        updateDeleteMode();
+
+    }
+
+
+    document
+        .getElementById('categoryDeleteModal')
+        .classList.add('show');
+
+}
+
+
+function updateDeleteMode() {
+
+    const selected =
+        document.querySelector(
+            'input[name="categoryDeleteMode"]:checked'
+        );
+
+    if (!selected) {
+        return;
+    }
+
+
+    const mode = selected.value;
+
+    document.getElementById(
+        'deleteMode'
+    ).value = mode;
+
+
+    const select =
+        document.getElementById(
+            'moveToCategory'
+        );
+
+
+    select.disabled =
+        mode !== 'move';
+
+
+    document.getElementById(
+        'confirmCategoryDelete'
+    ).textContent =
+        mode === 'force'
+            ? 'Delete Everything'
+            : 'Continue';
+
+}
+
+
+function confirmCategoryDelete() {
+
+    const mode =
+        document.getElementById(
+            'deleteMode'
+        ).value;
+
+
+    if (mode === 'move') {
+
+        const destination =
+            document.getElementById(
+                'moveToCategory'
+            ).value;
+
+
+        if (!destination) {
+
+            alert(
+                'Please select a category to move the products to.'
+            );
+
+            return;
+        }
+
+
+        document.getElementById(
+            'moveToCategoryId'
+        ).value = destination;
+
+    }
+
+
+    document
+        .getElementById('categoryDeleteForm')
+        .submit();
+
+}
+
+
+function closeCategoryDeleteModal() {
+
+    document
+        .getElementById('categoryDeleteModal')
+        .classList.remove('show');
+
+}
+
 </script>
 
+<div
+    id="categoryDeleteModal"
+    class="delete-modal"
+    aria-hidden="true"
+>
+
+    <div class="delete-modal-box">
+
+        <div class="delete-icon">
+            !
+        </div>
+
+        <h3>Delete Category?</h3>
+
+        <p>
+            You are deleting
+            <strong id="deleteCategoryName"></strong>.
+        </p>
+
+
+        <!-- EMPTY CATEGORY -->
+
+        <div id="emptyCategoryContent">
+
+            <p>
+                This category has no products.
+                It can be safely deleted.
+            </p>
+
+        </div>
+
+
+        <!-- CATEGORY WITH PRODUCTS -->
+
+        <div id="categoryProductsContent">
+
+            <p>
+                This category contains
+                <strong id="deleteProductCount"></strong>
+                products.
+            </p>
+
+
+            <div class="delete-option">
+
+<label>
+
+    <input
+        type="radio"
+        name="categoryDeleteMode"
+        value="move"
+        checked
+        onchange="updateDeleteMode()"
+    >
+
+    <span>
+        Move products to another category
+    </span>
+
+</label>
+
+
+                <select id="moveToCategory">
+
+                    <option value="">
+                        Select category
+                    </option>
+
+<?php foreach ($categories as $destination): ?>
+
+    <?php if (
+        (int)$destination['id'] ===
+        (int)($categoryId ?? 0)
+    ) {
+        continue;
+    } ?>
+
+    <option
+        value="<?= (int)$destination['id'] ?>"
+    >
+        <?= e($destination['name']) ?>
+    </option>
+
+<?php endforeach; ?>
+
+                </select>
+
+            </div>
+
+
+            <div class="delete-option">
+
+<label>
+
+    <input
+        type="radio"
+        name="categoryDeleteMode"
+        value="force"
+        onchange="updateDeleteMode()"
+    >
+
+    <span>
+        Force delete category and all products
+    </span>
+
+</label>
+
+            </div>
+
+
+            <p class="force-warning">
+                Force deleting permanently removes the
+                products and their images.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="delete-category.php"
+            id="categoryDeleteForm"
+        >
+
+            <?= csrf_field() ?>
+
+            <input
+    type="hidden"
+    name="confirm_delete"
+    value="1"
+>
+
+            <input
+                type="hidden"
+                name="id"
+                id="deleteCategoryId"
+            >
+
+            <input
+                type="hidden"
+                name="delete_mode"
+                id="deleteMode"
+            >
+
+<input
+    type="hidden"
+    name="replacement_category_id"
+    id="moveToCategoryId"
+>
+
+        </form>
+
+
+        <div class="delete-modal-actions">
+
+            <button
+                type="button"
+                class="modal-cancel"
+                onclick="closeCategoryDeleteModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="modal-confirm"
+                id="confirmCategoryDelete"
+                onclick="confirmCategoryDelete()"
+            >
+                Delete Category
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 

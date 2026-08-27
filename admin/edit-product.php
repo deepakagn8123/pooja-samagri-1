@@ -16,6 +16,94 @@ if ($productId < 1) {
     exit;
 }
 
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST' &&
+    ($_POST['action'] ?? '') === 'delete_product'
+) {
+
+    verify_csrf();
+
+    try {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Get Product Image
+        |--------------------------------------------------------------------------
+        */
+
+        $stmt = $pdo->prepare("
+            SELECT image
+            FROM products
+            WHERE id = :id
+            LIMIT 1
+        ");
+
+        $stmt->execute([
+            'id' => $productId
+        ]);
+
+        $deleteProduct = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$deleteProduct) {
+            header('Location: products.php');
+            exit;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product
+        |--------------------------------------------------------------------------
+        */
+
+        $pdo->beginTransaction();
+
+        $stmt = $pdo->prepare("
+            DELETE FROM products
+            WHERE id = :id
+        ");
+
+        $stmt->execute([
+            'id' => $productId
+        ]);
+
+        $pdo->commit();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Physical Image
+        |--------------------------------------------------------------------------
+        */
+
+        if (!empty($deleteProduct['image'])) {
+
+            $imagePath =
+                __DIR__ .
+                '/../assets/images/products/' .
+                $deleteProduct['image'];
+
+            if (is_file($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+
+        header('Location: products.php?deleted=1');
+        exit;
+
+
+    } catch (Throwable $e) {
+
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
+        $error =
+            'Unable to delete product. Please try again.';
+    }
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,8 +158,11 @@ $categoryId = $categoryId !== false && $categoryId !== null
 
 $price = request_string($_POST['price'] ?? null);
 $oldPrice = request_string($_POST['old_price'] ?? null);
-
 $unit = request_string($_POST['unit'] ?? null);
+
+if ($unit === '') {
+    $unit = 'piece';
+}
 $description = request_string($_POST['description'] ?? null);
 $tag = request_string($_POST['tag'] ?? null);
 $badge = request_string($_POST['badge'] ?? null);
@@ -525,7 +616,7 @@ body {
 }
 
 .content {
-    padding: 30px;
+    padding: 30px 36px;
 }
 
 .page-head {
@@ -542,17 +633,18 @@ body {
 }
 
 .form-box {
-    max-width: 900px;
+    width: 100%;
+    max-width: none;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
 }
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
 }
 
 .form-group {
@@ -652,6 +744,440 @@ textarea {
     color: #333;
 }
 
+/* =========================================
+   Mobile Responsive Edit Product
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Sidebar */
+
+    .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Main */
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Topbar */
+
+    .topbar {
+        padding: 14px 16px;
+        gap: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+    }
+
+    .topbar h2 {
+        font-size: 19px;
+    }
+
+    .admin-info {
+        gap: 8px;
+    }
+
+    .admin-info span {
+        display: none;
+    }
+
+    .admin-info button {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    /* Content */
+
+    .content {
+        padding: 18px 12px;
+    }
+
+    /* Page heading */
+
+    .page-head {
+        margin-bottom: 18px;
+    }
+
+    .page-head h1 {
+        font-size: 23px;
+        margin-bottom: 5px;
+    }
+
+    .page-head p {
+        font-size: 13px;
+        word-break: break-word;
+    }
+
+    /* Form */
+
+    .form-box {
+        width: 100%;
+        max-width: none;
+        padding: 18px 14px;
+        border-radius: 8px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group,
+    .form-group.full {
+        grid-column: auto;
+        margin-bottom: 18px;
+    }
+
+    /* Labels */
+
+    label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    /* Inputs */
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 150px;
+    }
+
+    /* Current image */
+
+    .current-image {
+        margin-bottom: 10px;
+    }
+
+    .current-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* File input */
+
+    input[type="file"] {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    .help {
+        line-height: 1.5;
+        font-size: 11px;
+    }
+
+    /* Active checkbox */
+
+    .checkbox-row {
+        padding: 4px 0;
+    }
+
+    .checkbox-row input {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    .checkbox-row label {
+        font-size: 13px;
+    }
+
+    /* Buttons */
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .btn {
+        flex: 1;
+        text-align: center;
+        padding: 11px 12px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   Very Small Phones
+========================================= */
+
+@media (max-width: 400px) {
+
+    .content {
+        padding: 14px 10px;
+    }
+
+    .form-box {
+        padding: 16px 12px;
+    }
+
+    .topbar {
+        padding: 13px 12px;
+    }
+
+    .topbar h2 {
+        font-size: 18px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #8B1E1E;
+    font-size: 25px;
+    padding: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+    }
+
+    .sidebar.open + .sidebar-overlay {
+        display: block;
+    }
+
+}
+
+
+.logout-btn {
+    border: 1px solid #e5bcbc;
+    background: #fff5f5;
+    color: #8B1E1E;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.logout-btn:hover {
+    background: #8B1E1E;
+    color: #fff;
+    border-color: #8B1E1E;
+}
+
+.logout-btn:active {
+    transform: scale(0.97);
+}
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, .5);
+
+    z-index: 2000;
+}
+
+.delete-modal.show {
+    display: flex;
+}
+
+.delete-modal-box {
+    width: 100%;
+    max-width: 430px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,.2);
+}
+
+.delete-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fde8e8;
+
+    color: #b42318;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.delete-modal-box h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.delete-modal-box p {
+    margin: 7px 0;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.delete-warning {
+    color: #b42318 !important;
+    font-size: 12px !important;
+}
+
+.delete-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.modal-cancel,
+.modal-delete {
+    flex: 1;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modal-cancel {
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    color: #333;
+}
+
+.modal-delete {
+    border: 0;
+    background: #8B1E1E;
+    color: #fff;
+}
+
+.btn-danger {
+    background: #8B1E1E;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #721818;
+}
+
+@media (max-width: 700px) {
+
+    .delete-modal {
+        padding: 14px;
+    }
+
+    .delete-modal-box {
+        max-width: 100%;
+        padding: 22px 18px;
+        border-radius: 10px;
+    }
+
+    .delete-modal-box h3 {
+        font-size: 18px;
+    }
+
+    .delete-modal-box p {
+        font-size: 13px;
+    }
+
+    .delete-modal-actions {
+        gap: 8px;
+    }
+
+    .modal-cancel,
+    .modal-delete {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    .actions {
+        flex-wrap: wrap;
+    }
+
+    .actions .btn {
+        flex: 1;
+        min-width: 0;
+    }
+
+}
 </style>
 
 </head>
@@ -691,11 +1217,22 @@ textarea {
 
 </div>
 
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
 
 <div class="main">
 
 
+
 <div class="topbar">
+
+<button
+    type="button"
+    class="menu-toggle"
+    onclick="toggleSidebar()"
+>
+    ☰
+</button>
 
     <h2>Edit Product</h2>
 
@@ -709,9 +1246,12 @@ textarea {
 
     <?= csrf_field() ?>
 
-    <button type="submit">
-        Logout
-    </button>
+<button
+    type="submit"
+    class="logout-btn"
+>
+    Logout
+</button>
 
 </form>
 
@@ -845,11 +1385,15 @@ textarea {
 
     <label>Unit</label>
 
-    <input
-        type="text"
-        name="unit"
-        value="<?= e($form['unit'] ?? '') ?>"
-    >
+<input
+    type="text"
+    name="unit"
+    value="<?= e($form['unit'] ?? 'piece') ?>"
+>
+
+<div class="help">
+    Enter only the unit, e.g. pack, day, kg, dozen.
+</div>
 
 </div>
 
@@ -963,6 +1507,14 @@ textarea {
         Cancel
     </a>
 
+    <button
+    type="button"
+    class="btn btn-danger"
+    onclick="openProductDeleteModal()"
+>
+    Delete Product
+</button>
+
 </div>
 
 
@@ -974,6 +1526,96 @@ textarea {
 
 </div>
 
+
+<script>
+
+function toggleSidebar() {
+
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebar.classList.toggle('open');
+
+}
+
+</script>
+
+<div
+    id="productDeleteModal"
+    class="delete-modal"
+>
+
+    <div class="delete-modal-box">
+
+        <div class="delete-icon">
+            !
+        </div>
+
+        <h3>Delete Product?</h3>
+
+        <p>
+            Are you sure you want to delete
+            <strong><?= e($product['name']) ?></strong>?
+        </p>
+
+        <p class="delete-warning">
+            This action cannot be undone.
+        </p>
+
+
+        <form method="POST">
+
+            <?= csrf_field() ?>
+
+            <input
+                type="hidden"
+                name="action"
+                value="delete_product"
+            >
+
+            <div class="delete-modal-actions">
+
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closeProductDeleteModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="modal-delete"
+                >
+                    Delete Product
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function openProductDeleteModal() {
+
+    document
+        .getElementById('productDeleteModal')
+        .classList.add('show');
+
+}
+
+function closeProductDeleteModal() {
+
+    document
+        .getElementById('productDeleteModal')
+        .classList.remove('show');
+
+}
+
+</script>
 
 </body>
 </html>
