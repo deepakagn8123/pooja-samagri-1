@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- ==========================================================
      GLOBAL FLOATING PUJA LIST WHATSAPP
 ========================================================== -->
-
+<!-- 
 <div class="floating-puja-whatsapp">
 
     <div
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </button>
 
-</div>
+</div> -->
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -534,6 +534,218 @@ if (
 </script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const closeButton = document.getElementById('mobileMenuClose');
+
+    const categoryToggle =
+        document.getElementById('mobileCategoryToggle');
+
+    const categoryList =
+        document.getElementById('mobileCategoryList');
+
+
+    if (!menuToggle || !mobileMenu || !overlay) {
+        return;
+    }
+
+
+    /* =========================================
+       OPEN MENU
+    ========================================== */
+
+    function openMenu() {
+
+        mobileMenu.classList.add('active');
+
+        overlay.classList.add('active');
+
+        menuToggle.classList.add('active');
+
+        document.body.classList.add('mobile-menu-open');
+
+        menuToggle.setAttribute(
+            'aria-expanded',
+            'true'
+        );
+
+        mobileMenu.setAttribute(
+            'aria-hidden',
+            'false'
+        );
+
+        menuToggle.setAttribute(
+            'aria-label',
+            'Close menu'
+        );
+    }
+
+
+    /* =========================================
+       CLOSE MENU
+    ========================================== */
+
+    function closeMenu() {
+
+        mobileMenu.classList.remove('active');
+
+        overlay.classList.remove('active');
+
+        menuToggle.classList.remove('active');
+
+        document.body.classList.remove('mobile-menu-open');
+
+        menuToggle.setAttribute(
+            'aria-expanded',
+            'false'
+        );
+
+        mobileMenu.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+        menuToggle.setAttribute(
+            'aria-label',
+            'Open menu'
+        );
+    }
+
+
+    /* =========================================
+       HAMBURGER
+    ========================================== */
+
+    menuToggle.addEventListener('click', function () {
+
+        if (mobileMenu.classList.contains('active')) {
+
+            closeMenu();
+
+        } else {
+
+            openMenu();
+
+        }
+
+    });
+
+
+    /* =========================================
+       CLOSE BUTTON
+    ========================================== */
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            'click',
+            closeMenu
+        );
+
+    }
+
+
+    /* =========================================
+       OVERLAY
+    ========================================== */
+
+    overlay.addEventListener(
+        'click',
+        closeMenu
+    );
+
+
+    /* =========================================
+       ESCAPE
+    ========================================== */
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (
+                event.key === 'Escape' &&
+                mobileMenu.classList.contains('active')
+            ) {
+
+                closeMenu();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       CATEGORIES ACCORDION
+    ========================================== */
+
+    if (categoryToggle && categoryList) {
+
+        categoryToggle.addEventListener(
+            'click',
+            function () {
+
+                const isOpen =
+                    categoryList.classList.toggle('active');
+
+                categoryToggle.classList.toggle(
+                    'active',
+                    isOpen
+                );
+
+                categoryToggle.setAttribute(
+                    'aria-expanded',
+                    isOpen ? 'true' : 'false'
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       CLOSE AFTER NAVIGATION
+    ========================================== */
+
+    mobileMenu
+        .querySelectorAll(
+            'a:not(.mobile-category-item)'
+        )
+        .forEach(function (link) {
+
+            link.addEventListener(
+                'click',
+                closeMenu
+            );
+
+        });
+
+
+    /* =========================================
+       RESET WHEN GOING DESKTOP
+    ========================================== */
+
+    window.addEventListener(
+        'resize',
+        function () {
+
+            if (window.innerWidth > 768) {
+
+                closeMenu();
+
+            }
+
+        }
+    );
+
+});
+</script>
 
 </body>
 </html>

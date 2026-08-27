@@ -222,6 +222,8 @@ try {
 
     </div>
 
+
+
 </div>
 
 
@@ -248,13 +250,213 @@ try {
     loop>
 </dotlottie-player> -->
 
+
+
                 
 
             </div>
+                <button
+    type="button"
+    class="mobile-menu-toggle"
+    id="mobileMenuToggle"
+    aria-label="Open menu"
+    aria-expanded="false"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<a
+    href="https://wa.me/919999999999"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mobile-header-whatsapp"
+    aria-label="Chat on WhatsApp"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        width="28"
+        height="28"
+        fill="#25D366"
+    >
+        <path
+            d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.77L0 32l8.43-2.007A15.934 15.934 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.267 13.267 0 0 1-6.746-1.84l-.484-.287-5.006 1.193 1.216-4.867-.316-.5A13.254 13.254 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.874c-.398-.2-2.355-1.162-2.72-1.294-.366-.133-.633-.2-.9.2-.266.397-1.031 1.294-1.264 1.56-.232.265-.465.299-.863.1-.398-.2-1.68-.619-3.2-1.977-1.183-1.056-1.981-2.361-2.213-2.759-.232-.398-.025-.613.174-.812.178-.178.398-.465.598-.698.2-.232.265-.398.398-.664.133-.266.066-.499-.033-.698-.1-.2-.9-2.162-1.232-2.96-.324-.778-.654-.673-.9-.685l-.766-.013c-.266 0-.698.1-1.065.499-.366.398-1.397 1.365-1.397 3.328 0 1.963 1.43 3.86 1.629 4.127.2.265 2.814 4.296 6.82 6.026.953.412 1.697.658 2.516.159.767-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.465z"
+        />
+    </svg>
+</a>
 
         </div>
+        
 
     </div>
 
 
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div
+    class="mobile-menu-overlay"
+    id="mobileMenuOverlay"
+></div>
+
+
+<!-- Mobile Menu -->
+<aside
+    class="mobile-menu"
+    id="mobileMenu"
+    aria-hidden="true"
+>
+
+    <div class="mobile-menu-header">
+
+        <span class="mobile-menu-title">
+            Menu
+        </span>
+
+        <button
+            type="button"
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+            aria-label="Close menu"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- Mobile Search -->
+    <form
+        class="mobile-menu-search"
+        action="search.php"
+        method="get"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-4-4"/>
+        </svg>
+
+        <input
+            type="search"
+            name="q"
+            placeholder="Search for Puja Items..."
+            value="<?= htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+        >
+
+        <dotlottie-player
+    class="mobile-search-lottie"
+    src="assets/images/search.lottie"
+    autoplay
+    loop
+    onclick="this.closest('form').submit()">
+</dotlottie-player>
+
+    </form>
+
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-navigation">
+
+        <a
+            href="index.php"
+            class="mobile-nav-link"
+        >
+            Home
+        </a>
+
+
+        <div class="mobile-category">
+
+            <button
+                type="button"
+                class="mobile-nav-link mobile-category-toggle"
+                id="mobileCategoryToggle"
+                aria-expanded="false"
+            >
+                <span>Categories</span>
+
+                <span class="mobile-category-arrow">
+                    ›
+                </span>
+            </button>
+
+
+            <div
+                class="mobile-category-list"
+                id="mobileCategoryList"
+            >
+
+                <a
+                    href="categories.php"
+                    class="mobile-category-item"
+                >
+                    All Categories
+                </a>
+
+                <?php foreach ($headerCategories as $category): ?>
+
+                    <a
+                        href="category.php?slug=<?= urlencode($category['slug']) ?>"
+                        class="mobile-category-item"
+                    >
+                        <?= htmlspecialchars(
+                            $category['name'],
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+                    </a>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="about.php"
+            class="mobile-nav-link"
+        >
+            About Us
+        </a>
+
+
+        <a
+            href="services.php"
+            class="mobile-nav-link"
+        >
+            Socials
+        </a>
+
+
+        <a
+            href="https://wa.me/919999999999"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mobile-nav-link mobile-whatsapp"
+        >
+            <span>WhatsApp</span>
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+                width="24"
+                height="24"
+                fill="#25D366"
+            >
+                <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.77L0 32l8.43-2.007A15.934 15.934 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.267 13.267 0 0 1-6.746-1.84l-.484-.287-5.006 1.193 1.216-4.867-.316-.5A13.254 13.254 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.874c-.398-.2-2.355-1.162-2.72-1.294-.366-.133-.633-.2-.9.2-.266.397-1.031 1.294-1.264 1.56-.232.265-.465.299-.863.1-.398-.2-1.68-.619-3.2-1.977-1.183-1.056-1.981-2.361-2.213-2.759-.232-.398-.025-.613.174-.812.178-.178.398-.465.598-.698.2-.232.265-.398.398-.664.133-.266.066-.499-.033-.698-.1-.2-.9-2.162-1.232-2.96-.324-.778-.654-.673-.9-.685l-.766-.013c-.266 0-.698.1-1.065.499-.366.398-1.397 1.365-1.397 3.328 0 1.963 1.43 3.86 1.629 4.127.2.265 2.814 4.296 6.82 6.026.953.412 1.697.658 2.516.159.767-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.465z"/>
+            </svg>
+
+        </a>
+
+    </nav>
+
+</aside>

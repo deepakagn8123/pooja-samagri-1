@@ -9685,3 +9685,1313 @@ img, video, svg, iframe { max-width: 100%; height: auto; }
 .category-dropdown.open .arrow-icon {
     transform: rotate(225deg);
 }
+
+
+/* =========================================================
+   MOBILE HEADER
+   ========================================================= */
+
+.mobile-menu-toggle,
+.mobile-menu,
+.mobile-menu-overlay {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    /* =====================================================
+       MOBILE HEADER
+    ===================================================== */
+
+    .store-header-inner {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        min-height: 58px;
+
+        padding: 7px 14px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* Hide desktop brand */
+
+    .store-brand {
+        display: none;
+    }
+
+
+    /* Hide desktop search */
+
+    .store-search {
+        display: none !important;
+    }
+
+
+    /* Hide desktop navigation */
+
+    .store-actions {
+        display: none !important;
+    }
+
+
+    /* =====================================================
+       HAMBURGER
+    ===================================================== */
+
+    .mobile-menu-toggle {
+        display: flex;
+
+        width: 44px;
+        height: 44px;
+
+        flex: 0 0 44px;
+
+        padding: 0;
+        margin: 0;
+
+        border: 0;
+        outline: 0;
+
+        background: transparent;
+
+        align-items: center;
+        justify-content: center;
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        cursor: pointer;
+
+        z-index: 1201;
+    }
+
+
+    .mobile-menu-toggle span {
+        display: block;
+
+        width: 25px;
+        height: 2.5px;
+
+        border-radius: 10px;
+
+        background: currentColor;
+
+        transition:
+            transform 0.3s ease,
+            opacity 0.2s ease;
+    }
+
+
+    /* Hamburger → X */
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+
+    /* =====================================================
+       MOBILE HEADER WHATSAPP
+    ===================================================== */
+
+    .mobile-header-whatsapp {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 44px;
+        height: 44px;
+
+        flex: 0 0 44px;
+
+        text-decoration: none;
+
+        z-index: 1201;
+    }
+
+
+    .mobile-header-whatsapp svg {
+        display: block;
+
+        width: 28px;
+        height: 28px;
+    }
+
+
+    /* =====================================================
+       MOBILE MENU OVERLAY
+    ===================================================== */
+
+    .mobile-menu-overlay {
+        display: block;
+
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        z-index: 1090;
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0s linear 0.3s;
+    }
+
+
+    .mobile-menu-overlay.active {
+        opacity: 1;
+
+        visibility: visible;
+
+        pointer-events: auto;
+
+        transition:
+            opacity 0.3s ease;
+    }
+
+
+    /* =====================================================
+       MOBILE DRAWER
+    ===================================================== */
+
+    .mobile-menu {
+        display: block;
+
+        position: fixed;
+
+        top: 0;
+        right: 0;
+
+        width: min(350px, 88vw);
+        height: 100dvh;
+
+        box-sizing: border-box;
+
+        background: #fff;
+
+        overflow-y: auto;
+
+        z-index: 1100;
+
+        transform: translateX(100%);
+
+        transition:
+            transform 0.4s cubic-bezier(.22, 1, .36, 1);
+
+        box-shadow:
+            -10px 0 30px rgba(0, 0, 0, 0.15);
+    }
+
+
+    .mobile-menu.active {
+        transform: translateX(0);
+    }
+
+
+    /* =====================================================
+       MENU HEADER
+    ===================================================== */
+
+    .mobile-menu-header {
+
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        height: 64px;
+
+        padding: 0 18px;
+
+        box-sizing: border-box;
+    }
+
+
+    .mobile-menu-title {
+
+        color: #2b2b2b;
+
+        font-size: 18px;
+
+        font-weight: 600;
+    }
+
+
+    .mobile-menu-close {
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 40px;
+        height: 40px;
+
+        padding: 0;
+
+        border: 0;
+
+        background: transparent;
+
+        color: #222;
+
+        font-size: 30px;
+
+        line-height: 1;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.25s ease;
+    }
+
+
+    .mobile-menu-close:hover {
+        transform: rotate(90deg);
+    }
+
+
+    /* =====================================================
+       SEARCH INSIDE MENU
+    ===================================================== */
+
+    .mobile-menu-search {
+
+        display: flex;
+
+        align-items: center;
+
+        width: calc(100% - 36px);
+
+        height: 46px;
+
+        margin: 4px 18px 22px;
+
+        padding: 0 10px;
+
+        box-sizing: border-box;
+
+        border: 1px solid rgba(0, 0, 0, 0.15);
+
+        border-radius: 10px;
+
+        background: #fff;
+    }
+
+
+    .mobile-menu-search svg {
+
+        width: 20px;
+        height: 20px;
+
+        flex: 0 0 20px;
+
+        color: #555;
+    }
+
+
+    .mobile-menu-search input {
+
+        flex: 1 1 auto;
+
+        min-width: 0;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 0 8px;
+
+        border: 0;
+        outline: 0;
+
+        background: transparent;
+
+        color: #222;
+
+        font-size: 14px;
+    }
+
+
+    .mobile-menu-search button {
+
+        flex: 0 0 auto;
+
+        border: 0;
+
+        background: transparent;
+
+        color: #222;
+
+        font-size: 13px;
+
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .mobile-navigation {
+
+        width: 100%;
+
+        padding: 0 18px 30px;
+
+        box-sizing: border-box;
+    }
+
+
+    .mobile-nav-link {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        width: 100%;
+
+        min-height: 50px;
+
+        padding: 0 14px;
+
+        margin: 0;
+
+        box-sizing: border-box;
+
+        border: 0;
+
+        border-radius: 9px;
+
+        background: transparent;
+
+        color: #2b2b2b !important;
+
+        text-decoration: none;
+
+        font-family: inherit;
+
+        font-size: 16px;
+
+        font-weight: 500;
+
+        text-align: left;
+
+        cursor: pointer;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    .mobile-nav-link:hover {
+
+        background: rgba(0, 0, 0, 0.05);
+
+        transform: translateX(3px);
+    }
+
+
+    /* =====================================================
+       CATEGORIES
+    ===================================================== */
+
+    .mobile-category {
+        width: 100%;
+    }
+
+
+    .mobile-category-toggle {
+        appearance: none;
+        -webkit-appearance: none;
+
+        font-family: inherit;
+    }
+
+
+    .mobile-category-arrow {
+
+        font-size: 24px;
+
+        line-height: 1;
+
+        transition:
+            transform 0.3s ease;
+    }
+
+
+    .mobile-category-toggle.active
+    .mobile-category-arrow {
+
+        transform: rotate(90deg);
+    }
+
+
+    .mobile-category-list {
+
+        max-height: 0;
+
+        overflow: hidden;
+
+        opacity: 0;
+
+        padding-left: 14px;
+
+        transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease;
+    }
+
+
+    .mobile-category-list.active {
+
+        max-height: 800px;
+
+        opacity: 1;
+    }
+
+
+    .mobile-category-item {
+
+        display: block;
+
+        width: 100%;
+
+        padding: 10px 14px;
+
+        box-sizing: border-box;
+
+        border-radius: 7px;
+
+        color: #2b2b2b !important;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    .mobile-category-item:hover {
+
+        background: rgba(0, 0, 0, 0.05);
+
+        transform: translateX(3px);
+    }
+
+
+    /* =====================================================
+       WHATSAPP IN MENU
+    ===================================================== */
+
+    .mobile-whatsapp {
+
+        margin-top: 8px;
+    }
+
+
+    .mobile-whatsapp svg {
+        flex-shrink: 0;
+    }
+
+
+    /* =====================================================
+       BODY LOCK
+    ===================================================== */
+
+    body.mobile-menu-open {
+        overflow: hidden;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .store-header-inner {
+
+        padding-left: 8px;
+        padding-right: 8px;
+
+        min-height: 54px;
+    }
+
+
+    .mobile-menu-toggle,
+    .mobile-header-whatsapp {
+
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+    }
+
+
+    .mobile-menu-toggle span {
+
+        width: 23px;
+    }
+
+
+    .mobile-header-whatsapp svg {
+
+        width: 27px;
+        height: 27px;
+    }
+
+}
+
+/* =========================================================
+   MOBILE HEADER - FINAL OVERRIDES
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .store-header-inner {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: space-between !important;
+
+        flex-wrap: nowrap !important;
+
+        width: 100% !important;
+
+        min-height: 58px !important;
+
+        padding: 7px 12px !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* Desktop elements are hidden */
+
+    .store-brand {
+        display: none !important;
+    }
+
+    .store-search {
+        display: none !important;
+    }
+
+    .store-actions {
+        display: none !important;
+    }
+
+
+    /* =====================================================
+       HAMBURGER
+    ===================================================== */
+
+    .mobile-menu-toggle {
+
+        display: flex !important;
+
+        position: relative !important;
+
+        width: 44px !important;
+
+        height: 44px !important;
+
+        min-width: 44px !important;
+
+        flex: 0 0 44px !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        border: 0 !important;
+
+        background: transparent !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        flex-direction: column !important;
+
+        gap: 5px !important;
+
+        z-index: 1201 !important;
+
+        cursor: pointer !important;
+    }
+
+
+    .mobile-menu-toggle span {
+
+        display: block !important;
+
+        width: 24px !important;
+
+        height: 2.5px !important;
+
+        flex: none !important;
+
+        background: currentColor !important;
+
+        border-radius: 10px !important;
+
+        transition:
+            transform .3s ease,
+            opacity .2s ease !important;
+    }
+
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+
+        transform:
+            translateY(7.5px)
+            rotate(45deg) !important;
+    }
+
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+
+        opacity: 0 !important;
+    }
+
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+
+        transform:
+            translateY(-7.5px)
+            rotate(-45deg) !important;
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ===================================================== */
+
+    .mobile-header-whatsapp {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        width: 44px !important;
+
+        height: 44px !important;
+
+        min-width: 44px !important;
+
+        flex: 0 0 44px !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        text-decoration: none !important;
+
+        z-index: 1201 !important;
+    }
+
+
+    .mobile-header-whatsapp svg {
+
+        display: block !important;
+
+        width: 28px !important;
+
+        height: 28px !important;
+    }
+
+
+    /* =====================================================
+       OVERLAY
+    ===================================================== */
+
+    .mobile-menu-overlay {
+
+        display: block !important;
+
+        position: fixed !important;
+
+        inset: 0 !important;
+
+        z-index: 1090 !important;
+
+        background: rgba(0, 0, 0, .45) !important;
+
+        opacity: 0 !important;
+
+        visibility: hidden !important;
+
+        pointer-events: none !important;
+
+        transition:
+            opacity .3s ease,
+            visibility .3s ease !important;
+    }
+
+
+    .mobile-menu-overlay.active {
+
+        opacity: 1 !important;
+
+        visibility: visible !important;
+
+        pointer-events: auto !important;
+    }
+
+
+    /* =====================================================
+       DRAWER
+    ===================================================== */
+
+    .mobile-menu {
+
+        display: block !important;
+
+        position: fixed !important;
+
+        top: 0 !important;
+
+        right: 0 !important;
+
+        width: min(350px, 88vw) !important;
+
+        height: 100dvh !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        box-sizing: border-box !important;
+
+        background: #fff !important;
+
+        z-index: 1100 !important;
+
+        overflow-x: hidden !important;
+
+        overflow-y: auto !important;
+
+        transform: translateX(100%) !important;
+
+        visibility: visible !important;
+
+        transition:
+            transform .4s cubic-bezier(.22, 1, .36, 1) !important;
+    }
+
+
+    .mobile-menu.active {
+
+        transform: translateX(0) !important;
+    }
+
+
+    /* =====================================================
+       MENU HEADER
+    ===================================================== */
+
+    .mobile-menu-header {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: space-between !important;
+
+        width: 100% !important;
+
+        height: 64px !important;
+
+        padding: 0 18px !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    .mobile-menu-title {
+
+        display: block !important;
+
+        color: #2b2b2b !important;
+
+        font-size: 18px !important;
+
+        font-weight: 600 !important;
+
+        visibility: visible !important;
+    }
+
+
+    .mobile-menu-close {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        width: 40px !important;
+
+        height: 40px !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        border: 0 !important;
+
+        background: transparent !important;
+
+        color: #222 !important;
+
+        font-size: 30px !important;
+
+        line-height: 1 !important;
+
+        cursor: pointer !important;
+    }
+
+
+    /* =====================================================
+       MOBILE SEARCH
+    ===================================================== */
+
+    .mobile-menu-search {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        gap: 7px !important;
+
+        width: calc(100% - 36px) !important;
+
+        height: 46px !important;
+
+        margin: 5px 18px 20px !important;
+
+        padding: 0 8px !important;
+
+        box-sizing: border-box !important;
+
+        border: 1px solid rgba(0, 0, 0, .15) !important;
+
+        border-radius: 10px !important;
+
+        background: #fff !important;
+    }
+
+
+    .mobile-menu-search svg {
+
+        display: block !important;
+
+        width: 20px !important;
+
+        height: 20px !important;
+
+        min-width: 20px !important;
+
+        color: #555 !important;
+    }
+
+
+    .mobile-menu-search input {
+
+        display: block !important;
+
+        flex: 1 1 auto !important;
+
+        min-width: 0 !important;
+
+        width: auto !important;
+
+        height: 100% !important;
+
+        padding: 0 4px !important;
+
+        border: 0 !important;
+
+        outline: 0 !important;
+
+        background: transparent !important;
+
+        color: #222 !important;
+
+        font-size: 14px !important;
+    }
+
+
+    .mobile-search-lottie {
+
+        display: block !important;
+
+        width: 34px !important;
+
+        height: 34px !important;
+
+        min-width: 34px !important;
+
+        flex: 0 0 34px !important;
+
+        cursor: pointer !important;
+    }
+
+
+    /* =====================================================
+       NAVIGATION — THIS FIXES THE BLANK MENU
+    ===================================================== */
+
+    .mobile-navigation {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        padding: 0 18px 30px !important;
+
+        margin: 0 !important;
+
+        box-sizing: border-box !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+    }
+
+
+    .mobile-nav-link {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: space-between !important;
+
+        width: 100% !important;
+
+        min-height: 50px !important;
+
+        height: auto !important;
+
+        padding: 0 14px !important;
+
+        margin: 0 !important;
+
+        box-sizing: border-box !important;
+
+        background: transparent !important;
+
+        border: 0 !important;
+
+        color: #2b2b2b !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        text-decoration: none !important;
+
+        font-size: 16px !important;
+
+        font-weight: 500 !important;
+
+    }
+
+
+    .mobile-nav-link span {
+
+        display: inline-block !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        color: #2b2b2b !important;
+    }
+
+
+    /* =====================================================
+       CATEGORY
+    ===================================================== */
+
+    .mobile-category {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+    }
+
+
+    .mobile-category-toggle {
+
+        display: flex !important;
+
+        width: 100% !important;
+
+        cursor: pointer !important;
+    }
+
+
+    .mobile-category-arrow {
+
+        display: inline-block !important;
+
+        color: #2b2b2b !important;
+
+        font-size: 24px !important;
+
+        transition: transform .3s ease !important;
+    }
+
+
+    .mobile-category-toggle.active
+    .mobile-category-arrow {
+
+        transform: rotate(90deg) !important;
+    }
+
+
+    .mobile-category-list {
+
+        display: block !important;
+
+        max-height: 0 !important;
+
+        overflow: hidden !important;
+
+        opacity: 0 !important;
+
+        padding-left: 14px !important;
+
+        visibility: hidden !important;
+
+        transition:
+            max-height .35s ease,
+            opacity .25s ease,
+            visibility .35s ease !important;
+    }
+
+
+    .mobile-category-list.active {
+
+        max-height: 800px !important;
+
+        opacity: 1 !important;
+
+        visibility: visible !important;
+    }
+
+
+    .mobile-category-item {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        padding: 10px 14px !important;
+
+        box-sizing: border-box !important;
+
+        color: #2b2b2b !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        text-decoration: none !important;
+
+        font-size: 14px !important;
+    }
+
+
+    /* =====================================================
+       WHATSAPP MENU ITEM
+    ===================================================== */
+
+    .mobile-whatsapp {
+
+        display: flex !important;
+    }
+
+}
+
+.mobile-header-whatsapp {
+    display: none;
+}
+
+/* =====================================================
+   MOBILE HEADER BUTTONS
+   RIGHT SIDE ONLY
+===================================================== */
+
+.store-header-inner {
+    position: relative !important;
+}
+
+
+/* WhatsApp */
+
+.mobile-header-whatsapp {
+    display: flex !important;
+
+    position: absolute !important;
+
+    right: 62px !important;
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 1201 !important;
+}
+
+
+/* Hamburger */
+
+.mobile-menu-toggle {
+    display: flex !important;
+
+    position: absolute !important;
+
+    right: 10px !important;
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 1201 !important;
+}
+
+
+/* Keep hamburger animation */
+
+.mobile-menu-toggle.active {
+    transform: translateY(-50%) !important;
+}
+
+
+/* WhatsApp icon */
+
+.mobile-header-whatsapp svg {
+    display: block !important;
+
+    width: 28px !important;
+    height: 28px !important;
+}
+
+@media (max-width: 768px) {
+
+    .mobile-menu-search > svg {
+        display: none !important;
+    }
+
+}
+
+/* =========================================================
+   DESKTOP HEADER RESET
+   Keep mobile additions completely hidden on desktop
+========================================================= */
+
+@media (min-width: 769px) {
+
+    /* Mobile-only buttons must NEVER appear on desktop */
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .mobile-header-whatsapp {
+        display: none !important;
+    }
+
+
+    /* Make sure original desktop elements remain visible */
+
+    .store-search {
+        display: flex !important;
+    }
+
+    .store-actions {
+        display: flex !important;
+    }
+
+
+    /* Mobile drawer components stay hidden */
+
+    .mobile-menu {
+        display: none !important;
+    }
+
+    .mobile-menu-overlay {
+        display: none !important;
+    }
+
+}
+
+
+
