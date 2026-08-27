@@ -121,11 +121,11 @@ try {
     loop>
 </dotlottie-player> -->
 
-    <img
+    <!-- <img
         src="assets/images/logo.svg"
         alt="Shubh Samagri"
         class="brand-logo"
-    >
+    > -->
 
     </a>
 
