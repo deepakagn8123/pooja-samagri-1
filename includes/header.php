@@ -159,7 +159,8 @@ try {
     class="search-bar"
     src="assets/images/search.lottie"
     autoplay
-    loop>
+    loop
+    onclick="this.closest('form').submit()">
 </dotlottie-player>
 
             </form>
@@ -183,13 +184,13 @@ try {
 
                 <div class="category-dropdown">
 
-    <button
-        type="button"
+    <a
+        href="categories.php"
         class="header-action-btn category-dropdown-btn"
     >
         Categories
-        <span class="category-dropdown-arrow">⌄</span>
-    </button>
+        <span class="category-dropdown-arrow"></span>
+    </a>
 
 
     <div class="category-dropdown-menu">
