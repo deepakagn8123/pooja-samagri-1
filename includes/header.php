@@ -112,7 +112,7 @@ try {
 
             <!-- BRAND -->
 
-            <a href="index.php" class="store-brand">
+            <!-- <a href="index.php" class="store-brand"> -->
 
 <!-- <dotlottie-player
     class="brand-diya"
@@ -127,7 +127,30 @@ try {
         class="brand-logo"
     > -->
 
-    </a>
+    <!-- BRAND -->
+
+
+
+    <!-- </a> -->
+
+
+<a href="index.php" class="store-brand">
+
+    <span class="navbar-brand-logo">
+
+        <span
+            class="navbar-brand-name"
+            id="navbarBrandName"
+        ></span>
+
+        <span
+            class="navbar-brand-subtitle"
+            id="navbarBrandSubtitle"
+        ></span>
+
+    </span>
+
+</a>
 
 
             <!-- SEARCH -->
@@ -460,3 +483,6 @@ try {
     </nav>
 
 </aside>
+
+
+

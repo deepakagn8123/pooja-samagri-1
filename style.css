@@ -10995,3 +10995,677 @@ img, video, svg, iframe { max-width: 100%; height: auto; }
 
 
 
+/* =========================================================
+   HEADER LAYOUT — DESKTOP
+   Logo LEFT | Search CENTER | Actions RIGHT
+========================================================= */
+
+@media (min-width: 1201px) {
+
+    .store-header-inner {
+        width: 100% !important;
+        min-height: 115px !important;
+
+        margin: 0 !important;
+        padding: 0 38px !important;
+
+        display: grid !important;
+
+        /*
+           Three fixed areas:
+
+           LEFT   = logo
+           CENTER = search
+           RIGHT  = buttons
+        */
+        grid-template-columns: 1fr auto 1fr !important;
+
+        align-items: center !important;
+
+        gap: 0 !important;
+
+        justify-content: initial !important;
+    }
+
+
+    /* =========================
+       LOGO — LEFT
+    ========================= */
+
+    .store-brand {
+        grid-column: 1 !important;
+        justify-self: start !important;
+
+        /* Remove flex positioning */
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        flex: none !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* =========================
+       SEARCH — CENTER
+    ========================= */
+
+    .store-search {
+        grid-column: 2 !important;
+        justify-self: center !important;
+
+        /* IMPORTANT:
+           cancel the old flex/order rules
+        */
+        order: 0 !important;
+        flex: none !important;
+
+        width: 430px !important;
+        min-width: 430px !important;
+        max-width: 430px !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* =========================
+       BUTTONS — RIGHT
+    ========================= */
+
+    .store-actions {
+        grid-column: 3 !important;
+        justify-self: end !important;
+
+        display: flex !important;
+
+        width: auto !important;
+        min-width: max-content !important;
+
+        flex: none !important;
+
+        margin: 0 !important;
+    }
+
+}
+
+
+/* =========================================================
+   HEADER — FINAL DESKTOP SIZING
+   Logo | Centered Search | Compact Actions
+========================================================= */
+
+@media (min-width: 1001px) {
+
+    .store-header-inner {
+        width: calc(100% - 60px) !important;
+
+        display: grid !important;
+
+        /*
+         * Equal flexible space on both sides.
+         * This keeps the search EXACTLY centered
+         * regardless of logo/action widths.
+         */
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(280px, 38vw)
+            minmax(0, 1fr) !important;
+
+        align-items: center !important;
+
+        gap: 0 !important;
+
+        padding: 0 !important;
+        margin: 0 auto !important;
+    }
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .store-brand {
+        grid-column: 1 !important;
+
+        justify-self: start !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        flex: none !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .store-search {
+        grid-column: 2 !important;
+
+        justify-self: center !important;
+
+        /*
+         * Width follows the screen size.
+         *
+         * 1001px → ~380px
+         * 1200px → ~456px
+         * 1440px → ~547px
+         * 1920px → ~730px
+         */
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        height: 38px !important;
+
+        margin: 0 !important;
+
+        padding: 0 15px !important;
+
+        flex: none !important;
+
+        display: flex !important;
+        align-items: center !important;
+    }
+
+
+    .store-search input {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        height: 100% !important;
+
+        padding: 0 10px !important;
+
+        font-size: 13px !important;
+    }
+
+
+    .store-search svg {
+        width: 19px !important;
+        height: 19px !important;
+
+        flex: 0 0 19px !important;
+    }
+
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .store-actions {
+        grid-column: 3 !important;
+
+        justify-self: end !important;
+
+        display: flex !important;
+        align-items: center !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+
+        gap: 6px !important;
+
+        flex: none !important;
+    }
+
+
+    /* =========================
+       CART
+    ========================= */
+
+    .store-cart {
+        width: 40px !important;
+        height: 40px !important;
+
+        flex: 0 0 40px !important;
+    }
+
+
+    .store-cart svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+
+    /* =========================
+       NAV BUTTONS
+    ========================= */
+
+    .header-action-btn {
+        min-width: 0 !important;
+
+        width: auto !important;
+
+        height: 36px !important;
+
+        padding: 0 10px !important;
+
+        font-size: 11px !important;
+
+        border-radius: 7px !important;
+
+        white-space: nowrap !important;
+    }
+
+}
+
+
+/* =========================================================
+   NITYA NAVBAR WORDMARK — LUXURY SERIF
+========================================================= */
+
+.navbar-brand-logo {
+    display: none;
+}
+
+
+@media (min-width: 1001px) {
+
+    .store-brand {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        width: 225px !important;
+        min-width: 225px !important;
+        max-width: 225px !important;
+
+        height: 72px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-decoration: none !important;
+    }
+
+
+    .navbar-brand-logo {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 220px;
+        height: 70px;
+
+        position: relative;
+
+        overflow: visible;
+
+        line-height: 1;
+    }
+
+
+    /* =====================================================
+       NITYA
+    ===================================================== */
+
+    .navbar-brand-name {
+
+        display: block;
+
+        width: 220px;
+        height: 44px;
+
+        text-align: center;
+
+        white-space: nowrap;
+        overflow: visible;
+
+        font-family:
+            "Bodoni MT",
+            "Didot",
+            "Baskerville",
+            "Palatino Linotype",
+            serif;
+
+        font-size: 43px;
+
+        font-weight: 500;
+
+        line-height: 44px;
+
+        letter-spacing: .10em;
+
+        padding-left: .10em;
+
+        transform: scaleX(1.06);
+
+        transform-origin: center;
+
+
+        /* =========================
+           RICH METALLIC GOLD
+        ========================= */
+
+        background:
+            linear-gradient(
+                180deg,
+
+                #fff8cf 0%,
+                #ffe993 13%,
+                #f5c84d 27%,
+                #d99820 43%,
+                #a9680e 55%,
+                #d79a20 66%,
+                #ffe88a 82%,
+                #c27b13 100%
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+
+        /* =========================
+           SUBTLE GOLD DEPTH
+        ========================= */
+
+        text-shadow:
+
+            0 1px 0 rgba(255, 239, 166, .65),
+
+            0 2px 2px rgba(63, 22, 0, .75),
+
+            0 0 3px rgba(255, 213, 91, .60),
+
+            0 0 8px rgba(235, 174, 46, .30),
+
+            0 0 15px rgba(212, 142, 22, .14);
+    }
+
+
+    /* =====================================================
+       SUBTITLE
+    ===================================================== */
+
+    .navbar-brand-subtitle {
+
+        display: block;
+
+        width: 220px;
+
+        height: 15px;
+
+        margin-top: 5px;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+        overflow: visible;
+
+        font-family:
+            "Bodoni MT",
+            "Didot",
+            "Baskerville",
+            "Palatino Linotype",
+            serif;
+
+        font-size: 11px;
+
+        font-weight: 500;
+
+        line-height: 15px;
+
+        letter-spacing: .27em;
+
+        padding-left: .27em;
+
+
+        background:
+            linear-gradient(
+                180deg,
+
+                #ffeaa0 0%,
+                #e2af37 38%,
+                #a96d12 65%,
+                #f1cc62 100%
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+
+        text-shadow:
+
+            0 1px 1px rgba(55, 20, 0, .70),
+
+            0 0 4px rgba(242, 193, 69, .30),
+
+            0 0 8px rgba(212, 145, 26, .14);
+    }
+
+
+    /* =====================================================
+       REMOVE TYPEWRITER CURSOR
+    ===================================================== */
+
+    .navbar-brand-name::after,
+    .navbar-brand-subtitle::after {
+
+        content: none !important;
+
+        display: none !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR — TEXT LOGO
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .store-brand {
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        width: 145px !important;
+        min-width: 145px !important;
+        max-width: 145px !important;
+
+        height: 48px !important;
+
+        flex: 0 0 145px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-decoration: none !important;
+
+        overflow: visible !important;
+    }
+
+
+    .navbar-brand-logo {
+
+        display: flex !important;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 145px;
+        height: 46px;
+
+        position: relative;
+
+        overflow: visible;
+
+        line-height: 1;
+    }
+
+
+    /* =====================================================
+       NITYA
+    ===================================================== */
+
+    .navbar-brand-name {
+
+        display: block;
+
+        width: 145px;
+
+        height: 28px;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+        overflow: visible;
+
+        font-family:
+            "Bodoni MT",
+            "Didot",
+            "Baskerville",
+            "Palatino Linotype",
+            serif;
+
+        font-size: 28px;
+
+        font-weight: 500;
+
+        line-height: 28px;
+
+        letter-spacing: .08em;
+
+        padding-left: .08em;
+
+        transform: scaleX(1.04);
+
+        transform-origin: center;
+
+
+        /* Metallic gold */
+
+        background:
+            linear-gradient(
+                180deg,
+                #fff9cf 0%,
+                #ffe99a 14%,
+                #f5c84e 30%,
+                #d99a20 47%,
+                #a9680d 58%,
+                #d79a20 69%,
+                #ffe991 84%,
+                #c17b12 100%
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+
+        text-shadow:
+            0 1px 0 rgba(255, 241, 173, .75),
+            0 1px 2px rgba(62, 22, 0, .75),
+            0 0 3px rgba(255, 216, 105, .65),
+            0 0 8px rgba(235, 175, 48, .30);
+    }
+
+
+    /* =====================================================
+       SUBTITLE
+    ===================================================== */
+
+    .navbar-brand-subtitle {
+
+        display: block;
+
+        width: 145px;
+
+        height: 10px;
+
+        margin-top: 3px;
+
+        text-align: center;
+
+        white-space: nowrap;
+
+        overflow: visible;
+
+        font-family:
+            "Bodoni MT",
+            "Didot",
+            "Baskerville",
+            serif;
+
+        font-size: 7px;
+
+        font-weight: 600;
+
+        line-height: 10px;
+
+        letter-spacing: .20em;
+
+        padding-left: .20em;
+
+
+        background:
+            linear-gradient(
+                180deg,
+                #fff0a5,
+                #dca935 45%,
+                #a96c11 70%,
+                #f3cf66
+            );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+        text-shadow:
+            0 1px 1px rgba(54, 18, 0, .7),
+            0 0 4px rgba(242, 193, 69, .25);
+    }
+
+
+    /* =====================================================
+       MOBILE HEADER POSITIONING
+    ===================================================== */
+
+    .store-header-inner {
+        display: flex !important;
+
+        align-items: center !important;
+
+        flex-wrap: nowrap !important;
+
+        position: relative !important;
+    }
+
+
+    /*
+       Keep the logo away from the two right-side
+       controls.
+    */
+
+    .mobile-header-whatsapp {
+        right: 62px !important;
+    }
+
+    .mobile-menu-toggle {
+        right: 10px !important;
+    }
+
+}

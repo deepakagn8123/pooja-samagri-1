@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- ==========================================================
      GLOBAL FLOATING PUJA LIST WHATSAPP
 ========================================================== -->
-<!-- 
+
 <div class="floating-puja-whatsapp">
 
     <div
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </button>
 
-</div> -->
+</div>
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -747,5 +747,123 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const nameElement =
+        document.getElementById("navbarBrandName");
+
+    const subtitleElement =
+        document.getElementById("navbarBrandSubtitle");
+
+    if (!nameElement || !subtitleElement) {
+        return;
+    }
+
+
+    const nameText = "Nitya";
+    const subtitleText = "E-RITUAL STORE";
+
+
+    let nameIndex = 0;
+    let subtitleIndex = 0;
+
+    let deleting = false;
+
+
+    function typeName() {
+
+        if (!deleting) {
+
+            nameElement.textContent =
+                nameText.substring(0, nameIndex);
+
+            if (nameIndex < nameText.length) {
+
+                nameIndex++;
+
+                setTimeout(typeName, 170);
+
+            } else {
+
+                /* Small pause before subtitle */
+                setTimeout(typeSubtitle, 450);
+            }
+
+        } else {
+
+            nameElement.textContent =
+                nameText.substring(0, nameIndex);
+
+            if (nameIndex > 0) {
+
+                nameIndex--;
+
+                setTimeout(typeName, 90);
+
+            } else {
+
+                /* Restart */
+                deleting = false;
+
+                setTimeout(typeName, 800);
+            }
+        }
+    }
+
+
+    function typeSubtitle() {
+
+        subtitleElement.textContent =
+            subtitleText.substring(0, subtitleIndex);
+
+        if (subtitleIndex < subtitleText.length) {
+
+            subtitleIndex++;
+
+            setTimeout(typeSubtitle, 90);
+
+        } else {
+
+            /*
+             * Keep the complete logo visible
+             * for a while before erasing.
+             */
+            setTimeout(startDeleting, 3000);
+        }
+    }
+
+
+    function startDeleting() {
+
+        deleting = true;
+
+        deleteSubtitle();
+    }
+
+
+    function deleteSubtitle() {
+
+        subtitleElement.textContent =
+            subtitleText.substring(0, subtitleIndex);
+
+        if (subtitleIndex > 0) {
+
+            subtitleIndex--;
+
+            setTimeout(deleteSubtitle, 55);
+
+        } else {
+
+            setTimeout(typeName, 300);
+        }
+    }
+
+
+    /* Start */
+    typeName();
+
+});
+</script>
 </body>
 </html>
