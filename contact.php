@@ -270,6 +270,125 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 
+<!-- ============================================================
+     MAP SECTION
+============================================================ -->
+
+<section class="contact-map-section">
+
+    <div class="contact-map-header">
+
+        <span class="eyebrow">
+            Humara Pata
+        </span>
+
+        <h2>
+            Hamare Paas Aayein
+        </h2>
+
+        <p>
+            Walk-in welcome hain — samagri dekhein, list banayein aur
+            seedha hamare store se le jaayein.
+        </p>
+
+    </div>
+
+
+    <div class="contact-map-wrap">
+
+        <!-- Address card overlay -->
+
+        <div class="contact-map-address">
+
+            <div class="contact-map-address-icon">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="#8B1E3F" stroke-width="2">
+                    <path d="M12 21s-7-6-7-12a7 7 0 0 1 14 0c0 6-7 12-7 12z"/>
+                    <circle cx="12" cy="9" r="2.5"/>
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h4>Store Address</h4>
+
+                <p>
+                    ShubhSamagri Retail Store<br>
+                    Ashok Rajpath, Near Patna City<br>
+                    Patna, Bihar — 800001
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-map-address">
+
+            <div class="contact-map-address-icon">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="#8B1E3F" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 7v5l3 3"/>
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h4>Store Timing</h4>
+
+                <p>
+                    Monday – Saturday: 8 AM – 9 PM<br>
+                    Sunday: 9 AM – 7 PM<br>
+                    WhatsApp: 24x7 available
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Map iframe — OpenStreetMap (no API key needed) -->
+
+        <div class="contact-map-iframe-wrap">
+
+            <iframe
+                id="contact-store-map"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=85.1200%2C25.5800%2C85.1500%2C25.6100&amp;layer=mapnik&amp;marker=25.5941%2C85.1376"
+                width="100%"
+                height="420"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                title="ShubhSamagri Store Location"
+                aria-label="Map showing ShubhSamagri store location in Patna, Bihar"
+            ></iframe>
+
+            <a
+                href="https://www.openstreetmap.org/?mlat=25.5941&mlon=85.1376#map=14/25.5941/85.1376"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-map-open-link"
+            >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                Bade Map Mein Dekhen
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
 <?php
 require __DIR__ . '/includes/footer.php';
 ?>

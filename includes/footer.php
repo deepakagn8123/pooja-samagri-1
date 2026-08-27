@@ -51,6 +51,10 @@
                 Contact
             </a>
 
+            <a href="about.php">
+                About US
+            </a>
+
         </div>
 
 
